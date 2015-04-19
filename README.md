@@ -7,4 +7,5 @@ A Game About JavaScript Logical (Or Not) Operators.
 ## v0.0.1 - [Unreleased]
 
 * [x] Add Change Log
-* [ ] Setup Workflow
+* [x] Setup Workflow
+* [ ] Design the app
