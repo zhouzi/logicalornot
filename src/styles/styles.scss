@@ -30,12 +30,14 @@
 
 $purple: #5300e2;
 $reddish: #cc005f;
+$reddish-light: lighten(saturate($reddish, 30%), 25%);
 $gold: #e8b81d;
 $black: #3d3d3d;
 $gray: lighten($black, 50%);
 $white: #fff;
+$white-transparent: rgba($white, .3);
 
-$font-size-root: 16px;
+$font-size-root: 18px;
 $font-size-small: ms(-1);
 $font-size-normal: ms(0);
 $font-size-medium: ms(1);
@@ -78,37 +80,41 @@ body {
   justify-content: center;
   flex-direction: column;
 
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Abel', sans-serif;
   font-size: $font-size-normal;
   line-height: 1.4;
   text-align: center;
 
   color: $white;
   background: linear-gradient(0deg, $reddish 0%, $purple 100%);
+  border: $gutter solid $white-transparent;
 }
 
 a {
   color: $gold;
   text-decoration: none;
-  border-bottom: 1px solid $reddish;
+  border-bottom: 2px solid $reddish;
 }
 
-h1 {
-  //font-family: 'Sansita One', cursive;
-  font-family: 'Rancho', cursive;
-  font-size: $font-size-large;
-  color: $gold;
+h1,
+p {
   line-height: 1.2;
   margin: 0;
 }
 
-p,
-pre {
-  margin: 0 0 $gutter 0;
+h1 {
+  font-family: 'Bigshot One', cursive;
+  font-size: $font-size-large;
+  color: $gold;
+
+  .muted {
+    color: $white-transparent;
+  }
 }
 
 pre {
   font-size: $font-size-medium;
+  margin: $gutter-large 0;
 }
 
 code {
@@ -135,23 +141,33 @@ li {
 
   a {
     display: block;
+    font-size: $font-size-medium;
     position: relative;
-    color: $black;
-    background: linear-gradient(0deg, $gray 0%, $white 100%);
     padding: $gutter-small $gutter;
-    border: none;
     border-radius: $border-radius;
-    text-shadow: 0 1px 0 $white;
-    box-shadow: 0 4px 0 0 darken($gray, 20%);
+    border: 2px solid $reddish-light;
+    box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish-light;
 
     &:hover,
     &:active {
       top: 2px;
-      box-shadow: 0 2px 0 0 darken($gray, 30%);
+      box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish-light;
+
+      .muted {
+        color: $reddish-light;
+      }
     }
 
     &:active {
-      background: linear-gradient(0deg, $gray 100%, $white 0%);
+      opacity: .6;
+    }
+
+    .muted {
+      display: inline-block;
+      vertical-align: baseline;
+      font-size: $font-size-medium;
+      margin-right: $gutter-small;
+      color: $white-transparent;
     }
   }
 }
@@ -159,7 +175,7 @@ li {
 section {
   position: relative;
   padding: $gutter-large $gutter-xlarge;
-  border: 1px dashed rgba($white, .2);
+  border: 1px dashed $white-transparent;
 
   &:before {
     $factor: 20px;
@@ -172,11 +188,11 @@ section {
     left: -($factor / 2);
     width: calc(100% + #{$factor});
     height: calc(100% + #{$factor});
-    border: 1px solid rgba($white, .2);
+    border: 1px solid $white-transparent;
   }
 }
 
 footer {
-  font-size: $font-size-small;
+  color: $reddish-light;
   margin-top: $gutter;
 }
