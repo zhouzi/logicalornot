@@ -8,7 +8,7 @@ gulp.task('styles', function () {
     .src('src/styles/*.scss')
     .pipe($.sass({ outputStyle: 'compressed' }))
     .pipe($.autoprefixer('last 2 version'))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function () {
@@ -25,6 +25,7 @@ gulp.task('serve', ['styles'], function () {
   });
 
   gulp.watch(['dist/*.css', 'dist/*.js', 'index.html']).on('change', reload);
+  gulp.run('watch');
 });
 
 gulp.task('default', ['styles']);

@@ -8,4 +8,4 @@ A Game About JavaScript Logical (Or Not) Operators.
 
 * [x] Add Change Log
 * [x] Setup Workflow
-* [ ] Design the app
+* [x] Design the app
