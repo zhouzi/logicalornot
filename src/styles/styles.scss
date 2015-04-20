@@ -25,13 +25,35 @@
 
 
 /*--------------------------------------------*\
+  Mixins
+\*--------------------------------------------*/
+
+@mixin fade-slide-base {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 600ms ease-out,
+              opacity 600ms ease-out;
+}
+
+@mixin delay ($delay) {
+  transition-delay: $delay;
+}
+
+@mixin fade-slide-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+
+
+/*--------------------------------------------*\
   Variables
 \*--------------------------------------------*/
 
-$purple: #5300e2;
-$reddish: #cc005f;
-$reddish-light: lighten(saturate($reddish, 30%), 25%);
-$gold: #e8b81d;
+$purple: #7642d0;
+$reddish: #e7438f;
+$reddish-light: lighten(saturate($reddish, 20%), 10%);
+$gold: #ffc302;
 $black: #3d3d3d;
 $gray: lighten($black, 50%);
 $white: #fff;
@@ -91,9 +113,8 @@ body {
 }
 
 a {
-  color: $gold;
+  color: $white;
   text-decoration: none;
-  border-bottom: 2px solid $reddish;
 }
 
 h1,
@@ -110,6 +131,10 @@ h1 {
   .muted {
     color: $white-transparent;
   }
+
+  .ornot {
+    color: $white;
+  }
 }
 
 pre {
@@ -119,10 +144,19 @@ pre {
 
 code {
   display: inline-block;
-  color: $black;
+  color: $reddish;
+  font-weight: bold;
+  font-family: monospace;
   background-color: $white;
   padding: $gutter;
   border-radius: $border-radius;
+}
+
+[class*="icon-"] {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+  margin: 0 .2em 0 0;
 }
 
 ul {
@@ -146,27 +180,26 @@ li {
     padding: $gutter-small $gutter;
     border-radius: $border-radius;
     border: 2px solid $reddish-light;
-    box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish-light;
+    box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish;
 
     &:hover,
-    &:active {
+    &:active,
+    &.active {
+      color: $gold;
       top: 2px;
-      box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish-light;
+      box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish;
 
       .muted {
         color: $reddish-light;
       }
     }
 
-    &:active {
+    &:active,
+    &.active {
       opacity: .6;
     }
 
     .muted {
-      display: inline-block;
-      vertical-align: baseline;
-      font-size: $font-size-medium;
-      margin-right: $gutter-small;
       color: $white-transparent;
     }
   }
@@ -174,6 +207,7 @@ li {
 
 section {
   position: relative;
+  margin: $gutter;
   padding: $gutter-large $gutter-xlarge;
   border: 1px dashed $white-transparent;
 
@@ -188,11 +222,66 @@ section {
     left: -($factor / 2);
     width: calc(100% + #{$factor});
     height: calc(100% + #{$factor});
-    border: 1px solid $white-transparent;
+    border: 2px solid $white-transparent;
   }
 }
 
 footer {
-  color: $reddish-light;
-  margin-top: $gutter;
+  color: $white-transparent;
+  //color: $reddish-light;
+
+  a {
+    color: $white-transparent;
+    display: inline-block;
+    padding: .2em;
+    border-bottom: 2px solid $reddish;
+    margin-left: $gutter-small;
+
+    [class*="icon-"] {
+      color: $reddish;
+    }
+
+    &:focus,
+    &:hover {
+      color: $white;
+      border-color: $gold;
+      background: linear-gradient(0deg, rgba($gold, .2) 0%, rgba($white, 0) 80%);
+
+      [class*="icon-"] {
+        color: $gold;
+      }
+    }
+  }
+}
+
+
+
+/*--------------------------------------------*\
+  Transitions, Animations
+\*--------------------------------------------*/
+
+section,
+h1,
+h1 + p,
+pre,
+ul,
+footer {
+  @include fade-slide-base;
+}
+
+h1 { @include delay(100ms); }
+h1 + p { @include delay(200ms); }
+ul { @include delay(300ms); }
+pre { @include delay(400ms); }
+footer { @include delay(500ms); }
+
+.active {
+  section,
+  h1,
+  h1 + p,
+  pre,
+  ul,
+  footer {
+    @include fade-slide-active;
+  }
 }
