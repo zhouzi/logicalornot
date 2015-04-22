@@ -11,3 +11,4 @@ A Game About JavaScript Logical (Or Not) Operators.
 * [x] Design the app
 * [x] Render the first question, then init
 * [x] Render a random question after an answer
+* [x] Add at least 20 questions

@@ -1,25 +1,8 @@
+import questions from './questions';
+
 export default class QuestionClass {
   constructor () {
-    this.questions =[
-      {
-        question: 'false || true',
-        answers: {
-          left: { answer: 'false', correct: true },
-          up: { answer: 'undefined' },
-          right: { answer: 'true' }
-        }
-      },
-
-      {
-        question: 'null && false',
-        answers: {
-          left: { answer: 'false' },
-          up: { answer: 'false' },
-          right: { answer: 'null', correct: true }
-        }
-      }
-    ];
-
+    this.questions = questions;
     this.pickedIndexes = [];
   }
 
