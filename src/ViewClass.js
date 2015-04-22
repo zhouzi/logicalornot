@@ -31,7 +31,6 @@ export default class ViewClass {
 
       if (answer) {
         self.answers[answer].button.className = 'active';
-        self.publish('selectAnswer', answer);
         e.preventDefault();
       }
     });
@@ -41,6 +40,7 @@ export default class ViewClass {
 
       if (answer) {
         self.answers[answer].button.className = '';
+        self.publish('selectAnswer', answer);
         e.preventDefault();
       }
     });
