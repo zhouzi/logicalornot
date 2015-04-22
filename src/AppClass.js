@@ -3,16 +3,16 @@ import QuestionClass from './QuestionClass';
 
 export default class AppClass {
   constructor () {
-    this.view = new ViewClass();
-    this.question = new QuestionClass();
+    var self = this;
 
-    this.view.renderQuestion(this.question.getQuestion(0));
+    self.view = new ViewClass();
+    self.question = new QuestionClass();
+
+    self.view.renderQuestion(self.question.getQuestion(0));
     ViewClass.animateIntro(500);
 
-    /*
-    this.view.subscribe('selectAnswer', function (...args) {
-      console.log(args);
+    self.view.subscribe('selectAnswer', function (...args) {
+      self.view.renderQuestion(self.question.randomQuestion);
     });
-    */
   }
 }

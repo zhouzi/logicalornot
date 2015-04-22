@@ -8,6 +8,15 @@ export default class QuestionClass {
           up: { answer: 'undefined' },
           right: { answer: 'true' }
         }
+      },
+
+      {
+        question: 'null && false',
+        answers: {
+          left: { answer: 'false' },
+          up: { answer: 'false' },
+          right: { answer: 'null', correct: true }
+        }
       }
     ];
 
