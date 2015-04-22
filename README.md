@@ -9,3 +9,5 @@ A Game About JavaScript Logical (Or Not) Operators.
 * [x] Add Change Log
 * [x] Setup Workflow
 * [x] Design the app
+* [ ] Render the first question, then init
+* [ ] Render a random question after an answer

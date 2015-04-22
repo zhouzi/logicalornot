@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var webpackConfig = require('./webpack.config.js');
 
 gulp.task('styles', function () {
   return gulp
@@ -11,11 +12,19 @@ gulp.task('styles', function () {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', function () {
-  gulp.watch('src/styles/*.scss', ['styles']);
+gulp.task('scripts', function () {
+  return gulp
+    .src('src/app.js')
+    .pipe($.webpack(webpackConfig))
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('serve', ['styles'], function () {
+gulp.task('watch', function () {
+  gulp.watch('src/styles/*.scss', ['styles']);
+  gulp.watch('src/*.js', ['scripts']);
+});
+
+gulp.task('serve', ['default'], function () {
   browserSync({
     notify: false,
     port: 9000,
@@ -28,4 +37,4 @@ gulp.task('serve', ['styles'], function () {
   gulp.run('watch');
 });
 
-gulp.task('default', ['styles']);
+gulp.task('default', ['styles', 'scripts']);

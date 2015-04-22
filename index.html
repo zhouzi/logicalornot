@@ -15,12 +15,29 @@
         <p>So, what's the result of...</p>
       </header>
 
-      <pre><code>'foo' || 'bar'</code></pre>
+      <pre><code id="question"></code></pre>
 
       <ul>
-        <li><a href="#" id="left"><span class="muted icon-arrow-left"></span>'foo'</a></li>
-        <li><a href="#" id="up"><span class="muted icon-arrow-up"></span>true</a></li>
-        <li><a href="#" id="right"><span class="muted icon-arrow-right"></span>'bar'</a></li>
+        <li>
+          <a href="#" id="answer-left">
+            <span class="muted icon-arrow-left"></span>
+            <span class="answer-label"></span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" id="answer-up">
+            <span class="muted icon-arrow-up"></span>
+            <span class="answer-label"></span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" id="answer-right">
+            <span class="muted icon-arrow-right"></span>
+            <span class="answer-label"></span>
+          </a>
+        </li>
       </ul>
     </section>
 
@@ -31,35 +48,6 @@
       <a href="#"><span class="icon-twitter"></span>Tweet</a>
     </footer>
 
-    <script>
-      var left = document.getElementById('left');
-      var up = document.getElementById('up');
-      var right = document.getElementById('right');
-
-      document.addEventListener('keydown', function (event) {
-        var keyCode = event.which;
-
-        if (keyCode === 37) {
-          left.className = 'active';
-          event.preventDefault();
-        } else if (keyCode === 38) {
-          up.className = 'active';
-          event.preventDefault();
-        } else if (keyCode === 39) {
-          right.className = 'active';
-          event.preventDefault();
-        }
-      });
-
-      document.addEventListener('keyup', function () {
-        left.className = '';
-        up.className = '';
-        right.className = '';
-      });
-
-      setTimeout(function () {
-        document.body.className = 'active';
-      }, 100);
-    </script>
+    <script src="dist/app.min.js"></script>
   </body>
 </html>
