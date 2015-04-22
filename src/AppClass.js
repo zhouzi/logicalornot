@@ -1,18 +1,12 @@
 import ViewClass from './ViewClass';
+import QuestionClass from './QuestionClass';
 
 export default class AppClass {
   constructor () {
     this.view = new ViewClass();
+    this.question = new QuestionClass();
 
-    this.view.renderQuestion({
-      question: 'null && "foo"',
-      answers: {
-        left: { answer: 'null', correct: true },
-        up: { answer: 'false' },
-        right: { answer: '"foo"' }
-      }
-    });
-
+    this.view.renderQuestion(this.question.getQuestion(0));
     ViewClass.animateIntro(500);
 
     /*
