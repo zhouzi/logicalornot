@@ -1,5 +1,9 @@
-export default class ViewClass {
+import PubSubClass from './PubSubClass';
+
+export default class ViewClass extends PubSubClass {
   constructor () {
+    super();
+
     this.question = document.getElementById('question');
 
     this.answers = {
@@ -7,8 +11,6 @@ export default class ViewClass {
       up: { button: document.getElementById('answer-up'), label: document.querySelector('#answer-up .answer-label') },
       right: { button: document.getElementById('answer-right'), label: document.querySelector('#answer-right .answer-label') }
     };
-
-    this.events = {};
 
     this.bind();
   }
@@ -56,20 +58,6 @@ export default class ViewClass {
         }
       }
     });
-  }
-
-  subscribe (eventName, callback) {
-    (this.events[eventName] || (this.events[eventName] = [])).push(callback);
-  }
-
-  publish (eventName, ...args) {
-    let subscribers = this.events[eventName];
-
-    if (!subscribers) return;
-
-    for (let i = 0, subscriber; subscriber = subscribers[i]; i++) {
-      subscriber.apply(this, args);
-    }
   }
 
   renderQuestion (question) {

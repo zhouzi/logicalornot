@@ -12,7 +12,12 @@ A Game About JavaScript Logical (Or Not) Operators.
 * [x] Render the first question, then init
 * [x] Render a random question after an answer
 * [x] Add at least 20 questions
-* [ ] Add "life bar"
-  * [ ] When giving a wrong answer, lose 1 point
-  * [ ] When giving a right answer, earn 1 point
-  * [ ] When a question appears, lose 1 point every 3 seconds until an answer
+* [x] Add "life bar"
+  * [x] The life bar decrease as the time pass (10 seconds before reaching 0)
+  * [x] When giving a wrong answer, lose 1 second
+  * [x] When giving a right answer, earn 1 second
+* [ ] When reaching 0, show the game over screen
+  * [ ] With the score
+  * [ ] With a button to tweet the result
+  * [ ] With a replay button mapped to the space bar key
+* [ ] Display user's score (right answers)

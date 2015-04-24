@@ -2,9 +2,9 @@ const questions = [
   {
     question: 'false || true',
     answers: {
-      left: { answer: 'false', correct: true },
+      left: { answer: 'false' },
       up: { answer: 'undefined' },
-      right: { answer: 'true' }
+      right: { answer: 'true', correct: true }
     }
   },
 

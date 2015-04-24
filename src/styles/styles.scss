@@ -72,6 +72,8 @@ $gutter-xlarge: $font-size-large;
 
 $border-radius: 4px;
 
+$life-bar-height: 20px;
+
 
 
 /*--------------------------------------------*\
@@ -284,4 +286,19 @@ footer { @include delay(500ms); }
   footer {
     @include fade-slide-active;
   }
+}
+
+.life-bar,
+.life-bar__progress {
+  height: $life-bar-height;
+}
+
+.life-bar {
+  background-color: $gray;
+  width: 100%;
+  margin: $gutter 0 0 0;
+}
+
+.life-bar__progress {
+  background-color: $purple;
 }

@@ -4,11 +4,19 @@ export default class QuestionClass {
   constructor () {
     this.questions = questions;
     this.pickedIndexes = [];
+    this.currentIndex = null;
   }
 
   getQuestion (index) {
     this.pickedIndexes.push(index);
+    this.currentIndex = index;
+
     return this.questions[index];
+  }
+
+  get currentQuestion () {
+    if (this.currentIndex === null) return {};
+    return this.questions[this.currentIndex];
   }
 
   get randomQuestion () {
