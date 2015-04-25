@@ -119,39 +119,41 @@ a {
   text-decoration: none;
 }
 
-h1,
-p {
-  line-height: 1.2;
-  margin: 0;
-}
-
-h1 {
-  font-family: 'Bigshot One', cursive;
-  font-size: $font-size-large;
-  color: $gold;
-
-  .muted {
-    color: $white-transparent;
+.header {
+  h1,
+  p {
+    line-height: 1.2;
+    margin: 0;
   }
 
-  .ornot {
-    color: $white;
+  h1 {
+    font-family: 'Bigshot One', cursive;
+    font-size: $font-size-large;
+    color: $gold;
+
+    .muted {
+      color: $white-transparent;
+    }
+
+    .ornot {
+      color: $white;
+    }
   }
 }
 
-pre {
+.question-container {
   font-size: $font-size-medium;
   margin: $gutter-large 0;
-}
 
-code {
-  display: inline-block;
-  color: $reddish;
-  font-weight: bold;
-  font-family: monospace;
-  background-color: $white;
-  padding: $gutter;
-  border-radius: $border-radius;
+  code {
+    display: inline-block;
+    color: $reddish;
+    font-weight: bold;
+    font-family: monospace;
+    background-color: $white;
+    padding: $gutter;
+    border-radius: $border-radius;
+  }
 }
 
 [class*="icon-"] {
@@ -161,53 +163,53 @@ code {
   margin: 0 .2em 0 0;
 }
 
-ul {
+.button-list {
   list-style: none;
   margin: 0;
   padding: 0;
+
+  li {
+    display: inline-block;
+    margin: 0 $gutter-small 0 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
-li {
-  display: inline-block;
-  margin: 0 $gutter-small 0 0;
+.button {
+  display: block;
+  font-size: $font-size-medium;
+  position: relative;
+  padding: $gutter-small $gutter;
+  border-radius: $border-radius;
+  border: 2px solid $reddish-light;
+  box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish;
 
-  &:last-child {
-    margin-right: 0;
-  }
-
-  a {
-    display: block;
-    font-size: $font-size-medium;
-    position: relative;
-    padding: $gutter-small $gutter;
-    border-radius: $border-radius;
-    border: 2px solid $reddish-light;
-    box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish;
-
-    &:hover,
-    &:active,
-    &.active {
-      color: $gold;
-      top: 2px;
-      box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish;
-
-      .muted {
-        color: $reddish-light;
-      }
-    }
-
-    &:active,
-    &.active {
-      opacity: .6;
-    }
+  &:hover,
+  &:active,
+  &.active {
+    color: $gold;
+    top: 2px;
+    box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish;
 
     .muted {
-      color: $white-transparent;
+      color: $reddish-light;
     }
+  }
+
+  &:active,
+  &.active {
+    opacity: .6;
+  }
+
+  .muted {
+    color: $white-transparent;
   }
 }
 
-section {
+.box-container {
   position: relative;
   margin: $gutter;
   padding: $gutter-large $gutter-xlarge;
@@ -228,9 +230,8 @@ section {
   }
 }
 
-footer {
+.footer {
   color: $white-transparent;
-  //color: $reddish-light;
 
   a {
     color: $white-transparent;
@@ -256,38 +257,6 @@ footer {
   }
 }
 
-
-
-/*--------------------------------------------*\
-  Transitions, Animations
-\*--------------------------------------------*/
-
-section,
-h1,
-h1 + p,
-pre,
-ul,
-footer {
-  @include fade-slide-base;
-}
-
-h1 { @include delay(100ms); }
-h1 + p { @include delay(200ms); }
-ul { @include delay(300ms); }
-pre { @include delay(400ms); }
-footer { @include delay(500ms); }
-
-.active {
-  section,
-  h1,
-  h1 + p,
-  pre,
-  ul,
-  footer {
-    @include fade-slide-active;
-  }
-}
-
 .life-bar,
 .life-bar__progress {
   height: $life-bar-height;
@@ -301,4 +270,35 @@ footer { @include delay(500ms); }
 
 .life-bar__progress {
   background-color: $purple;
+}
+
+
+
+/*--------------------------------------------*\
+  Transitions, Animations
+\*--------------------------------------------*/
+
+$intro-delay: 100ms;
+$intro-elements:
+  unquote(".box-container"),
+  unquote(".header h1"),
+  unquote(".header h1 + p"),
+  unquote(".question-container"),
+  unquote(".box-container .button-list"),
+  unquote(".footer");
+
+#{$intro-elements} {
+  @include fade-slide-base;
+}
+
+@for $i from 1 through length($intro-elements) {
+  #{nth($intro-elements, $i)} {
+    @include delay($intro-delay * ($i - 1));
+  }
+}
+
+.active {
+  #{$intro-elements} {
+    @include fade-slide-active;
+  }
 }
