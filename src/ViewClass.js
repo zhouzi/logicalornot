@@ -1,25 +1,30 @@
 import PubSubClass from './PubSubClass';
+import $ from './$';
 
 export default class ViewClass extends PubSubClass {
   constructor () {
     super();
 
-    this.question = document.getElementById('question');
+    this.question = $.get('#question');
 
     this.answers = {
-      left: { button: document.getElementById('answer-left'), label: document.querySelector('#answer-left .answer-label') },
-      up: { button: document.getElementById('answer-up'), label: document.querySelector('#answer-up .answer-label') },
-      right: { button: document.getElementById('answer-right'), label: document.querySelector('#answer-right .answer-label') }
+      left: { button: $.get('#answer-left'), label: $.get('#answer-left .answer-label') },
+      up: { button: $.get('#answer-up'), label: $.get('#answer-up .answer-label') },
+      right: { button: $.get('#answer-right'), label: $.get('#answer-right .answer-label') }
     };
 
     this.bind();
   }
 
   static animateIntro (delay = 1000) {
-    document.body.className = '';
+    let body = document.body;
+
+    $.addClass(body, 'u-no-transition');
+    $.removeClass(document.body, 'active');
+    $.removeClass(body, 'u-no-transition');
 
     setTimeout(function () {
-      document.body.className = 'active';
+      $.addClass(body, 'active');
     }, delay);
   }
 
@@ -28,26 +33,26 @@ export default class ViewClass extends PubSubClass {
     let keys = { 37: 'left', 38: 'up', 39: 'right' };
     let answer;
 
-    document.addEventListener('keydown', function (e) {
+    $.on(document, 'keydown', function (e) {
       answer = keys[e.which];
 
       if (answer) {
-        self.answers[answer].button.className = 'active';
+        $.addClass(self.answers[answer].button, 'active');
         e.preventDefault();
       }
     });
 
-    document.addEventListener('keyup', function (e) {
+    $.on(document, 'keyup', function (e) {
       answer = keys[e.which];
 
       if (answer) {
-        self.answers[answer].button.className = '';
+        $.removeClass(self.answers[answer].button, 'active');
         self.publish('selectAnswer', answer);
         e.preventDefault();
       }
     });
 
-    document.addEventListener('click', function (e) {
+    $.on(document, 'click', function (e) {
       let target = e.target;
 
       for (let key in self.answers) {
@@ -61,9 +66,12 @@ export default class ViewClass extends PubSubClass {
   }
 
   renderQuestion (question) {
-    this.question.innerHTML = question.question;
-    this.answers.left.label.innerHTML = question.answers.left.answer;
-    this.answers.up.label.innerHTML = question.answers.up.answer;
-    this.answers.right.label.innerHTML = question.answers.right.answer;
+    $.html(this.question, question.question);
+
+    for (let key in question.answers) {
+      if (question.answers.hasOwnProperty(key) && this.answers[key]) {
+        $.html(this.answers[key].label, question.answers[key].answer);
+      }
+    }
   }
 }

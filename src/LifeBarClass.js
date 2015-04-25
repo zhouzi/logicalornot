@@ -1,4 +1,5 @@
 import PubSubClass from './PubSubClass';
+import $ from './$';
 
 export default class LifeBarClass extends PubSubClass {
   constructor () {
@@ -6,7 +7,7 @@ export default class LifeBarClass extends PubSubClass {
 
     let fps = 60;
 
-    this.lifeBarProgress = document.querySelector('.life-bar__progress');
+    this.lifeBarProgress = $.get('.life-bar__progress');
     this.startingValue = 0;
     this.endingValue = 100;
     this.duration = 10; // 10 second
@@ -37,7 +38,7 @@ export default class LifeBarClass extends PubSubClass {
 
     let easingValue = LifeBarClass.ease(this.iteration, this.startingValue, this.endingValue, this.totalIterations);
 
-    this.lifeBarProgress.style.width = (100 - easingValue) + '%';
+    $.css(this.lifeBarProgress, { width: (100 - easingValue) + '%' });
     this.iteration++;
 
     let self = this;
