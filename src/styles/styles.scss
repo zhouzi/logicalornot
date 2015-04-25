@@ -68,6 +68,7 @@ $white: #fff;
 $white-transparent: rgba($white, .3);
 $green: rgb(70, 174, 67);
 $red: rgb(242, 87, 87);
+$yellow: $gold;
 
 $font-size-root: 18px;
 $font-size-small: ms(-1);
@@ -81,8 +82,6 @@ $gutter-large: $font-size-medium;
 $gutter-xlarge: $font-size-large;
 
 $border-radius: 4px;
-
-$life-bar-height: 20px;
 
 
 
@@ -241,27 +240,28 @@ h2 {
 }
 
 .box-container {
+  $enlarge-margin: 20px;
+
   position: relative;
-  margin: $gutter;
+  margin: (($enlarge-margin / 2) - 1px); // 1px is the border-width
   padding: $gutter-large $gutter-xlarge;
   border: 1px dashed $white-transparent;
 
   &:before {
-    $factor: 20px;
-
     content: "";
     display: block;
     position: absolute;
     z-index: -1;
-    top: -($factor / 2);
-    left: -($factor / 2);
-    width: calc(100% + #{$factor});
-    height: calc(100% + #{$factor});
+    top: -($enlarge-margin / 2);
+    left: -($enlarge-margin / 2);
+    width: calc(100% + #{$enlarge-margin});
+    height: calc(100% + #{$enlarge-margin});
     border: 2px solid $white-transparent;
   }
 }
 
 .footer {
+  margin-top: $gutter;
   color: $white-transparent;
 
   a {
@@ -288,19 +288,27 @@ h2 {
   }
 }
 
-.life-bar,
-.life-bar__progress {
-  height: $life-bar-height;
-}
+
 
 .life-bar {
-  background-color: $gray;
+  height: 8px;
   width: 100%;
-  margin: $gutter 0 0 0;
-}
+  background-color: $green;
+  box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($green, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($green, .8), 10%);
+  border-radius: $border-radius;
+  margin-bottom: $gutter;
+  transition: background-color 500ms ease-in,
+              box-shadow 500ms ease-in;
 
-.life-bar__progress {
-  background-color: $purple;
+  &.life-bar--low {
+    background-color: $yellow;
+    box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($yellow, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($yellow, .8), 10%);
+  }
+
+  &.life-bar--critical {
+    background-color: $red;
+    box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($red, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($red, .8), 10%);
+  }
 }
 
 
@@ -398,17 +406,18 @@ h2 {
 
 
 /*--------------------------------------------*\
-  Transitions, Animations
+  Introduction animation
 \*--------------------------------------------*/
 
-$intro-delay: 100ms;
+$intro-delay: 150ms;
 $intro-elements:
   unquote(".box-container"),
   unquote(".header h1"),
   unquote(".header h1 + p"),
   unquote(".question-container"),
   unquote(".box-container .button-list"),
-  unquote(".footer");
+  unquote(".footer"),
+  unquote(".life-bar");
 
 #{$intro-elements} {
   @include fade-slide-base;

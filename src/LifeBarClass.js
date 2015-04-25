@@ -7,7 +7,7 @@ export default class LifeBarClass extends PubSubClass {
 
     let fps = 60;
 
-    this.lifeBarProgress = $.get('.life-bar__progress');
+    this.lifeBarProgress = $.get('.life-bar');
     this.startingValue = 0;
     this.endingValue = 100;
     this.duration = 10; // 10 second
@@ -37,12 +37,23 @@ export default class LifeBarClass extends PubSubClass {
     }
 
     let easingValue = LifeBarClass.ease(this.iteration, this.startingValue, this.endingValue, this.totalIterations);
+    let value = 100 - easingValue;
 
-    $.css(this.lifeBarProgress, { width: (100 - easingValue) + '%' });
+    $.css(this.lifeBarProgress, { width: value + '%' });
     this.iteration++;
 
-    let self = this;
+    if (value > 50) {
+      $.removeClass(this.lifeBarProgress, 'life-bar--low');
+      $.removeClass(this.lifeBarProgress, 'life-bar--critical');
+    } else if (value > 20) {
+      $.addClass(this.lifeBarProgress, 'life-bar--low');
+      $.removeClass(this.lifeBarProgress, 'life-bar--critical');
+    } else {
+      $.addClass(this.lifeBarProgress, 'life-bar--critical');
+      $.removeClass(this.lifeBarProgress, 'life-bar--low');
+    }
 
+    let self = this;
     LifeBarClass.requestAnimationFrame(() => {
       self.animate.apply(self, []);
     });
