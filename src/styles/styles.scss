@@ -44,6 +44,13 @@
   opacity: 1;
 }
 
+@mixin flexbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 
 
 /*--------------------------------------------*\
@@ -55,9 +62,12 @@ $reddish: #e7438f;
 $reddish-light: lighten(saturate($reddish, 20%), 10%);
 $gold: #ffc302;
 $black: #3d3d3d;
-$gray: lighten($black, 50%);
+$gray: lighten($black, 55%);
+$gray-light: lighten($black, 70%);
 $white: #fff;
 $white-transparent: rgba($white, .3);
+$green: rgb(70, 174, 67);
+$red: rgb(242, 87, 87);
 
 $font-size-root: 18px;
 $font-size-small: ms(-1);
@@ -99,14 +109,11 @@ html {
 }
 
 body {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  @include flexbox-container;
 
   font-family: 'Abel', sans-serif;
   font-size: $font-size-normal;
-  line-height: 1.4;
+  line-height: 1.2;
   text-align: center;
 
   color: $white;
@@ -119,26 +126,35 @@ a {
   text-decoration: none;
 }
 
-.header {
-  h1,
-  p {
-    line-height: 1.2;
-    margin: 0;
+small {
+  font-size: $font-size-normal;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+h1,
+h2 {
+  font-family: 'Bigshot One', cursive;
+  font-size: $font-size-large;
+  line-height: 1;
+  margin: 0;
+
+  .muted {
+    color: $white-transparent;
   }
 
-  h1 {
-    font-family: 'Bigshot One', cursive;
-    font-size: $font-size-large;
-    color: $gold;
-
-    .muted {
-      color: $white-transparent;
-    }
-
-    .ornot {
-      color: $white;
-    }
+  .ornot {
+    color: $white;
   }
+}
+
+h1 {
+  color: $gold;
+}
+
+h2 {
+  color: $reddish;
+  margin-bottom: $gutter;
 }
 
 .question-container {
@@ -194,7 +210,8 @@ a {
     top: 2px;
     box-shadow: inset 0 0 20px 6px $white-transparent, 0 2px 0 0 $reddish;
 
-    .muted {
+    .muted,
+    [class*="icon-"] {
       color: $reddish-light;
     }
   }
@@ -204,7 +221,21 @@ a {
     opacity: .6;
   }
 
-  .muted {
+  &.button--secondary {
+    background-color: $reddish-light;
+
+    &:hover,
+    &:active,
+    &.active {
+      .muted,
+      [class*="icon-"] {
+        color: $white;
+      }
+    }
+  }
+
+  .muted,
+  [class*="icon-"] {
     color: $white-transparent;
   }
 }
@@ -271,6 +302,98 @@ a {
 .life-bar__progress {
   background-color: $purple;
 }
+
+
+
+.modal {
+  @include flexbox-container;
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+
+  &.active .modal-box {
+    transform: translateY(0) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+.modal-box {
+  color: $black;
+  background-color: $white;
+  padding: $gutter-large $gutter-xlarge;
+  box-shadow: 0 0 6px 4px rgba($black, .4);
+  transform: translateY(20px) rotateX(-30deg) scale(.8);
+  opacity: 0;
+  transition: all 300ms cubic-bezier(.87,.66,.38,1.35);
+
+  p {
+    $caret-width: 20px;
+    $caret-height: 10px;
+
+    font-size: $font-size-medium;
+    margin: 0 0 $gutter 0;
+
+    position: relative;
+    border: 2px solid $gray;
+    padding: $gutter;
+    border-radius: $border-radius;
+    background-color: $gray-light;
+
+    &:before {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: $caret-height ($caret-width / 2) 0 ($caret-width / 2);
+      border-color: $gray transparent transparent transparent;
+      position: absolute;
+      bottom: -($caret-height);
+      left: 90px; // such magic number!
+    }
+  }
+}
+
+.point {
+  $point-width: 20px;
+  $point-height: $point-width;
+
+  display: inline-block;
+  vertical-align: middle;
+  font-size: $font-size-small;
+  line-height: $point-height;
+  color: $white;
+  width: $point-width;
+  height: $point-height;
+  border-radius: $border-radius;
+}
+
+.point--right {
+  background-color: $green;
+
+  &:before {
+    content: '1';
+  }
+}
+
+.point--wrong {
+  background-color: $red;
+
+  &:before {
+    content: '0';
+  }
+}
+
+
+
+/*--------------------------------------------*\
+  Utils
+\*--------------------------------------------*/
+
+.u-hide { display: none; }
+.u-no-transition { transition: none; }
 
 
 

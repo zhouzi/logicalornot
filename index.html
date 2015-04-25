@@ -9,6 +9,40 @@
   </head>
 
   <body>
+    <div class="modal u-hide">
+      <div class="modal-box">
+        <h2>Boom!</h2>
+
+        <p>
+          "Just made a score of
+          <span id="points">
+            <span class="point point--right"></span>
+            <span class="point point--wrong"></span>
+            <span class="point point--right"></span>
+            <span class="point point--right"></span>
+          </span>
+          <br>
+          Come and beat me!"
+        </p>
+
+        <ul class="button-list">
+          <li>
+            <a href="#" class="button button--secondary">
+              <span class="icon-twitter"></span>
+              Tweet
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="button button--secondary">
+              <small class="muted">(space)</small>
+              Replay
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
     <section class="box-container">
       <header class="header">
         <h1>Logical <span class="ornot"><span class="muted">(</span>Or Not<span class="muted">)</span></span></h1>
@@ -20,21 +54,21 @@
       <ul class="button-list">
         <li>
           <a href="#" class="button" id="answer-left">
-            <span class="muted icon-arrow-left"></span>
+            <span class="icon-arrow-left"></span>
             <span class="answer-label"></span>
           </a>
         </li>
 
         <li>
           <a href="#" class="button" id="answer-up">
-            <span class="muted icon-arrow-up"></span>
+            <span class="icon-arrow-up"></span>
             <span class="answer-label"></span>
           </a>
         </li>
 
         <li>
           <a href="#" class="button" id="answer-right">
-            <span class="muted icon-arrow-right"></span>
+            <span class="icon-arrow-right"></span>
             <span class="answer-label"></span>
           </a>
         </li>
