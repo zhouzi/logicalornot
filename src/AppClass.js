@@ -21,5 +21,9 @@ export default class AppClass {
 
       self.view.renderQuestion(self.question.randomQuestion);
     });
+
+    self.lifeBar.subscribe('game over', function () {
+      alert('Game Over!');
+    });
   }
 }

@@ -13,6 +13,7 @@ export default class LifeBarClass extends PubSubClass {
     this.iteration = 0;
     this.totalIterations = this.duration * fps;
     this.gap = 1 * fps; // 1 second
+    this.status = 'ready';
   }
 
   static requestAnimationFrame (callback) {
@@ -20,18 +21,26 @@ export default class LifeBarClass extends PubSubClass {
   }
 
   start () {
+    this.status = 'playing';
     this.animate();
   }
 
   animate () {
+    if (this.status !== 'playing') return;
+
+    if (this.iteration >= this.totalIterations) {
+      this.status = 'end';
+      this.publish('game over');
+
+      return;
+    }
+
+    let easingValue = LifeBarClass.ease(this.iteration, this.startingValue, this.endingValue, this.totalIterations);
+
+    this.lifeBarProgress.style.width = (100 - easingValue) + '%';
+    this.iteration++;
+
     let self = this;
-
-    if (self.iteration >= self.totalIterations) return;
-
-    let easingValue = LifeBarClass.ease(self.iteration, self.startingValue, self.endingValue, self.totalIterations);
-
-    self.lifeBarProgress.style.width = (100 - easingValue) + '%';
-    self.iteration++;
 
     LifeBarClass.requestAnimationFrame(() => {
       self.animate.apply(self, []);
@@ -40,12 +49,16 @@ export default class LifeBarClass extends PubSubClass {
 
   drop () {
     console.log('dropped');
+    if (this.status !== 'playing') return;
+
     if (this.iteration + this.gap >= this.totalIterations) this.iteration = this.totalIterations;
     else this.iteration += this.gap;
   }
 
   rise () {
     console.log('rised');
+    if (this.status !== 'playing') return;
+
     if (this.iteration - this.gap <= 0) this.iteration = 0;
     else this.iteration -= this.gap;
   }
