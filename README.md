@@ -32,3 +32,4 @@ You definitely got to check dem out!
 * [Understanding Sass Lists](http://hugogiraudel.com/2013/07/15/understanding-sass-lists/)
 * [How to Establish a Modular Typographic Scale](http://webdesign.tutsplus.com/articles/how-to-establish-a-modular-typographic-scale--webdesign-14927)
 * [Modular Scale](http://www.modularscale.com/)
+* [Cubic Bezier Builder](http://cubic-bezier.com/)
