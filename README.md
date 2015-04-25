@@ -16,6 +16,7 @@ A Game About JavaScript Logical (Or Not) Operators.
   * [x] The life bar decrease as the time pass (10 seconds before reaching 0)
   * [x] When giving a wrong answer, lose 1 second
   * [x] When giving a right answer, earn 1 second
+  * [ ] Display score
 * [ ] When reaching 0, show the game over screen
   * [ ] With the score
   * [ ] With a button to tweet the result
