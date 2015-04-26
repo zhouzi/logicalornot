@@ -338,29 +338,30 @@ h2 {
   transition: all 300ms cubic-bezier(.87,.66,.38,1.35);
 
   p {
-    $caret-width: 20px;
-    $caret-height: 10px;
-
     font-size: $font-size-medium;
     margin: 0 0 $gutter 0;
-
-    position: relative;
     border: 2px solid $gray;
     padding: $gutter;
     border-radius: $border-radius;
     background-color: $gray-light;
+  }
 
-    &:before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: $caret-height ($caret-width / 2) 0 ($caret-width / 2);
-      border-color: $gray transparent transparent transparent;
-      position: absolute;
-      bottom: -($caret-height);
-      left: 90px; // such magic number!
-    }
+  li {
+    position: relative;
+  }
+
+  .caret {
+    $caret-width: 20px;
+    $caret-height: 10px;
+
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: $caret-height ($caret-width / 2) 0 ($caret-width / 2);
+    border-color: $gray transparent transparent transparent;
+    position: absolute;
+    top: -$gutter;
+    left: $gutter-large;
   }
 }
 

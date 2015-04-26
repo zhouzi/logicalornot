@@ -28,6 +28,8 @@ export default class AppClass {
       self.view.renderQuestion(self.question.randomQuestion);
     });
 
+    self.view.renderGameOverModal(self.score);
+
     self.lifeBar.subscribe('game over', function () {
       self.view.renderGameOverModal(self.score);
     });
