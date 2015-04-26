@@ -3,43 +3,43 @@
     "question": "false || true",
     "answers": {
       "left": { "answer": "false" },
-      "up": { "answer": "undefined" },
-      "right": { "answer": "true", "correct": true }
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "undefined" }
     }
   },
 
   {
     "question": "null && false",
     "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "true" },
-      "right": { "answer": "null", "correct": true }
+      "left": { "answer": "null", "correct": true },
+      "up": { "answer": "false" },
+      "right": { "answer": "true" }
     }
   },
 
   {
     "question": "(false && 'bar') || 'foo'",
     "answers": {
-      "left": { "answer": "'bar'" },
-      "up": { "answer": "'foo'", "correct": true },
-      "right": { "answer": "false" }
-    }
-  },
-
-  {
-    "question": "'foo' || 'bar'",
-    "answers": {
-      "left": { "answer": "true" },
+      "left": { "answer": "false" },
       "up": { "answer": "'bar'" },
       "right": { "answer": "'foo'", "correct": true }
     }
   },
 
   {
+    "question": "'foo' || 'bar'",
+    "answers": {
+      "left": { "answer": "'foo'", "correct": true },
+      "up": { "answer": "'bar'" },
+      "right": { "answer": "true" }
+    }
+  },
+
+  {
     "question": "'foo' && 'bar' || 'quz'",
     "answers": {
-      "left": { "answer": "'bar'", "correct": true },
-      "up": { "answer": "'foo'" },
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "'bar'", "correct": true },
       "right": { "answer": "'quz'" }
     }
   },
@@ -47,17 +47,17 @@
   {
     "question": "!'foo' && 'bar'",
     "answers": {
-      "left": { "answer": "'bar'" },
-      "up": { "answer": "false", "correct": true },
-      "right": { "answer": "'foo'" }
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "'bar'" },
+      "right": { "answer": "false", "correct": true }
     }
   },
 
   {
     "question": "'foo' && !(false && null)",
     "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "'foo'" },
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "false" },
       "right": { "answer": "true", "correct": true }
     }
   },
@@ -74,17 +74,17 @@
   {
     "question": "'foo' || !!'bar'",
     "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "'foo'", "correct": true },
-      "right": { "answer": "true" }
+      "left": { "answer": "'foo'", "correct": true },
+      "up": { "answer": "true" },
+      "right": { "answer": "false" }
     }
   },
 
   {
     "question": "(null && 'foo') || 'bar'",
     "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "null" },
+      "left": { "answer": "null" },
+      "up": { "answer": "'foo'" },
       "right": { "answer": "'bar'", "correct": true }
     }
   },
@@ -92,8 +92,8 @@
   {
     "question": "(null || []).push('foo')",
     "answers": {
-      "left": { "answer": "['foo']" },
-      "up": { "answer": "Error" },
+      "left": { "answer": "null" },
+      "up": { "answer": "['foo']" },
       "right": { "answer": "1", "correct": true }
     }
   },
@@ -101,8 +101,8 @@
   {
     "question": "('foo' || 'bar').indexOf('f')",
     "answers": {
-      "left": { "answer": "0", "correct": true },
-      "up": { "answer": "-1" },
+      "left": { "answer": "-1" },
+      "up": { "answer": "0", "correct": true },
       "right": { "answer": "1" }
     }
   },
@@ -110,9 +110,9 @@
   {
     "question": "null || 'foo' && 'bar'",
     "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "'bar'", "correct": true },
-      "right": { "answer": "null" }
+      "left": { "answer": "null" },
+      "up": { "answer": "'foo'" },
+      "right": { "answer": "'bar'", "correct": true }
     }
   },
 
@@ -128,17 +128,17 @@
   {
     "question": "null || [] || {}",
     "answers": {
-      "left": { "answer": "'{}'" },
+      "left": { "answer": "null" },
       "up": { "answer": "[]", "correct": true },
-      "right": { "answer": "null" }
+      "right": { "answer": "'{}'" }
     }
   },
 
   {
     "question": "!!!'foo'",
     "answers": {
-      "left": { "answer": "true" },
-      "up": { "answer": "'foo'" },
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "true" },
       "right": { "answer": "false", "correct": true }
     }
   },
@@ -146,9 +146,9 @@
   {
     "question": "![].length",
     "answers": {
-      "left": { "answer": "true", "correct": true },
-      "up": { "answer": "1" },
-      "right": { "answer": "false" }
+      "left": { "answer": "false" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "0" }
     }
   },
 
@@ -164,9 +164,9 @@
   {
     "question": "'foo' !== ('foo' && 'bar')",
     "answers": {
-      "left": { "answer": "true", "correct": true },
-      "up": { "answer": "false" },
-      "right": { "answer": "'foo'" }
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
     }
   },
 
@@ -174,8 +174,8 @@
     "question": "2 > (3 && 0)",
     "answers": {
       "left": { "answer": "false" },
-      "up": { "answer": "0" },
-      "right": { "answer": "true", "correct": true }
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "2" }
     }
   }
 ]
