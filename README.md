@@ -22,8 +22,9 @@ A Game About JavaScript Logical (Or Not) Operators.
   * [x] With a replay button mapped to the space bar key
 * [x] Add a significant indicator when giving a wrong answer
 * [x] When giving an answer, show a random taunt depending of whether the answer is correct or not
-* [ ] Add the star, contribute and tweet link
-* [ ] Add Google Analytics
+* [x] Add the star, contribute and tweet link
+* [x] Add Google Analytics
+* [ ] Make some cross browser tests
 
 # Resources
 
