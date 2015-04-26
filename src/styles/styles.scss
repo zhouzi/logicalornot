@@ -417,7 +417,7 @@ $intro-elements:
   unquote(".question-container"),
   unquote(".box-container .button-list"),
   unquote(".footer"),
-  unquote(".life-bar");
+  unquote(".life-bar-container");
 
 #{$intro-elements} {
   @include fade-slide-base;
