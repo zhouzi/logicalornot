@@ -3,6 +3,10 @@ import questions from './questions';
 export default class QuestionClass {
   constructor () {
     this.questions = questions;
+    this.clear();
+  }
+
+  clear () {
     this.pickedIndexes = [];
     this.currentIndex = null;
   }

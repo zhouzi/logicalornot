@@ -4,15 +4,21 @@ import QuestionClass from './QuestionClass';
 
 export default class AppClass {
   constructor () {
-    var self = this;
+    this.view = new ViewClass();
+    this.question = new QuestionClass();
+    this.lifeBar = new LifeBarClass();
+    this.clear();
 
-    self.view = new ViewClass();
-    self.question = new QuestionClass();
-    self.lifeBar = new LifeBarClass();
-    self.score = [];
+    this.bind();
+    this.start();
+    this.view.animateIntro();
 
-    self.view.renderQuestion(self.question.getQuestion(0));
-    self.view.animateIntro(500);
+    // debug
+    //this.view.renderGameOverModal(this.score);
+  }
+
+  bind () {
+    let self = this;
 
     self.view.subscribe('selectAnswer', function (answer) {
       if (self.question.pickedIndexes.length === 1) self.lifeBar.start();
@@ -28,10 +34,24 @@ export default class AppClass {
       self.view.renderQuestion(self.question.randomQuestion);
     });
 
-    self.view.renderGameOverModal(self.score);
-
     self.lifeBar.subscribe('game over', function () {
       self.view.renderGameOverModal(self.score);
     });
+
+    self.view.subscribe('replay game', function () {
+      self.start();
+    });
+  }
+
+  start () {
+    this.view.clear();
+    this.question.clear();
+    this.lifeBar.clear();
+    this.clear();
+  }
+
+  clear () {
+    this.score = [];
+    this.view.renderQuestion(this.question.getQuestion(0));
   }
 }

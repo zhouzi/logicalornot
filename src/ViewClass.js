@@ -10,6 +10,7 @@ export default class ViewClass extends PubSubClass {
     this.$question = new $('#question');
     this.$gameOverModal = new $('.modal');
     this.$scoreBoard = new $('#score-board');
+    this.$replayButton = new $('#replay-button');
 
     this.answers = {
       left: { $button: new $('#answer-left'), $label: new $('#answer-left .answer-label') },
@@ -36,34 +37,51 @@ export default class ViewClass extends PubSubClass {
   bind () {
     let self = this;
     let keys = { 37: 'left', 38: 'up', 39: 'right' };
+    let spacebar = 32;
     let answer;
 
     this.$document
       .on('keydown', function (e) {
-        answer = keys[e.which];
-
-        if (answer) {
-          self.answers[answer].$button.addClass('active');
+        if (e.which === spacebar) {
+          self.$replayButton.addClass('active');
           e.preventDefault();
+        } else {
+          answer = keys[e.which];
+
+          if (answer) {
+            self.answers[answer].$button.addClass('active');
+            e.preventDefault();
+          }
         }
       })
       .on('keyup', function (e) {
-        answer = keys[e.which];
-
-        if (answer) {
-          self.answers[answer].$button.removeClass('active');
-          self.publish('selectAnswer', answer);
+        if (e.which === spacebar) {
+          self.$replayButton.removeClass('active');
+          self.publish('replay game', answer);
           e.preventDefault();
+        } else {
+          answer = keys[e.which];
+
+          if (answer) {
+            self.answers[answer].$button.removeClass('active');
+            self.publish('selectAnswer', answer);
+            e.preventDefault();
+          }
         }
       })
       .on('click', function (e) {
         let target = e.target;
 
-        for (let key in self.answers) {
-          if (self.answers.hasOwnProperty(key) && self.answers[key].$button.node === target) {
-            self.publish('selectAnswer', key);
-            e.preventDefault();
-            return;
+        if (target === self.$replayButton.node) {
+          self.publish('replay game', answer);
+          e.preventDefault();
+        } else {
+          for (let key in self.answers) {
+            if (self.answers.hasOwnProperty(key) && self.answers[key].$button.node === target) {
+              self.publish('selectAnswer', key);
+              e.preventDefault();
+              return;
+            }
           }
         }
       });
@@ -107,9 +125,14 @@ export default class ViewClass extends PubSubClass {
 
   hideGameOverModal () {
     let $modal = this.$gameOverModal;
+    $modal.removeClass('active');
 
-    $modal
-      .addClass('u-hide')
-      .removeClass('active');
+    setTimeout(function () {
+      $modal.addClass('u-hide');
+    }, 500);
+  }
+
+  clear () {
+    this.hideGameOverModal();
   }
 }

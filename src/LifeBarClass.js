@@ -11,10 +11,16 @@ export default class LifeBarClass extends PubSubClass {
     this.startingValue = 0;
     this.endingValue = 100;
     this.duration = 10; // 10 second
-    this.iteration = 0;
     this.totalIterations = this.duration * fps;
     this.gap = 1 * fps; // 1 second
+
+    this.clear();
+  }
+
+  clear () {
+    this.iteration = 0;
     this.status = 'ready';
+    this.renderLifeBar();
   }
 
   static requestAnimationFrame (callback) {
@@ -36,11 +42,20 @@ export default class LifeBarClass extends PubSubClass {
       return;
     }
 
+    this.renderLifeBar();
+    this.iteration++;
+
+    let self = this;
+    LifeBarClass.requestAnimationFrame(() => {
+      self.animate.apply(self, []);
+    });
+  }
+
+  renderLifeBar () {
     let easingValue = LifeBarClass.ease(this.iteration, this.startingValue, this.endingValue, this.totalIterations);
     let value = 100 - easingValue;
 
     this.$lifeBarProgress.css({ width: value + '%' });
-    this.iteration++;
 
     if (value > 50) {
       this.$lifeBarProgress
@@ -55,11 +70,6 @@ export default class LifeBarClass extends PubSubClass {
         .addClass('life-bar--critical')
         .removeClass('life-bar--low');
     }
-
-    let self = this;
-    LifeBarClass.requestAnimationFrame(() => {
-      self.animate.apply(self, []);
-    });
   }
 
   drop () {
