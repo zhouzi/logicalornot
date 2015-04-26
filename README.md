@@ -18,10 +18,12 @@ A Game About JavaScript Logical (Or Not) Operators.
   * [x] When giving a right answer, earn 1 second
 * [x] When reaching 0, show the game over screen
   * [x] With the score
-  * [ ] With a button to tweet the result
-  * [ ] With a replay button mapped to the space bar key
+  * [x] With a button to tweet the result
+  * [x] With a replay button mapped to the space bar key
 * [ ] Add a significant indicator when giving a wrong and right answer
 * [ ] When giving an answer, show a random taunt depending of whether the answer is correct or not
+* [ ] Add the star, contribute and tweet link
+* [ ] Add Google Analytics
 
 # Resources
 
