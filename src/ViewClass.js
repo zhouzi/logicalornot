@@ -1,5 +1,7 @@
 import PubSubClass from './PubSubClass';
 import $ from './$';
+import rand from './rand';
+import taunts from './taunts.json';
 
 export default class ViewClass extends PubSubClass {
   constructor () {
@@ -7,11 +9,13 @@ export default class ViewClass extends PubSubClass {
 
     this.$document = new $(document);
     this.$body = new $('body');
+    this.$bloody = new $('.bloody');
     this.$question = new $('#question');
     this.$gameOverModal = new $('.modal');
     this.$scoreBoard = new $('#score-board');
     this.$replayButton = new $('#replay-button');
     this.$tweetMyGameButton = new $('#tweet-my-game-button');
+    this.$taunt = new $('#taunt');
 
     this.tweetMyGameMessage = 'Boom! Just made a score of {score}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi';
 
@@ -22,19 +26,7 @@ export default class ViewClass extends PubSubClass {
     };
 
     this.bind();
-  }
-
-  animateIntro (delay = 1000) {
-    let $body = this.$body;
-
-    $body
-      .addClass('u-no-transition')
-      .removeClass('active')
-      .removeClass('u-no-transition');
-
-    setTimeout(function () {
-      $body.addClass('active');
-    }, delay);
+    this.clear();
   }
 
   bind () {
@@ -90,6 +82,24 @@ export default class ViewClass extends PubSubClass {
       });
   }
 
+  clear () {
+    this.hideGameOverModal();
+    this.$taunt.html(this.$taunt.attr('data-initial-message'));
+  }
+
+  animateIntro (delay = 1000) {
+    let $body = this.$body;
+
+    $body
+      .addClass('u-no-transition')
+      .removeClass('active')
+      .removeClass('u-no-transition');
+
+    setTimeout(function () {
+      $body.addClass('active');
+    }, delay);
+  }
+
   renderQuestion (question) {
     this.$question.html(question.question);
 
@@ -139,7 +149,26 @@ export default class ViewClass extends PubSubClass {
     }, 500);
   }
 
-  clear () {
-    this.hideGameOverModal();
+  renderRandomTaunt (type = 'nice') {
+    let index = rand(0, taunts[type].length - 1);
+    let taunt = taunts[type][index];
+    let $taunt = this.$taunt;
+    let $bloody = this.$bloody;
+
+    $taunt
+      .removeClass('active')
+      .html(taunt);
+
+    if (type === 'mean') {
+      $bloody
+        .addClass('u-no-transition')
+        .addClass('active')
+        .removeClass('u-no-transition');
+    }
+
+    setTimeout(function () {
+      $bloody.removeClass('active');
+      $taunt.addClass('active');
+    }, 150);
   }
 }

@@ -19,13 +19,16 @@ export default class AppClass {
 
     self.view.subscribe('selectAnswer', function (answer) {
       if (self.question.pickedIndexes.length === 1) self.lifeBar.start();
+      if (self.lifeBar.status !== 'playing') return;
 
       if (self.question.currentQuestion.answers[answer].correct) {
         self.score.push(1);
         self.lifeBar.rise();
+        self.view.renderRandomTaunt('nice');
       } else {
         self.score.push(0);
         self.lifeBar.drop();
+        self.view.renderRandomTaunt('mean');
       }
 
       self.view.renderQuestion(self.question.randomQuestion);

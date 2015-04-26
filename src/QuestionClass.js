@@ -1,4 +1,5 @@
 import questions from './questions';
+import rand from './rand';
 
 export default class QuestionClass {
   constructor () {
@@ -24,17 +25,13 @@ export default class QuestionClass {
   }
 
   get randomQuestion () {
-    let index = QuestionClass.rand(0, this.questions.length - 1);
+    let index = rand(0, this.questions.length - 1);
     let i = 0;
 
     while (this.pickedIndexes.indexOf(index) >= 0 && ++i < 10) {
-      index = QuestionClass.rand(0, this.questions.length - 1);
+      index = rand(0, this.questions.length - 1);
     }
 
     return this.getQuestion(index);
-  }
-
-  static rand (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }

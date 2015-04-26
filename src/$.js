@@ -31,14 +31,17 @@ export default class $ {
     return this;
   }
 
-  html (html = null) {
-    if (!html) return this.node.innerHTML;
+  html (html) {
+    if (html === undefined) return this.node.innerHTML;
     this.node.innerHTML = html;
 
     return this;
   }
 
   attr (attrName, value) {
-    this.node.setAttribute(attrName, value);
+    if (value === undefined) return this.node.getAttribute(attrName);
+    else this.node.setAttribute(attrName, value);
+
+    return this;
   }
 }
