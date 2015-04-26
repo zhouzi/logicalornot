@@ -6,6 +6,8 @@ export default class ViewClass extends PubSubClass {
     super();
 
     this.question = $.get('#question');
+    this.gameOverModal = $.get('.modal');
+    this.scoreBoard = $.get('#score-board');
 
     this.answers = {
       left: { button: $.get('#answer-left'), label: $.get('#answer-left .answer-label') },
@@ -73,5 +75,39 @@ export default class ViewClass extends PubSubClass {
         $.html(this.answers[key].label, question.answers[key].answer);
       }
     }
+  }
+
+  renderGameOverModal (score = []) {
+    let i = 0;
+    let len = score.length;
+    let point;
+    let template = '';
+
+    for (; i < len; i++) {
+      point = score[i];
+
+      if (point === 1) template += '<span class="point point--right"></span>\n';
+      else template += '<span class="point point--wrong"></span>\n';
+    }
+
+    $.html(this.scoreBoard, template);
+
+    this.showGameOverModal();
+  }
+
+  showGameOverModal () {
+    let modal = this.gameOverModal;
+    $.removeClass(modal, 'u-hide');
+
+    setTimeout(function () {
+      $.addClass(modal, 'active');
+    });
+  }
+
+  hideGameOverModal () {
+    let modal = this.gameOverModal;
+
+    $.addClass(modal, 'u-hide');
+    $.removeClass(modal, 'active');
   }
 }
