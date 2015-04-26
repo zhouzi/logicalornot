@@ -1,29 +1,40 @@
-export default {
-  on: function (el, eventName, callback) {
-    el.addEventListener(eventName, callback);
-  },
+export default class $ {
+  constructor (selector) {
+    if (typeof selector === 'string') this.node = document.querySelector(selector);
+    else this.node = selector;
+  }
 
-  get: function (selector) {
-    return document.querySelector(selector);
-  },
+  on (eventName, callback) {
+    this.node.addEventListener(eventName, callback);
 
-  css: function (el, rules) {
+    return this;
+  }
+
+  css (rules) {
     for (let prop in rules) {
       if (!rules.hasOwnProperty(prop)) continue;
-      el.style[prop] = rules[prop];
+      this.node.style[prop] = rules[prop];
     }
-  },
 
-  addClass: function (el, className) {
-    el.classList.add(className);
-  },
-
-  removeClass: function (el, className) {
-    el.classList.remove(className);
-  },
-
-  html: function (el, html = null) {
-    if (!html) return el.innerHTML;
-    el.innerHTML = html;
+    return this;
   }
-};
+
+  addClass (className) {
+    this.node.classList.add(className);
+
+    return this;
+  }
+
+  removeClass (className) {
+    this.node.classList.remove(className);
+
+    return this;
+  }
+
+  html (html = null) {
+    if (!html) return this.node.innerHTML;
+    this.node.innerHTML = html;
+
+    return this;
+  }
+}

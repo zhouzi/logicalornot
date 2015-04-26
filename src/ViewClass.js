@@ -5,28 +5,31 @@ export default class ViewClass extends PubSubClass {
   constructor () {
     super();
 
-    this.question = $.get('#question');
-    this.gameOverModal = $.get('.modal');
-    this.scoreBoard = $.get('#score-board');
+    this.$document = new $(document);
+    this.$body = new $('body');
+    this.$question = new $('#question');
+    this.$gameOverModal = new $('.modal');
+    this.$scoreBoard = new $('#score-board');
 
     this.answers = {
-      left: { button: $.get('#answer-left'), label: $.get('#answer-left .answer-label') },
-      up: { button: $.get('#answer-up'), label: $.get('#answer-up .answer-label') },
-      right: { button: $.get('#answer-right'), label: $.get('#answer-right .answer-label') }
+      left: { $button: new $('#answer-left'), $label: new $('#answer-left .answer-label') },
+      up: { $button: new $('#answer-up'), $label: new $('#answer-up .answer-label') },
+      right: { $button: new $('#answer-right'), $label: new $('#answer-right .answer-label') }
     };
 
     this.bind();
   }
 
-  static animateIntro (delay = 1000) {
-    let body = document.body;
+  animateIntro (delay = 1000) {
+    let $body = this.$body;
 
-    $.addClass(body, 'u-no-transition');
-    $.removeClass(document.body, 'active');
-    $.removeClass(body, 'u-no-transition');
+    $body
+      .addClass('u-no-transition')
+      .removeClass('active')
+      .removeClass('u-no-transition');
 
     setTimeout(function () {
-      $.addClass(body, 'active');
+      $body.addClass('active');
     }, delay);
   }
 
@@ -35,44 +38,43 @@ export default class ViewClass extends PubSubClass {
     let keys = { 37: 'left', 38: 'up', 39: 'right' };
     let answer;
 
-    $.on(document, 'keydown', function (e) {
-      answer = keys[e.which];
+    this.$document
+      .on('keydown', function (e) {
+        answer = keys[e.which];
 
-      if (answer) {
-        $.addClass(self.answers[answer].button, 'active');
-        e.preventDefault();
-      }
-    });
-
-    $.on(document, 'keyup', function (e) {
-      answer = keys[e.which];
-
-      if (answer) {
-        $.removeClass(self.answers[answer].button, 'active');
-        self.publish('selectAnswer', answer);
-        e.preventDefault();
-      }
-    });
-
-    $.on(document, 'click', function (e) {
-      let target = e.target;
-
-      for (let key in self.answers) {
-        if (self.answers.hasOwnProperty(key) && self.answers[key].button === target) {
-          self.publish('selectAnswer', key);
+        if (answer) {
+          self.answers[answer].$button.addClass('active');
           e.preventDefault();
-          return;
         }
-      }
-    });
+      })
+      .on('keyup', function (e) {
+        answer = keys[e.which];
+
+        if (answer) {
+          self.answers[answer].$button.removeClass('active');
+          self.publish('selectAnswer', answer);
+          e.preventDefault();
+        }
+      })
+      .on('click', function (e) {
+        let target = e.target;
+
+        for (let key in self.answers) {
+          if (self.answers.hasOwnProperty(key) && self.answers[key].$button.node === target) {
+            self.publish('selectAnswer', key);
+            e.preventDefault();
+            return;
+          }
+        }
+      });
   }
 
   renderQuestion (question) {
-    $.html(this.question, question.question);
+    this.$question.html(question.question);
 
     for (let key in question.answers) {
       if (question.answers.hasOwnProperty(key) && this.answers[key]) {
-        $.html(this.answers[key].label, question.answers[key].answer);
+        this.answers[key].$label.html(question.answers[key].answer);
       }
     }
   }
@@ -90,24 +92,24 @@ export default class ViewClass extends PubSubClass {
       else template += '<span class="point point--wrong"></span>\n';
     }
 
-    $.html(this.scoreBoard, template);
-
+    this.$scoreBoard.html(template);
     this.showGameOverModal();
   }
 
   showGameOverModal () {
-    let modal = this.gameOverModal;
-    $.removeClass(modal, 'u-hide');
+    let $modal = this.$gameOverModal;
+    $modal.removeClass('u-hide');
 
     setTimeout(function () {
-      $.addClass(modal, 'active');
-    });
+      $modal.addClass('active');
+    }, 0);
   }
 
   hideGameOverModal () {
-    let modal = this.gameOverModal;
+    let $modal = this.$gameOverModal;
 
-    $.addClass(modal, 'u-hide');
-    $.removeClass(modal, 'active');
+    $modal
+      .addClass('u-hide')
+      .removeClass('active');
   }
 }

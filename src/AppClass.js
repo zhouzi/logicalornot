@@ -12,7 +12,7 @@ export default class AppClass {
     self.score = [];
 
     self.view.renderQuestion(self.question.getQuestion(0));
-    ViewClass.animateIntro(500);
+    self.view.animateIntro(500);
 
     self.view.subscribe('selectAnswer', function (answer) {
       if (self.question.pickedIndexes.length === 1) self.lifeBar.start();
