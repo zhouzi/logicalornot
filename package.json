@@ -2,9 +2,9 @@
   "name": "logicalornot",
   "version": "0.0.1",
   "description": "A Game About JavaScript Logical (Or Not) Operators.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zhouzi/logicalornot.git"
   },
   "keywords": [
     "logical",
@@ -14,6 +14,10 @@
   ],
   "author": "Gabin",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Zhouzi/logicalornot/issues"
+  },
+  "homepage": "https://github.com/Zhouzi/logicalornot",
   "devDependencies": {
     "babel-core": "^5.1.11",
     "babel-loader": "^5.0.0",
