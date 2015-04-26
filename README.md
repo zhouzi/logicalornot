@@ -20,8 +20,8 @@ A Game About JavaScript Logical (Or Not) Operators.
   * [x] With the score
   * [x] With a button to tweet the result
   * [x] With a replay button mapped to the space bar key
-* [ ] Add a significant indicator when giving a wrong and right answer
-* [ ] When giving an answer, show a random taunt depending of whether the answer is correct or not
+* [x] Add a significant indicator when giving a wrong answer
+* [x] When giving an answer, show a random taunt depending of whether the answer is correct or not
 * [ ] Add the star, contribute and tweet link
 * [ ] Add Google Analytics
 
