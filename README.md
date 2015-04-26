@@ -2,29 +2,29 @@
 
 A Game About JavaScript Logical (Or Not) Operators.
 
+[Play Now!](http://gabinaureche.com/logicalornot/)
+
+
+
 # Change Log
 
-## v0.0.1 - [Unreleased]
+## v0.0.1 - 2015-04-26
 
-* [x] Add Change Log
-* [x] Setup Workflow
-* [x] Design the app
-* [x] Render the first question, then init
-* [x] Render a random question after an answer
-* [x] Add at least 20 questions
-* [x] Add "life bar"
-  * [x] The life bar decrease as the time pass (10 seconds before reaching 0)
-  * [x] When giving a wrong answer, lose 1 second
-  * [x] When giving a right answer, earn 1 second
-* [x] When reaching 0, show the game over screen
-  * [x] With the score
-  * [x] With a button to tweet the result
-  * [x] With a replay button mapped to the space bar key
-* [x] Add a significant indicator when giving a wrong answer
-* [x] When giving an answer, show a random taunt depending of whether the answer is correct or not
-* [x] Add the star, contribute and tweet link
-* [x] Add Google Analytics
-* [ ] Make some cross browser tests
+* Setup repository, first version
+* The first question starts the game
+* Display a random question after an answer
+* Added 20 questions [`src/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/questions.json)
+* Added life bar
+  * Takes 10 seconds to go from 100% to 0%
+  * When giving a wrong answer, lose 1 second
+  * When giving a right answer, win 1 second
+* Added a Game Over modal
+  * Display the score and offer a way to tweet it
+  * The replay button, mapped to the space bar, restarts the game (you can restart the game at any moment)
+* When giving a wrong answer, screen blinks with a "bloody" effect
+* When giving an answer, show a random taunt depending on whether the answer is correct or not [`src/taunts.json`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/taunts.json)
+
+
 
 # Resources
 
