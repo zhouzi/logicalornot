@@ -67,14 +67,21 @@ export default class ViewClass extends PubSubClass {
       .on('click', function (e) {
         let target = e.target;
 
-        if (target === self.$replayButton.node) {
+        // The target element could be a child of the button (i.e a <span>)
+        if (self.$replayButton.node === target  || self.$replayButton.node.contains(target)) {
           self.publish('replay game', answer);
           e.preventDefault();
         } else {
+          let $button;
+
           for (let key in self.answers) {
-            if (self.answers.hasOwnProperty(key) && self.answers[key].$button.node === target) {
+            if (!self.answers.hasOwnProperty(key)) continue;
+
+            $button = self.answers[key].$button;
+            if ($button.node === target || $button.node.contains(target)) {
               self.publish('selectAnswer', key);
               e.preventDefault();
+
               return;
             }
           }
