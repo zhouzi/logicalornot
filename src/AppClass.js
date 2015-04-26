@@ -12,9 +12,6 @@ export default class AppClass {
     this.bind();
     this.start();
     this.view.animateIntro();
-
-    // debug
-    //this.view.renderGameOverModal(this.score);
   }
 
   bind () {

@@ -37,4 +37,8 @@ export default class $ {
 
     return this;
   }
+
+  attr (attrName, value) {
+    this.node.setAttribute(attrName, value);
+  }
 }

@@ -11,6 +11,9 @@ export default class ViewClass extends PubSubClass {
     this.$gameOverModal = new $('.modal');
     this.$scoreBoard = new $('#score-board');
     this.$replayButton = new $('#replay-button');
+    this.$tweetMyGameButton = new $('#tweet-my-game-button');
+
+    this.tweetMyGameMessage = 'Boom! Just made a score of {score}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi';
 
     this.answers = {
       left: { $button: new $('#answer-left'), $label: new $('#answer-left .answer-label') },
@@ -98,20 +101,24 @@ export default class ViewClass extends PubSubClass {
   }
 
   renderGameOverModal (score = []) {
-    let i = 0;
-    let len = score.length;
-    let point;
     let template = '';
 
-    for (; i < len; i++) {
-      point = score[i];
-
-      if (point === 1) template += '<span class="point point--right"></span>\n';
+    for (let i = 0; i < score.length; i++) {
+      if (score[i] === 1) template += '<span class="point point--right"></span>\n';
       else template += '<span class="point point--wrong"></span>\n';
     }
 
     this.$scoreBoard.html(template);
+    this.renderTweetMyGameButton(score.join(''));
     this.showGameOverModal();
+  }
+
+  renderTweetMyGameButton (binaryScore) {
+    let message =
+      'https://twitter.com/home?status=' +
+      encodeURIComponent(this.tweetMyGameMessage.replace(/\{score\}/g, binaryScore));
+
+    this.$tweetMyGameButton.attr('href', message);
   }
 
   showGameOverModal () {
