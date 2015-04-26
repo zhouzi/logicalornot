@@ -73,7 +73,6 @@ export default class LifeBarClass extends PubSubClass {
   }
 
   drop () {
-    console.log('dropped');
     if (this.status !== 'playing') return;
 
     if (this.iteration + this.gap >= this.totalIterations) this.iteration = this.totalIterations;
@@ -81,7 +80,6 @@ export default class LifeBarClass extends PubSubClass {
   }
 
   rise () {
-    console.log('rised');
     if (this.status !== 'playing') return;
 
     if (this.iteration - this.gap <= 0) this.iteration = 0;
