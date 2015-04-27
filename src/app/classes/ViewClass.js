@@ -1,7 +1,7 @@
 import PubSubClass from './PubSubClass';
-import $ from './$';
-import rand from './rand';
-import taunts from './taunts.json';
+import $ from '../utils/$';
+import rand from '../utils/rand';
+import taunts from '../data/taunts.json';
 
 export default class ViewClass extends PubSubClass {
   constructor () {

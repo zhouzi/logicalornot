@@ -1,5 +1,5 @@
 import PubSubClass from './PubSubClass';
-import $ from './$';
+import $ from '../utils/$';
 
 export default class LifeBarClass extends PubSubClass {
   constructor () {

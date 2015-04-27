@@ -1,5 +1,5 @@
-import questions from './questions.json';
-import rand from './rand';
+import questions from '../data/questions.json';
+import rand from '../utils/rand';
 
 export default class QuestionClass {
   constructor () {
