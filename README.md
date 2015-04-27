@@ -8,6 +8,13 @@ A Game About JavaScript Logical (Or Not) Operators.
 
 # Change Log
 
+## v0.0.2 - [Unreleased]
+
+* [x] Refactor, clean folder structure
+* [ ] Move every methods that manipulate the DOM to the view class
+* [ ] Move the logic out of the view class
+* [ ] Add a note on contribution
+
 ## v0.0.1 - 2015-04-26
 
 * Setup repository, first version
