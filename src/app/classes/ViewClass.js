@@ -52,6 +52,7 @@ export default class ViewClass {
         if (!self.$buttons.hasOwnProperty(key)) continue;
 
         if (self.$buttons[key].element.contains(event.target)) {
+          event.preventDefault();
           return self.publishButtonData(self.$buttons[key]);
         }
       }
