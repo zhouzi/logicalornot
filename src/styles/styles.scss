@@ -333,9 +333,12 @@ h2 {
   background-color: $white;
   padding: $gutter-large $gutter-xlarge;
   box-shadow: 0 0 6px 4px rgba($black, .4);
+  max-width: 100%;
+  margin: $gutter;
   transform: translateY(20px) rotateX(-30deg) scale(.8);
   opacity: 0;
-  transition: all 300ms cubic-bezier(.87,.66,.38,1.35);
+  transition: transform 300ms cubic-bezier(.87,.66,.38,1.35),
+              opacity 300ms cubic-bezier(.87,.66,.38,1.35);
 
   p {
     font-size: $font-size-medium;
