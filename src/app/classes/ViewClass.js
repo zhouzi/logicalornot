@@ -1,6 +1,3 @@
-const SELECTANSWER = 'view:selectAnswer';
-const NEWROUND     = 'view:newRound';
-
 export default class ViewClass {
   constructor (proxy, stream) {
     this.$proxy    = typeof proxy === 'string' ? document.querySelector(proxy) : proxy;
@@ -9,61 +6,6 @@ export default class ViewClass {
     this.$buttons  = {};
 
     this.bind();
-  }
-
-  render (selector, method, ...args) {
-    args.unshift(this.$get(selector));
-    return ViewClass[method].apply(this, args);
-  }
-
-  $get (selector) {
-    selector = 'bind-' + selector;
-
-    if (!this.$elements[selector]) {
-      this.$elements[selector] = document.getElementById(selector);
-    }
-
-    return this.$elements[selector];
-  }
-
-  static html (element, html) {
-    element.innerHTML = html;
-  }
-
-  static css (element, styles) {
-    for (let prop in styles) {
-      if (styles.hasOwnProperty(prop)) {
-        element.style[prop] = styles[prop];
-      }
-    }
-
-    return element;
-  }
-
-  static addClass (element, className) {
-    return element.classList.add(className);
-  }
-
-  static removeClass (element, className) {
-    return element.classList.remove(className);
-  }
-
-  static attr (element, attrs) {
-    for (let prop in attrs) {
-      if (attrs.hasOwnProperty(prop)) {
-        element.setAttribute(prop, attrs[prop]);
-      }
-    }
-
-    return element;
-  }
-
-  static getAttribute (element, attrName) {
-    return element.getAttribute(attrName);
-  }
-
-  publishButtonData (button) {
-    this.stream.publish(button.eventName, button.eventData);
   }
 
   bind () {
@@ -114,5 +56,66 @@ export default class ViewClass {
         }
       }
     });
+  }
+
+  publishButtonData (button) {
+    this.stream.publish(button.eventName, button.eventData);
+  }
+
+  $get (selector) {
+    selector = 'bind-' + selector;
+
+    if (!this.$elements[selector]) {
+      this.$elements[selector] = document.getElementById(selector);
+    }
+
+    return this.$elements[selector];
+  }
+
+  render (selector, method, ...args) {
+    args.unshift(this.$get(selector));
+    return ViewClass[method].apply(this, args);
+  }
+
+
+
+  /*-------------------------------------------*\
+    statics (DOM manipulators)
+  \*-------------------------------------------*/
+
+  static html (element, html) {
+    element.innerHTML = html;
+  }
+
+  static css (element, styles) {
+    for (let prop in styles) {
+      if (styles.hasOwnProperty(prop)) {
+        element.style[prop] = styles[prop];
+      }
+    }
+
+    return element;
+  }
+
+  static addClass (element, className) {
+    return element.classList.add(className);
+  }
+
+  static removeClass (element, className) {
+    return element.classList.remove(className);
+  }
+
+  static attr (element, attrs) {
+    for (let prop in attrs) {
+      if (attrs.hasOwnProperty(prop)) {
+        element.setAttribute(prop, attrs[prop]);
+      }
+    }
+
+    return element;
+  }
+
+  static getAttribute (element, attrName) {
+    return element.getAttribute(attrName);
   }
 }

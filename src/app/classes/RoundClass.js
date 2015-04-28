@@ -35,10 +35,32 @@ export default class RoundClass {
     this.animate();
   }
 
-  stop () {
-    this.status = 'game over';
-    cancelAnimationFrame(this._animateId);
+
+
+  /*-------------------------------------------*\
+    question
+  \*-------------------------------------------*/
+
+  get currentQuestion () {
+    return this.questions[this.currentIndex];
   }
+
+  get randomIndex () {
+    let index   = rand(0, this.questions.length - 1);
+    let maxExec = 10;
+
+    while (this.pickedIndexes.indexOf(index) > -1 && --maxExec > 0) {
+      index = rand(0, this.questions.length - 1);
+    }
+
+    return index;
+  }
+
+
+
+  /*-------------------------------------------*\
+    animation
+  \*-------------------------------------------*/
 
   animate () {
     if (this.status === 'game over') return;
@@ -59,25 +81,16 @@ export default class RoundClass {
     this._animateId = requestAnimationFrame(() => self.animate.apply(self, []));
   }
 
-  setLifeBarHp (hp) {
-    this.lifeBar = hp;
-    this.stream.publish('round:updateLifeBar', hp);
+  stop () {
+    this.status = 'game over';
+    cancelAnimationFrame(this._animateId);
   }
 
-  get currentQuestion () {
-    return this.questions[this.currentIndex];
-  }
 
-  get randomIndex () {
-    let index   = rand(0, this.questions.length - 1);
-    let maxExec = 10;
 
-    while (this.pickedIndexes.indexOf(index) > -1 && --maxExec > 0) {
-      index = rand(0, this.questions.length - 1);
-    }
-
-    return index;
-  }
+  /*-------------------------------------------*\
+    question, answer
+  \*-------------------------------------------*/
 
   setQuestion (index) {
     this.pickedIndexes.push(index);
@@ -85,17 +98,6 @@ export default class RoundClass {
 
     this.stream.publish('round:newQuestion', this.currentQuestion);
     return this.currentQuestion;
-  }
-
-  setTaunt (index, type = 'nice') {
-    this.stream.publish('round:newTaunt', this.taunt = this.taunts[type][index], type);
-  }
-
-  setRandomTaunt (isCorrect) {
-    let type   = isCorrect ? 'nice' : 'mean';
-    let taunts = this.taunts[type];
-
-    return this.setTaunt(rand(0, taunts.length - 1), type);
   }
 
   submitAnswer (answer) {
@@ -115,6 +117,34 @@ export default class RoundClass {
 
     this.setRandomTaunt(isCorrect);
     this.setQuestion(this.randomIndex);
+  }
+
+
+
+  /*-------------------------------------------*\
+    taunt
+  \*-------------------------------------------*/
+
+  setTaunt (index, type = 'nice') {
+    this.stream.publish('round:newTaunt', this.taunt = this.taunts[type][index], type);
+  }
+
+  setRandomTaunt (isCorrect) {
+    let type   = isCorrect ? 'nice' : 'mean';
+    let taunts = this.taunts[type];
+
+    return this.setTaunt(rand(0, taunts.length - 1), type);
+  }
+
+
+
+  /*-------------------------------------------*\
+    life bar
+  \*-------------------------------------------*/
+
+  setLifeBarHp (hp) {
+    this.lifeBar = hp;
+    this.stream.publish('round:updateLifeBar', hp);
   }
 
   riseLifeBar () {
