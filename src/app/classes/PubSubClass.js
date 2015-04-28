@@ -5,14 +5,12 @@ export default class PubSubClass {
   }
 
   subscribe (eventName, callback) {
-    //console.log('subscribe');
     (this.events[eventName] || (this.events[eventName] = [])).push(callback);
 
     return this;
   }
 
   publish (eventName, ...args) {
-    //console.log('publish');
     let subscribers = this.events[eventName] || [];
     let context     = this.context;
 

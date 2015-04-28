@@ -12,7 +12,9 @@ export default class GameClass {
 
     this.bind();
     this.newRound();
+  }
 
+  animateIntro () {
     this.view.render('body', 'addClass', 'active');
   }
 
