@@ -20,7 +20,7 @@ module.exports = {
         loaders: ['json-loader']
       }
     ]
-  }/*,
+  },
 
-  plugins: [new webpack.optimize.UglifyJsPlugin()]*/
+  plugins: [new webpack.optimize.UglifyJsPlugin()]
 };
