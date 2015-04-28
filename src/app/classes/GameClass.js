@@ -19,7 +19,7 @@ export default class GameClass {
   bind () {
     this
       .stream
-      .subscribe('new question', (newQuestion) => {
+      .subscribe('round:newQuestion', (newQuestion) => {
         this.view.render('question',           'html', newQuestion.question);
         this.view.render('answer-left-label',  'html', newQuestion.answers.left.answer);
         this.view.render('answer-up-label',    'html', newQuestion.answers.up.answer);
@@ -70,9 +70,6 @@ export default class GameClass {
       })
       .subscribe('view:newRound', () => {
         this.newRound();
-      })
-      .subscribe('answer question', (isCorrect, nextQuestion) => {
-        //console.log(isCorrect, nextQuestion);
       })
       .subscribe('view:selectAnswer', (answer) => {
         this.round.submitAnswer(answer);

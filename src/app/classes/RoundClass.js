@@ -83,7 +83,7 @@ export default class RoundClass {
     this.pickedIndexes.push(index);
     this.currentIndex = index;
 
-    this.stream.publish('new question', this.currentQuestion);
+    this.stream.publish('round:newQuestion', this.currentQuestion);
     return this.currentQuestion;
   }
 
@@ -115,7 +115,6 @@ export default class RoundClass {
 
     this.setRandomTaunt(isCorrect);
     this.setQuestion(this.randomIndex);
-    this.stream.publish('answer question', isCorrect, this.currentQuestion);
   }
 
   riseLifeBar () {
