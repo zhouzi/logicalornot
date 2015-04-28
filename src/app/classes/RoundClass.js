@@ -1,11 +1,11 @@
+import gameplay from '../data/gameplay.json';
+
 import requestAnimationFrame from '../utils/requestAnimationFrame';
 import cancelAnimationFrame from '../utils/cancelAnimationFrame';
 import rand from '../utils/rand';
 import ease from '../utils/ease';
 
-const FPS      = 60;
-const DURATION = 10; // 10 seconds
-const GAP      = 1; // lose or win 1 second
+const FPS = 60;
 
 export default class RoundClass {
   constructor (questions, taunts, stream) {
@@ -17,9 +17,17 @@ export default class RoundClass {
     this.score         = [];
     this.currentIndex  = null;
     this.pickedIndexes = [];
-    this.config        = { minValue: 0, maxValue: 100, duration: DURATION, iteration: 0, totalIterations: DURATION * FPS, gap: GAP * FPS };
     this.lifeBar       = 100;
     this._animateId    = null;
+
+    this.config = {
+      minValue:        0,
+      maxValue:        100,
+      iteration:       0,
+      totalIterations: gameplay.duration   * FPS,
+      winningGap:      gameplay.winningGap * FPS,
+      losingGap:       gameplay.losingGap  * FPS
+    };
 
     this.setLifeBarHp(this.config.maxValue);
     this.setTaunt(0, 'nice');
@@ -111,12 +119,12 @@ export default class RoundClass {
   }
 
   riseLifeBar () {
-    if (this.config.iteration - this.config.gap <= 0) this.config.iteration = 0;
-    else this.config.iteration -= this.config.gap;
+    if (this.config.iteration - this.config.winningGap <= 0) this.config.iteration = 0;
+    else this.config.iteration -= this.config.winningGap;
   }
 
   dropLifeBar () {
-    if (this.config.iteration + this.config.gap >= this.config.totalIterations) this.config.iteration = this.config.totalIterations;
-    else this.config.iteration += this.config.gap;
+    if (this.config.iteration + this.config.losingGap >= this.config.totalIterations) this.config.iteration = this.config.totalIterations;
+    else this.config.iteration += this.config.losingGap;
   }
 }
