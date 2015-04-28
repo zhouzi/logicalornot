@@ -8,15 +8,15 @@
     <link rel="stylesheet" href="dist/styles.css">
   </head>
 
-  <body>
-    <div class="modal u-hide">
+  <body id="bind-body">
+    <div id="bind-modal" class="modal u-hide">
       <div class="modal-box">
         <h2>Boom!</h2>
 
         <p>
           "Just made a score of
           <br>
-          <span id="score-board"></span>
+          <span id="bind-score-board"></span>
           <br>
           Come and beat me!"
         </p>
@@ -25,14 +25,14 @@
           <li>
             <span class="caret"></span>
 
-            <a href="#" id="tweet-my-game-button" class="button button--secondary" target="_blank">
+            <a href="#" id="bind-tweet-my-game-button" class="button button--secondary" target="_blank">
               <span class="icon-twitter"></span>
               Tweet
             </a>
           </li>
 
           <li>
-            <a href="#" id="replay-button" class="button button--secondary">
+            <a href="#" class="button button--secondary" data-bind="spacebar" data-event="view:newRound">
               <small class="muted">(space)</small>
               Replay
             </a>
@@ -41,41 +41,41 @@
       </div>
     </div>
 
-    <div class="bloody"></div>
+    <div id="bind-bloody" class="bloody"></div>
 
     <div class="wrapper">
-      <div class="life-bar-container"><div class="life-bar"></div></div>
+      <div class="life-bar-container"><div id="bind-life-bar" class="life-bar"></div></div>
 
       <section class="box-container">
         <header class="header">
           <h1>Logical <span class="ornot"><span class="muted">(</span>Or Not<span class="muted">)</span></span></h1>
 
           <p class="taunt-container">
-            <span id="taunt" data-initial-message="So, what's the result of..." class="taunt active">So, what's the result of...</span>
+            <span id="bind-taunt" class="taunt active"></span>
           </p>
         </header>
 
-        <pre class="question-container"><code id="question"></code></pre>
+        <pre class="question-container"><code id="bind-question"></code></pre>
 
         <ul class="button-list">
           <li>
-            <a href="#" class="button" id="answer-left">
+            <a href="#" class="button" data-bind="left" data-event="view:selectAnswer" data-event-data="left">
               <span class="icon-arrow-left"></span>
-              <span class="answer-label"></span>
+              <span id="bind-answer-left-label"></span>
             </a>
           </li>
 
           <li>
-            <a href="#" class="button" id="answer-up">
+            <a href="#" class="button" data-bind="up" data-event="view:selectAnswer" data-event-data="up">
               <span class="icon-arrow-up"></span>
-              <span class="answer-label"></span>
+              <span id="bind-answer-up-label"></span>
             </a>
           </li>
 
           <li>
-            <a href="#" class="button" id="answer-right">
+            <a href="#" class="button" data-bind="right" data-event="view:selectAnswer" data-event-data="right">
               <span class="icon-arrow-right"></span>
-              <span class="answer-label"></span>
+              <span id="bind-answer-right-label"></span>
             </a>
           </li>
         </ul>

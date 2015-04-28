@@ -1,7 +1,7 @@
 var webpack = require('webpack');
 
 module.exports = {
-  entry: './src/app.js',
+  entry: './src/app/app.js',
 
   output: {
     path: __dirname + '/dist',
@@ -20,7 +20,7 @@ module.exports = {
         loaders: ['json-loader']
       }
     ]
-  },
+  }/*,
 
-  plugins: [new webpack.optimize.UglifyJsPlugin()]
+  plugins: [new webpack.optimize.UglifyJsPlugin()]*/
 };

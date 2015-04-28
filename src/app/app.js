@@ -1,3 +1,5 @@
-import AppClass from './classes/AppClass';
+import GameClass from './classes/GameClass';
+import questions from './data/questions.json';
+import taunts from './data/taunts.json';
 
-let app = new AppClass();
+let app = new GameClass(document, questions, taunts);

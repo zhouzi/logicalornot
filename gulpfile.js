@@ -14,14 +14,14 @@ gulp.task('styles', function () {
 
 gulp.task('scripts', function () {
   return gulp
-    .src('src/app.js')
+    .src('src/app/app.js')
     .pipe($.webpack(webpackConfig))
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', function () {
   gulp.watch('src/styles/*.scss', ['styles']);
-  gulp.watch('src/*.js', ['scripts']);
+  gulp.watch('src/**/*.js', ['scripts']);
 });
 
 gulp.task('serve', ['default'], function () {

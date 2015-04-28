@@ -8,12 +8,15 @@ A Game About JavaScript Logical (Or Not) Operators.
 
 # Change Log
 
-## v0.0.2 - [Unreleased]
+## v1.0.0 - [Unreleased]
 
 * [x] Refactor, clean folder structure
-* [ ] Move every methods that manipulate the DOM to the view class
-* [ ] Move the logic out of the view class
+* [x] RoundClass contains model and logic
+* [x] ViewClass contains ui logic
+* [x] GameClass wraps the app and link the view to the model
 * [ ] Add a note on contribution
+* [ ] Add eslint with its gulp task
+* [ ] Add unit tests
 
 ## v0.0.1 - 2015-04-26
 

@@ -1,19 +1,25 @@
-export default class EventStreamClass {
-  constructor () {
-    this.events = {};
+export default class PubSubClass {
+  constructor (context = this) {
+    this.context = context;
+    this.events  = {};
   }
 
   subscribe (eventName, callback) {
+    //console.log('subscribe');
     (this.events[eventName] || (this.events[eventName] = [])).push(callback);
+
+    return this;
   }
 
   publish (eventName, ...args) {
-    let subscribers = this.events[eventName];
+    //console.log('publish');
+    let subscribers = this.events[eventName] || [];
+    let context     = this.context;
 
-    if (!subscribers) return;
+    subscribers.forEach((callback) => {
+      callback.apply(context, args);
+    });
 
-    for (let i = 0, subscriber; subscriber = subscribers[i]; i++) {
-      subscriber.apply(this, args);
-    }
+    return this;
   }
 }
