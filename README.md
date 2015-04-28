@@ -23,7 +23,7 @@ A Game About JavaScript Logical (Or Not) Operators.
 * Setup repository, first version
 * The first question starts the game
 * Display a random question after an answer
-* Added 20 questions [`src/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/questions.json)
+* Added 20 questions [`src/app/data/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/questions.json)
 * Added life bar
   * Takes 10 seconds to go from 100% to 0%
   * When giving a wrong answer, lose 1 second
@@ -32,7 +32,7 @@ A Game About JavaScript Logical (Or Not) Operators.
   * Display the score and offer a way to tweet it
   * The replay button, mapped to the space bar, restarts the game (you can restart the game at any moment)
 * When giving a wrong answer, screen blinks with a "bloody" effect
-* When giving an answer, show a random taunt depending on whether the answer is correct or not [`src/taunts.json`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/taunts.json)
+* When giving an answer, show a random taunt depending on whether the answer is correct or not [`src/app/data/taunts.json`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/taunts.json)
 
 
 
