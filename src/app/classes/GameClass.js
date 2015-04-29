@@ -70,8 +70,13 @@ export default class GameClass {
 
 
         // update href attribute of tweet button
+        let points = score.join('').match(/1/g);
+
+        if (points) points = points.length;
+        else points = 0;
+
         let baseUrl      = 'https://twitter.com/home?status=';
-        let tweetMessage = encodeURIComponent(`Boom! Just made a score of ${score.join('')}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`);
+        let tweetMessage = encodeURIComponent(`Boom! Just made a score of ${points}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`);
 
         this.view.render('tweet-my-game-button', 'attr', { href: baseUrl + tweetMessage });
 
