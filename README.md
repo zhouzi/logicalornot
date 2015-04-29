@@ -8,6 +8,10 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
+## v1.0.1 - [Unreleased]
+
+* [ ] Store user's best score
+
 ## v1.0.0 - [Unreleased]
 
 * [x] Refactor, clean folder structure
@@ -17,6 +21,8 @@ A Game About JavaScript Logical Operators.
 * [ ] Add a note on contribution
 * [ ] Add eslint with its gulp task
 * [ ] Add unit tests
+* [ ] Increase duration to 15 (instead of 10)
+* [ ] Simplify questions
 
 ## v0.0.1 - 2015-04-26
 
