@@ -268,11 +268,11 @@ h2 {
     //color: $white-transparent;
     display: inline-block;
     padding: .2em;
-    border-bottom: 2px solid $reddish;
+    border-bottom: 2px solid $reddish-light;
     margin-left: $gutter-small;
 
     [class*="icon-"] {
-      color: $reddish;
+      color: $reddish-light;
     }
 
     &:focus,
