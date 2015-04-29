@@ -19,6 +19,14 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('lint', function () {
+  return gulp
+    .src(['src/app/**/*.js'])
+    .pipe($.eslint())
+    .pipe($.eslint.format())
+    .pipe($.eslint.failOnError());
+});
+
 gulp.task('watch', function () {
   gulp.watch('src/styles/*.scss', ['styles']);
   gulp.watch('src/**/*.js', ['scripts']);
