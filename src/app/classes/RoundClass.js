@@ -33,7 +33,7 @@ export default class RoundClass {
     this.setLifeBarHp(this.config.maxValue);
     this.updateLifeBarState();
     this.setTaunt(0, 'nice');
-    this.setQuestion(0);
+    this.setRandomQuestion();
     this.animate();
   }
 
@@ -102,6 +102,10 @@ export default class RoundClass {
     return this.currentQuestion;
   }
 
+  setRandomQuestion () {
+    this.setQuestion(this.randomIndex);
+  }
+
   submitAnswer (answer) {
     if (this.status === 'game over') return;
 
@@ -118,7 +122,7 @@ export default class RoundClass {
     }
 
     this.setRandomTaunt(isCorrect);
-    this.setQuestion(this.randomIndex);
+    this.setRandomQuestion();
   }
 
 
