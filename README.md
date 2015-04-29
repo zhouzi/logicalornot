@@ -12,6 +12,7 @@ A Game About JavaScript Logical Operators.
 ## v1.0.1 - [Unreleased]
 
 * [ ] Store user's best score
+* [ ] Add unit tests
 
 ## v1.0.0 - [Unreleased]
 
@@ -21,8 +22,7 @@ A Game About JavaScript Logical Operators.
 * [x] GameClass wraps the app and link the view to the model
 * [x] Add a note on contribution
 * [x] Add eslint with its gulp task
-* [ ] Add unit tests
-* [ ] Increase duration to 15 (instead of 10)
+* [ ] Increase duration to 12 (instead of 10)
 * [ ] Simplify questions
 
 ## v0.0.1 - 2015-04-26
