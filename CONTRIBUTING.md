@@ -1,18 +1,18 @@
 # Contributing
 
-Thank you very much for your interest in Logical (Or Not), really much appreciated!
-Actually, there are several ways you can contribute.
+Thank you very much for your interest in Logical (Or Not)!
+Below are the different ways you can contribute to the project.
 
 
 
 ## Questions
 
-Logical (Or Not) is a question based.
-To have a look at the existing ones, head up to the [`src/app/data/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/questions.json) file.
-If you want to submit new questions, please make sure that:
+Logical (Or Not) is a question based game.
+The questions are stored in the [`src/app/data/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/questions.json) file.
+If you want to submit new ones, please make sure that:
 
 * It doesn't involve any external context (`'foo' || 'bar'` is ok while `!variable || func()` is not)
-* It is short and not too complicated
+* It is short and not too complex
 
 
 
@@ -39,7 +39,7 @@ I am also reachable on twitter: [@zh0uzi](http://twitter.com/zh0uzi).
 ### Installation
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) this repository
-* run `npm install` in your command line interface (from the `/logicalornot` directory)
+* `npm install`
 
 ### Workflow
 
