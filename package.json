@@ -1,7 +1,7 @@
 {
   "name": "logicalornot",
   "version": "0.0.1",
-  "description": "A Game About JavaScript Logical (Or Not) Operators.",
+  "description": "A Game About JavaScript Logical Operators.",
   "repository": {
     "type": "git",
     "url": "https://github.com/Zhouzi/logicalornot.git"
