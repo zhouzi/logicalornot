@@ -18,6 +18,7 @@ export default class RoundClass {
     this.currentIndex  = null;
     this.pickedIndexes = [];
     this.lifeBar       = 100;
+    this.lifeBarState  = null;
     this._animateId    = null;
 
     this.config = {
@@ -30,6 +31,7 @@ export default class RoundClass {
     };
 
     this.setLifeBarHp(this.config.maxValue);
+    this.updateLifeBarState();
     this.setTaunt(0, 'nice');
     this.setQuestion(0);
     this.animate();
@@ -144,7 +146,25 @@ export default class RoundClass {
 
   setLifeBarHp (hp) {
     this.lifeBar = hp;
+
+    this.updateLifeBarState();
     this.stream.publish('round:updateLifeBar', hp);
+  }
+
+  updateLifeBarState () {
+    let state;
+    if (this.lifeBar > 50) {
+      state = 'normal';
+    } else if (this.lifeBar > 20) {
+      state = 'low';
+    } else {
+      state = 'critical';
+    }
+
+    if (this.lifeBarState !== state) {
+      this.lifeBarState = state;
+      this.stream.publish('round:updateLifeBarState', state);
+    }
   }
 
   riseLifeBar () {

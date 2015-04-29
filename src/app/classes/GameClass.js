@@ -30,6 +30,18 @@ export default class GameClass {
       .subscribe('round:updateLifeBar', (hp) => {
         this.view.render('life-bar', 'css', { width: `${hp}%` });
       })
+      .subscribe('round:updateLifeBarState', function (lifeBarState) {
+        if (lifeBarState === 'normal') {
+          this.view.render('life-bar', 'removeClass', 'life-bar--low');
+          this.view.render('life-bar', 'removeClass', 'life-bar--critical');
+        } else if (lifeBarState === 'low') {
+          this.view.render('life-bar', 'removeClass', 'life-bar--critical');
+          this.view.render('life-bar', 'addClass', 'life-bar--low');
+        } else if (lifeBarState === 'critical') {
+          this.view.render('life-bar', 'removeClass', 'life-bar--low');
+          this.view.render('life-bar', 'addClass', 'life-bar--critical');
+        }
+      })
       .subscribe('round:newTaunt', (taunt, type) => {
         //this.view.render('taunt', 'removeClass', 'active');
         this.view.render('taunt', 'html', taunt);
