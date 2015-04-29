@@ -177,5 +177,95 @@
       "up": { "answer": "true", "correct": true },
       "right": { "answer": "2" }
     }
+  },
+
+  {
+    "question": "false && false",
+    "answers": {
+      "left": { "answer": "false", "correct": true },
+      "up": { "answer": "true" },
+      "right": { "answer": "null" }
+    }
+  },
+
+  {
+    "question": "!false || 'foo'",
+    "answers": {
+      "left": { "answer": "false" },
+      "up": { "answer": "'foo'" },
+      "right": { "answer": "true", "correct": true }
+    }
+  },
+
+  {
+    "question": "1 >= 1",
+    "answers": {
+      "left": { "answer": "1" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "!!['foo'].indexOf('foo')",
+    "answers": {
+      "left": { "answer": "0" },
+      "up": { "answer": "1" },
+      "right": { "answer": "false", "correct": true }
+    }
+  },
+
+  {
+    "question": "0 == false",
+    "answers": {
+      "left": { "answer": "0" },
+      "up": { "answer": "false" },
+      "right": { "answer": "true", "correct": true }
+    }
+  },
+
+  {
+    "question": "1 > 2",
+    "answers": {
+      "left": { "answer": "1" },
+      "up": { "answer": "true" },
+      "right": { "answer": "false", "correct": true }
+    }
+  },
+
+  {
+    "question": "!!'foo'",
+    "answers": {
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "'foo' == 'bar'",
+    "answers": {
+      "left": { "answer": "'foo'" },
+      "up": { "answer": "true" },
+      "right": { "answer": "false", "correct": true }
+    }
+  },
+
+  {
+    "question": "0 || 1",
+    "answers": {
+      "left": { "answer": "0" },
+      "up": { "answer": "1", "correct": true },
+      "right": { "answer": "true" }
+    }
+  },
+
+  {
+    "question": "1 === true",
+    "answers": {
+      "left": { "answer": "1" },
+      "up": { "answer": "true" },
+      "right": { "answer": "false", "correct": true }
+    }
   }
 ]
