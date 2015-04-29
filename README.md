@@ -14,18 +14,19 @@ A Game About JavaScript Logical Operators.
 * [ ] Store user's best score
 * [ ] Add unit tests
 
-## v1.0.0 - [Unreleased]
+## v1.0.0 - 2015-04-29
 
-* [x] Refactor, clean folder structure
-* [x] RoundClass contains model and logic
-* [x] ViewClass contains ui logic
-* [x] GameClass wraps the app and link the view to the model
-* [x] Life bar changes color depending on its state (normal, low or critical)
-* [x] Add a note on contribution
-* [x] Add eslint with its gulp task
-* [x] Increase duration to 12 (instead of 10)
-* [x] Add 10 easier questions
-* [ ] Set the first question randomly as well (instead of always picking the first of the list)
+* Complete refactor to separate concerns
+  * Model: RoundClass
+  * View: ViewClass
+  * Controller: GameClass
+  * The three communicate through a shared event stream
+* Life bar now change color depending on life bar's state (normal, low or critical)
+* Add CONTRIBUTING.md
+* Add eslint and gulp task
+* Increase game duration to 12 (instead of 10)
+* Add 10 "easy" questions
+* The first question is now also set randomly (instead of always picking the first one) 
 
 ## v0.0.1 - 2015-04-26
 
