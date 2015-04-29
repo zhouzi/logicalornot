@@ -20,10 +20,12 @@ A Game About JavaScript Logical Operators.
 * [x] RoundClass contains model and logic
 * [x] ViewClass contains ui logic
 * [x] GameClass wraps the app and link the view to the model
+* [x] Life bar changes color depending on its state (normal, low or critical)
 * [x] Add a note on contribution
 * [x] Add eslint with its gulp task
-* [ ] Increase duration to 12 (instead of 10)
-* [ ] Simplify questions
+* [x] Increase duration to 12 (instead of 10)
+* [x] Add 10 easier questions
+* [ ] Set the first question randomly as well (instead of always picking the first of the list)
 
 ## v0.0.1 - 2015-04-26
 
