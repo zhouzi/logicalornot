@@ -16,7 +16,9 @@ export default class ViewClass {
     // map data-bind buttons
     let buttons = document.querySelectorAll('[data-bind]');
 
-    for (let i = 0, button; button = buttons[i]; i++) {
+    for (let i = 0, len = buttons.length, button; i < len; i++) {
+      button = buttons[i];
+
       let keyShortcut = ViewClass.getAttribute(button, 'data-bind');
 
       self.$buttons[keyShortcut] = {

@@ -20,7 +20,7 @@ A Game About JavaScript Logical Operators.
 * [x] ViewClass contains ui logic
 * [x] GameClass wraps the app and link the view to the model
 * [x] Add a note on contribution
-* [ ] Add eslint with its gulp task
+* [x] Add eslint with its gulp task
 * [ ] Add unit tests
 * [ ] Increase duration to 15 (instead of 10)
 * [ ] Simplify questions
