@@ -261,6 +261,21 @@ h2 {
 }
 
 .footer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.footer__left {
+  text-align: left;
+}
+
+.footer__right {
+  text-align: right;
+  flex-grow: 1;
+}
+
+.footer {
   margin-top: $gutter;
   //color: $white-transparent;
 
@@ -269,11 +284,7 @@ h2 {
     display: inline-block;
     padding: .2em;
     border-bottom: 2px solid $reddish-light;
-    margin-left: $gutter-small;
-
-    [class*="icon-"] {
-      color: $reddish-light;
-    }
+    margin-left: .4rem;
 
     &:focus,
     &:hover {
@@ -284,6 +295,10 @@ h2 {
       [class*="icon-"] {
         color: $gold;
       }
+    }
+
+    [class*="icon-"] {
+      color: $reddish-light;
     }
   }
 }

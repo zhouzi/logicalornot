@@ -9,7 +9,9 @@ export default class GameClass {
     this.stream    = new PubSubClass(this);
     this.view      = new ViewClass(proxy, this.stream);
     this.round     = null;
+    this.bestScore = 0;
 
+    this.updateBestScore();
     this.bind();
     this.newRound();
   }
@@ -74,6 +76,9 @@ export default class GameClass {
 
         this.view.render('tweet-my-game-button', 'attr', { href: baseUrl + tweetMessage });
 
+        // update best score
+        this.bestScore = Math.max(this.bestScore, wins);
+        this.updateBestScore();
 
         // show game over modal
         this.view.render('modal', 'removeClass', 'u-hide');
@@ -84,6 +89,10 @@ export default class GameClass {
       .subscribe('view:newRound', this.newRound.bind(this))
       .subscribe('view:selectAnswer', answer => this.round.submitAnswer(answer))
     ;
+  }
+
+  updateBestScore () {
+    this.view.render('best-score', 'html', this.bestScore);
   }
 
   newRound () {
