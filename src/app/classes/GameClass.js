@@ -59,29 +59,23 @@ export default class GameClass {
         }, 200);
       })
       .subscribe('round:gameOver', score => {
-        let template = '';
+        // update score board
+        let wins = score.join('').match(/1/g);
+        wins = wins ? wins.length : 0;
 
-        score.forEach(point => {
-          if (point === 1) template += '<span class="point point--right"></span>\n';
-          else template += '<span class="point point--wrong"></span>\n';
-        });
+        let loses = score.length - wins;
 
-        this.view.render('score-board', 'html', template);
+        this.view.render('wins', 'html', wins);
+        this.view.render('loses', 'html', loses);
 
-
-        // update href attribute of tweet button
-        let points = score.join('').match(/1/g);
-
-        if (points) points = points.length;
-        else points = 0;
-
+        // update tweet my game button
         let baseUrl      = 'https://twitter.com/home?status=';
-        let tweetMessage = encodeURIComponent(`Boom! Just made a score of ${points}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`);
+        let tweetMessage = encodeURIComponent(`Boom! Just made a score of ${wins}/${score.length}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`);
 
         this.view.render('tweet-my-game-button', 'attr', { href: baseUrl + tweetMessage });
 
 
-        // Show modal
+        // show game over modal
         this.view.render('modal', 'removeClass', 'u-hide');
 
         let self = this;

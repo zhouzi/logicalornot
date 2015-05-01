@@ -368,33 +368,35 @@ h2 {
   }
 }
 
-.point {
-  $point-width: 20px;
-  $point-height: $point-width;
-
-  display: inline-block;
-  vertical-align: middle;
-  font-size: $font-size-small;
-  line-height: $point-height;
+.wins,
+.loses {
+  font-size: $font-size-normal;
   color: $white;
-  width: $point-width;
-  height: $point-height;
-  border-radius: $border-radius;
-}
+  padding: .2rem .4rem;
+  vertical-align: middle;
 
-.point--right {
-  background-color: $green;
-
-  &:before {
-    content: '1';
+  &:after {
+    font-size: $font-size-small;
+    margin-left: .1rem;
   }
 }
 
-.point--wrong {
-  background-color: $red;
+.wins {
+  background-color: $green;
+  border-radius: $border-radius 0 0 $border-radius;
+  margin-right: .1rem;
 
-  &:before {
-    content: '0';
+  &:after {
+    content: "W";
+  }
+}
+
+.loses {
+  background-color: $red;
+  border-radius: 0 $border-radius $border-radius 0;
+
+  &:after {
+    content: "L";
   }
 }
 
