@@ -39,7 +39,8 @@ I am also reachable on twitter: [@zh0uzi](http://twitter.com/zh0uzi).
 ### Installation
 
 * [Fork](https://help.github.com/articles/fork-a-repo/) this repository
-* `npm install`
+* Install gulp globally: `npm install --global gulp`
+* Run `npm install` (in the repository's directory)
 
 ### Workflow
 
@@ -69,9 +70,8 @@ There's no real guidelines but just two rules to avoid getting too messy:
   * **docs**: documentation only changes
   * **style**: changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
   * **refactor**: a code change that neither fixes a bug or adds a feature
-  * **perf**: a code change that improves performance
   * **test**: adding missing tests
   * **chore**: changes to the build process or auxiliary tools and libraries such as documentation generation
-  * **design**: design changes
+  * **design**: changes in the templates or sass, css files
 
 **Note:** shamelessly stolen from the Angular [commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit).
