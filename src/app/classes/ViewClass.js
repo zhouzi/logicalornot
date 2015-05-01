@@ -28,7 +28,7 @@ export default class ViewClass {
       };
     }
 
-    $proxy.addEventListener('keydown', (event) => {
+    $proxy.addEventListener('keydown', event => {
       let keyName = keys[event.which];
       if (!keyName) return;
 
@@ -38,7 +38,7 @@ export default class ViewClass {
       event.preventDefault();
     });
 
-    $proxy.addEventListener('keyup', (event) => {
+    $proxy.addEventListener('keyup', event => {
       let keyName = keys[event.which];
       if (!keyName) return;
 
@@ -49,7 +49,7 @@ export default class ViewClass {
       event.preventDefault();
     });
 
-    $proxy.addEventListener('click', (event) => {
+    $proxy.addEventListener('click', event => {
       for (let key in self.$buttons) {
         if (!self.$buttons.hasOwnProperty(key)) continue;
 
