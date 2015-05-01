@@ -12,7 +12,7 @@ A Game About JavaScript Logical Operators.
 ## v1.0.1 - [Unreleased]
 
 * [x] Clarify score in the game over modal and tweet
-* [ ] Store user's best score
+* [x] Display and store user's best score
 * [ ] Add unit tests
 
 ## v1.0.0 - 2015-04-29
