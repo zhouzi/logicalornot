@@ -69,7 +69,7 @@ export default class RoundClass {
 
     if (this.status === 'playing') {
       if (this.config.iteration >= this.config.totalIterations) {
-        this.status = 'game over';
+        this.stop();
         this.stream.publish('round:gameOver', this.score);
         return;
       }
