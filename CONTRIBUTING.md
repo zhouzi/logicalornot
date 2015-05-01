@@ -56,6 +56,7 @@ To take full advantages of the ES6 capabilities, this project uses:
 * `gulp scripts`: transpile and minify ES6 files thanks to webpack
 * `gulp lint`: lint the javascript source files
 * `gulp watch`: watch for changes and run `styles` or `scripts`
+* `gulp test`: run the tests using karma
 * `gulp serve`: serve the game, watch for changes and reload the browser automatically
 
 
