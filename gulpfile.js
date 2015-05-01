@@ -25,12 +25,13 @@ gulp.task('lint', function () {
     .src(['src/app/**/*.js'])
     .pipe($.eslint())
     .pipe($.eslint.format())
-    .pipe($.eslint.failOnError());
+    /*.pipe($.eslint.failOnError())*/;
 });
 
 gulp.task('watch', function () {
   gulp.watch('src/styles/*.scss', ['styles']);
   gulp.watch('src/**/*.js', ['scripts']);
+  gulp.watch('dist/app.min.js', ['lint']);
 });
 
 gulp.task('test', function (done) {
