@@ -14,9 +14,7 @@ export default class PubSubClass {
     let subscribers = this.events[eventName] || [];
     let context     = this.context;
 
-    subscribers.forEach((callback) => {
-      callback.apply(context, args);
-    });
+    subscribers.forEach(callback => callback.apply(context, args));
 
     return this;
   }

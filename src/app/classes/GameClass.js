@@ -21,16 +21,16 @@ export default class GameClass {
   bind () {
     this
       .stream
-      .subscribe('round:newQuestion', (newQuestion) => {
+      .subscribe('round:newQuestion', newQuestion => {
         this.view.render('question',           'html', newQuestion.question);
         this.view.render('answer-left-label',  'html', newQuestion.answers.left.answer);
         this.view.render('answer-up-label',    'html', newQuestion.answers.up.answer);
         this.view.render('answer-right-label', 'html', newQuestion.answers.right.answer);
       })
-      .subscribe('round:updateLifeBar', (hp) => {
+      .subscribe('round:updateLifeBar', hp => {
         this.view.render('life-bar', 'css', { width: `${hp}%` });
       })
-      .subscribe('round:updateLifeBarState', function (lifeBarState) {
+      .subscribe('round:updateLifeBarState', lifeBarState => {
         if (lifeBarState === 'normal') {
           this.view.render('life-bar', 'removeClass', 'life-bar--low');
           this.view.render('life-bar', 'removeClass', 'life-bar--critical');
@@ -58,7 +58,7 @@ export default class GameClass {
           if (type === 'mean') self.view.render('bloody', 'removeClass', 'active');
         }, 200);
       })
-      .subscribe('round:gameOver', (score) => {
+      .subscribe('round:gameOver', score => {
         // update score board
         let wins = score.join('').match(/1/g);
         wins = wins ? wins.length : 0;
@@ -81,12 +81,8 @@ export default class GameClass {
         let self = this;
         setTimeout(() => self.view.render('modal', 'addClass', 'active'), 100);
       })
-      .subscribe('view:newRound', () => {
-        this.newRound();
-      })
-      .subscribe('view:selectAnswer', (answer) => {
-        this.round.submitAnswer(answer);
-      })
+      .subscribe('view:newRound', this.newRound.bind(this))
+      .subscribe('view:selectAnswer', answer => this.round.submitAnswer(answer))
     ;
   }
 

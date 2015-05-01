@@ -79,8 +79,8 @@ export default class RoundClass {
       this.config.iteration++;
     }
 
-    let self = this;
-    this._animateId = requestAnimationFrame(() => self.animate.apply(self, []));
+    var thisMethod = this.animate.bind(this);
+    this._animateId = requestAnimationFrame(thisMethod);
   }
 
   stop () {
@@ -172,12 +172,10 @@ export default class RoundClass {
   }
 
   riseLifeBar () {
-    if (this.config.iteration - this.config.winningGap <= 0) this.config.iteration = 0;
-    else this.config.iteration -= this.config.winningGap;
+    this.config.iteration = Math.max(this.config.iteration - this.config.winningGap, 0);
   }
 
   dropLifeBar () {
-    if (this.config.iteration + this.config.losingGap >= this.config.totalIterations) this.config.iteration = this.config.totalIterations;
-    else this.config.iteration += this.config.losingGap;
+    this.config.iteration = Math.min(this.config.iteration + this.config.losingGap, this.config.totalIterations);
   }
 }

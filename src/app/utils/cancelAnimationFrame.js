@@ -1,4 +1,4 @@
-let cancelAnimationFrame = (function (w) {
+let cancelAnimationFrame = (w => {
   let fn = w.cancelAnimationFrame       ||
            w.mozCancelAnimationFrame    ||
            w.webkitCancelAnimationFrame ||
