@@ -3,7 +3,12 @@
     "So, what's the result of...",
     "Such skills!",
     "Damn good!",
-    "That was easy..."
+    "That was easy...",
+    "Nice one!",
+    "Bingo!",
+    "You really know your stuff!",
+    "Score!",
+    "Excellent!"
   ],
 
   "mean": [
@@ -12,6 +17,8 @@
     "Really dude?",
     "Do you know javascript?",
     "Haha!",
-    "Are u kidding me?"
+    "Are u kidding me?",
+    "Oh dear...",
+    "*sigh*"
   ]
 }
