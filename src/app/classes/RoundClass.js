@@ -121,7 +121,7 @@ export default class RoundClass {
       this.score.push(0);
     }
 
-    this.setRandomTaunt(isCorrect);
+    this.setRandomTaunt(isCorrect ? 'nice' : 'mean');
     this.setRandomQuestion();
   }
 
@@ -135,10 +135,8 @@ export default class RoundClass {
     this.stream.publish('round:newTaunt', this.taunt = this.taunts[type][index], type);
   }
 
-  setRandomTaunt (isCorrect) {
-    let type   = isCorrect ? 'nice' : 'mean';
+  setRandomTaunt (type) {
     let taunts = this.taunts[type];
-
     return this.setTaunt(rand(0, taunts.length - 1), type);
   }
 
