@@ -3,6 +3,7 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var webpackConfig = require('./webpack.config.js');
+var karma = require('karma').server;
 
 gulp.task('styles', function () {
   return gulp
@@ -30,6 +31,13 @@ gulp.task('lint', function () {
 gulp.task('watch', function () {
   gulp.watch('src/styles/*.scss', ['styles']);
   gulp.watch('src/**/*.js', ['scripts']);
+});
+
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
 });
 
 gulp.task('serve', ['default'], function () {
