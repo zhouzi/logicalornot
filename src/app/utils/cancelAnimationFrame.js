@@ -1,4 +1,4 @@
-let cancelAnimationFrame = (w => {
+export default (w => {
   let fn = w.cancelAnimationFrame       ||
            w.mozCancelAnimationFrame    ||
            w.webkitCancelAnimationFrame ||
@@ -8,5 +8,3 @@ let cancelAnimationFrame = (w => {
   // make sure the function is called with context set to window, otherwise it causes an illegal invocation
   return (...args) => fn.apply(w, args);
 })(window);
-
-export default cancelAnimationFrame;
