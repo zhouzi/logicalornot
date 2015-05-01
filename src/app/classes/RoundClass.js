@@ -79,7 +79,7 @@ export default class RoundClass {
       this.config.iteration++;
     }
 
-    var thisMethod = this.animate.bind(this);
+    let thisMethod = this.animate.bind(this);
     this._animateId = requestAnimationFrame(thisMethod);
   }
 
