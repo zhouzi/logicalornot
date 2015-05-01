@@ -74,4 +74,4 @@ There's no real guidelines but just two rules to avoid getting too messy:
   * **chore**: changes to the build process or auxiliary tools and libraries such as documentation generation
   * **design**: changes in the templates or sass, css files
 
-**Note:** shamelessly stolen from the Angular [commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit).
+**Note:** adapted from the Angular [commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#commit).
