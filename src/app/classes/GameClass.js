@@ -1,6 +1,7 @@
 import RoundClass from './RoundClass';
 import ViewClass from './ViewClass';
 import PubSubClass from './PubSubClass';
+import storage from '../utils/storage';
 
 export default class GameClass {
   constructor (proxy, questions, taunts) {
@@ -9,7 +10,7 @@ export default class GameClass {
     this.stream    = new PubSubClass(this);
     this.view      = new ViewClass(proxy, this.stream);
     this.round     = null;
-    this.bestScore = 0;
+    this.bestScore = storage.getItem('bestScore') || 0;
 
     this.updateBestScore();
     this.bind();
@@ -92,6 +93,7 @@ export default class GameClass {
   }
 
   updateBestScore () {
+    storage.setItem('bestScore', this.bestScore);
     this.view.render('best-score', 'html', this.bestScore);
   }
 
