@@ -9,11 +9,11 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
-## v1.1.0 - [Unreleased]
+## v1.1.0 - 2015-05-02
 
-* [x] Clarify score in the game over modal and tweet
-* [x] Display and store user's best score
-* [x] Add unit tests
+* Clarify score in the game over modal and tweet
+* Display and store user's best score
+* Add unit tests
 
 ## v1.0.0 - 2015-04-29
 
