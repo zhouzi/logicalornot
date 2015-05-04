@@ -9,6 +9,14 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
+# v1.2.0 - [Unreleased]
+
+* [ ] When giving a right or wrong answer, make the gap depend on the complexity of the question
+* [ ] Increase round duration from 12 to 15
+* [ ] Add `<noscript></noscript>`
+* [ ] Add a clearer indicator of whether the answer is correct or not
+* [ ] Display "So, what's the result of..." only the first time
+
 ## v1.1.0 - 2015-05-02
 
 * Clarify score in the game over modal and tweet
