@@ -143,14 +143,16 @@ h2 {
   border: 2px solid $reddish-light;
   box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish;
 
-  [class*="icon-"] {
+  [class*="icon-"],
+  .muted {
     display: none;
   }
 
   @media #{$md-up} {
     font-size: $font-size-medium;
 
-    [class*="icon-"] {
+    [class*="icon-"],
+    .muted {
       display: inline;
     }
   }
