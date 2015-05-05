@@ -9,6 +9,7 @@ export default class GameClass {
     this.taunts    = taunts;
     this.stream    = new PubSubClass(this);
     this.view      = new ViewClass(proxy, this.stream);
+    this.mode      = 'normal';
     this.round     = null;
     this.bestScore = storage.getItem('bestScore') || 0;
 
@@ -87,10 +88,16 @@ export default class GameClass {
         let self = this;
         setTimeout(() => self.view.render('modal', 'addClass', 'active'), 100);
       })
-      .subscribe('view:newRound', () => this.newRound.call(this, 'normal'))
+      .subscribe('view:newRound', this.newRound.bind(this))
       .subscribe('view:selectAnswer', answer => this.round.submitAnswer(answer))
-      .subscribe('view:normal-mode', () => this.newRound.call(this, 'normal'))
-      .subscribe('view:hardcore-mode', () => this.newRound.call(this, 'hardcore'))
+      .subscribe('view:normal-mode', () =>  {
+        this.mode = 'normal';
+        this.newRound.call(this, 'normal')
+      })
+      .subscribe('view:hardcore-mode', () => {
+        this.mode = 'hardcore';
+        this.newRound.call(this, 'hardcore');
+      })
     ;
   }
 
@@ -99,7 +106,7 @@ export default class GameClass {
     this.view.render('best-score', 'html', this.bestScore);
   }
 
-  newRound (mode = 'normal') {
+  newRound () {
     if (this.round) {
       if (this.round.status === 'game over') {
         this.view.render('modal', 'removeClass', 'active');
@@ -111,6 +118,6 @@ export default class GameClass {
       this.round.stop();
     }
 
-    this.round = new RoundClass(this.questions, this.taunts, this.stream, mode);
+    this.round = new RoundClass(this.questions, this.taunts, this.stream, this.mode);
   }
 }
