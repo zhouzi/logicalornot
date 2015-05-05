@@ -101,7 +101,11 @@ export default class ViewClass {
     this.$proxy.addEventListener(eventName, function (event) {
       let target = event.target;
       let matcher = target.matches || target.matchesSelector || target.webkitMatchesSelector || target.msMatchesSelector;
-      if (matcher.call(target, '#bind-' + selector)) cb(event);
+
+      if (matcher.call(target, '#bind-' + selector)) {
+        cb(event);
+        event.preventDefault();
+      }
     });
   }
 
