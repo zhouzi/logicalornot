@@ -25,9 +25,9 @@ A Game About JavaScript Logical Operators.
 * [x] Added two modes: "normal" and "hardcore"
   * [x] **normal**: remove timer, set life bar to 6
   * [x] **hardcore**: keep timer, set life bar to 15
-* [ ] Add a `<noscript></noscript>`
-* [ ] Add a clearer indicator of whether the answer is correct or not
+* [ ] Add a `<noscript></noscript>` tag
 * [ ] Display "So, what's the result of..." only the first time
+* [ ] Simplify the model of a question
 
 ## v1.1.0 - 2015-05-02
 
