@@ -1,0 +1,30 @@
+/*--------------------------------------------*\
+  Mixins
+\*--------------------------------------------*/
+
+@mixin fade-slide-base {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: transform 600ms ease-out,
+  opacity 600ms ease-out;
+}
+
+@mixin delay ($delay) {
+  transition-delay: $delay;
+}
+
+@mixin fade-slide-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@mixin flexbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/*@media #{$xl-up} {
+  margin: 0 -230px;
+}*/

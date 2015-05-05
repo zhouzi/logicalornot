@@ -1,0 +1,63 @@
+/*--------------------------------------------*\
+  Colors
+\*--------------------------------------------*/
+
+$purple: #7642d0;
+$reddish: #e7438f;
+$reddish-light: lighten(saturate($reddish, 20%), 10%);
+$gold: #ffc302;
+$black: #3d3d3d;
+$gray: lighten($black, 55%);
+$gray-light: lighten($black, 70%);
+$white: #fff;
+$white-transparent: rgba($white, .3);
+$green: rgb(70, 174, 67);
+$red: rgb(242, 87, 87);
+$yellow: $gold;
+
+
+
+/*--------------------------------------------*\
+  Typography
+\*--------------------------------------------*/
+
+$font-size-root-small: 16px;
+$font-size-root: 18px;
+$font-size-small: ms(-1);
+$font-size-normal: ms(0);
+$font-size-medium: ms(1);
+$font-size-large: ms(3);
+
+
+
+/*--------------------------------------------*\
+  Components
+\*--------------------------------------------*/
+
+$border-radius: 4px;
+
+
+
+/*--------------------------------------------*\
+  Grid
+\*--------------------------------------------*/
+
+$gutter-small: $font-size-small;
+$gutter: $font-size-normal;
+$gutter-large: $font-size-medium;
+$gutter-xlarge: $font-size-large;
+
+$sm-width: 480px;
+$md-width: 768px;
+$lg-width: 992px;
+$xl-width: 1200px;
+
+$sm-up: "(min-width:#{$sm-width})";
+$md-up: "(min-width:#{$md-width})";
+$lg-up: "(min-width:#{$lg-width})";
+$xl-up: "(min-width:#{$xl-width})";
+
+$xs-only: "screen and (max-width:#{$sm-width})";
+$sm-only: "(min-width:#{$sm-width}) and (max-width:#{$md-width})";
+$md-only: "(min-width:#{$md-width}) and (max-width:#{$lg-width})";
+$lg-only: "(min-width:#{$lg-width}) and (max-width:#{$xl-width})";

@@ -1,87 +1,6 @@
-/*--------------------------------------------*\
-  Functions
-\*--------------------------------------------*/
-
-@function pow ($x, $n) {
-  $ret: 1;
-
-  @if $n >= 0 {
-    @for $i from 0 to $n {
-      $ret: $ret * $x;
-    }
-  } @else {
-    @for $i from $n to 0 {
-      $ret: $ret / $x;
-    }
-  }
-
-  @return $ret;
-}
-
-@function ms ($n, $base: 1rem, $ratio: 1.618) {
-  @return pow($ratio, $n) * $base;
-}
-
-
-
-/*--------------------------------------------*\
-  Mixins
-\*--------------------------------------------*/
-
-@mixin fade-slide-base {
-  transform: translateY(10px);
-  opacity: 0;
-  transition: transform 600ms ease-out,
-              opacity 600ms ease-out;
-}
-
-@mixin delay ($delay) {
-  transition-delay: $delay;
-}
-
-@mixin fade-slide-active {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-@mixin flexbox-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-
-
-/*--------------------------------------------*\
-  Variables
-\*--------------------------------------------*/
-
-$purple: #7642d0;
-$reddish: #e7438f;
-$reddish-light: lighten(saturate($reddish, 20%), 10%);
-$gold: #ffc302;
-$black: #3d3d3d;
-$gray: lighten($black, 55%);
-$gray-light: lighten($black, 70%);
-$white: #fff;
-$white-transparent: rgba($white, .3);
-$green: rgb(70, 174, 67);
-$red: rgb(242, 87, 87);
-$yellow: $gold;
-
-$font-size-root: 18px;
-$font-size-small: ms(-1);
-$font-size-normal: ms(0);
-$font-size-medium: ms(1);
-$font-size-large: ms(3);
-
-$gutter-small: $font-size-small;
-$gutter: $font-size-normal;
-$gutter-large: $font-size-medium;
-$gutter-xlarge: $font-size-large;
-
-$border-radius: 4px;
+@import "functions",
+        "variables",
+        "mixins";
 
 
 
@@ -98,26 +17,33 @@ $border-radius: 4px;
 html,
 body {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 html {
-  font-size: $font-size-root;
+  height: 100%;
+  font-size: $font-size-root-small;
+
+  @media #{$md-up} {
+    font-size: $font-size-root;
+  }
 }
 
 body {
-  @include flexbox-container;
-
   font-family: 'Abel', sans-serif;
   font-size: $font-size-normal;
   line-height: 1.2;
   text-align: center;
-
   color: $white;
   background: linear-gradient(0deg, $reddish 0%, $purple 100%);
-  border: $gutter solid $white-transparent;
+  background-attachment: fixed;
+  min-height: 100%;
+
+  @media #{$md-up} {
+    @include flexbox-container;
+    border: $gutter solid $white-transparent;
+  }
 }
 
 a {
@@ -143,7 +69,12 @@ h2 {
   }
 
   .ornot {
+    display: block;
     color: $white;
+
+    @media #{$md-up} {
+      display: inline;
+    }
   }
 }
 
@@ -157,8 +88,11 @@ h2 {
 }
 
 .question-container {
-  font-size: $font-size-medium;
   margin: $gutter-large 0;
+
+  @media #{$md-up} {
+    font-size: $font-size-medium;
+  }
 
   code {
     display: inline-block;
@@ -168,6 +102,9 @@ h2 {
     background-color: $white;
     padding: $gutter;
     border-radius: $border-radius;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -184,23 +121,39 @@ h2 {
   padding: 0;
 
   li {
-    display: inline-block;
-    margin: 0 $gutter-small 0 0;
+    display: block;
+    margin: 0 0 $gutter-small 0;
 
-    &:last-child {
-      margin-right: 0;
+    @media #{$sm-up} {
+      display: inline-block;
+      margin: 0 $gutter-small 0 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
     }
   }
 }
 
 .button {
   display: block;
-  font-size: $font-size-medium;
   position: relative;
   padding: $gutter-small $gutter;
   border-radius: $border-radius;
   border: 2px solid $reddish-light;
   box-shadow: inset 0 0 20px 6px $white-transparent, 0 4px 0 0 $reddish;
+
+  [class*="icon-"] {
+    display: none;
+  }
+
+  @media #{$md-up} {
+    font-size: $font-size-medium;
+
+    [class*="icon-"] {
+      display: inline;
+    }
+  }
 
   &:hover,
   &:active,
@@ -240,47 +193,64 @@ h2 {
 }
 
 .box-container {
-  $enlarge-margin: 20px;
+  padding: $gutter-small;
 
-  position: relative;
-  margin: (($enlarge-margin / 2) - 1px); // 1px is the border-width
-  padding: $gutter-large $gutter-xlarge;
-  border: 1px dashed $white-transparent;
+  @media #{$md-up} {
+    $enlarge-margin: 20px;
 
-  &:before {
-    content: "";
-    display: block;
-    position: absolute;
-    z-index: -1;
-    top: -($enlarge-margin / 2);
-    left: -($enlarge-margin / 2);
-    width: calc(100% + #{$enlarge-margin});
-    height: calc(100% + #{$enlarge-margin});
-    border: 2px solid $white-transparent;
+    position: relative;
+    margin: (($enlarge-margin / 2) - 1px); // 1px is the border-width
+    padding: $gutter-large $gutter-xlarge;
+    border: 1px dashed $white-transparent;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      z-index: -1;
+      top: -($enlarge-margin / 2);
+      left: -($enlarge-margin / 2);
+      width: calc(100% + #{$enlarge-margin});
+      height: calc(100% + #{$enlarge-margin});
+      border: 2px solid $white-transparent;
+    }
   }
 }
 
 .footer {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-}
+  margin: $gutter 0;
 
-.footer__left {
-  text-align: left;
-}
+  .footer__left {
+    margin-bottom: $gutter;
+  }
 
-.footer__right {
-  text-align: right;
-  flex-grow: 1;
-}
+  .footer__links {
+    display: block;
+    margin-top: .2rem;
+  }
 
-.footer {
-  margin-top: $gutter;
-  //color: $white-transparent;
+  @media #{$md-up} {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    .footer__links {
+      display: inline;
+      margin-top: 0;
+    }
+
+    .footer__left {
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    .footer__right {
+      text-align: right;
+      flex-grow: 1;
+    }
+  }
 
   a {
-    //color: $white-transparent;
     display: inline-block;
     padding: .2em;
     border-bottom: 2px solid $reddish-light;
@@ -310,10 +280,13 @@ h2 {
   width: 100%;
   background-color: $green;
   box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($green, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($green, .8), 10%);
-  border-radius: $border-radius;
   margin-bottom: $gutter;
   transition: background-color 500ms ease-in,
               box-shadow 500ms ease-in;
+
+  @media #{$md-up} {
+    border-radius: $border-radius;
+  }
 
   &.life-bar--low {
     background-color: $yellow;
@@ -329,7 +302,6 @@ h2 {
 
 
 .modal {
-  @include flexbox-container;
   position: fixed;
   z-index: 9;
   top: 0;
@@ -341,12 +313,16 @@ h2 {
     transform: translateY(0) rotateX(0deg) scale(1);
     opacity: 1;
   }
+
+  @media #{$md-up} {
+    @include flexbox-container;
+  }
 }
 
 .modal-box {
   color: $black;
   background-color: $white;
-  padding: $gutter-large $gutter-xlarge;
+  padding: $gutter-small $gutter-large;
   box-shadow: 0 0 6px 4px rgba($black, .4);
   max-width: 100%;
   margin: $gutter;
@@ -354,6 +330,10 @@ h2 {
   opacity: 0;
   transition: transform 300ms cubic-bezier(.87,.66,.38,1.35),
               opacity 300ms cubic-bezier(.87,.66,.38,1.35);
+
+  @media #{$md-up} {
+    padding: $gutter-large $gutter-xlarge;
+  }
 
   p {
     font-size: $font-size-medium;
