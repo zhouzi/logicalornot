@@ -9,10 +9,11 @@ import ease from '../utils/ease';
 const FPS = 60;
 
 export default class RoundClass {
-  constructor (questions, taunts, stream) {
+  constructor (questions, taunts, stream, mode) {
     this.questions       = copy(questions);
     this.taunts          = taunts;
     this.stream          = stream;
+    this.gameplay        = gameplay[mode];
     this.status          = 'ready';
     this.taunt           = null;
     this.score           = [];
@@ -22,10 +23,11 @@ export default class RoundClass {
     this._animateId      = null;
 
     this.config = {
+      timer:           this.gameplay.timer,
       minValue:        0,
       maxValue:        100,
       iteration:       0,
-      totalIterations: gameplay.duration * FPS
+      totalIterations: this.gameplay.duration * FPS
     };
 
     this.setLifeBarHp(this.config.maxValue);
@@ -52,18 +54,22 @@ export default class RoundClass {
 
       let easingValue = ease(this.config.iteration, this.config.minValue, this.config.maxValue, this.config.totalIterations);
       this.setLifeBarHp(this.config.maxValue - easingValue);
-      this.config.iteration++;
+
+      if (this.config.timer) this.config.iteration++;
     }
 
-    let thisMethod = this.animate.bind(this);
-    this._animateId = requestAnimationFrame(thisMethod);
+    this._animateId = requestAnimationFrame(this.animate.bind(this));
   }
 
   stop (notify = false) {
     this.status = 'game over';
     cancelAnimationFrame(this._animateId);
 
-    if (notify) this.stream.publish('round:gameOver', this.score);
+    if (notify) {
+      this.setLifeBarHp(0);
+      this.updateLifeBarState();
+      this.stream.publish('round:gameOver', this.score);
+    }
   }
 
 
@@ -111,7 +117,7 @@ export default class RoundClass {
       this.setRandomTaunt('mean');
     }
 
-    if (this.questions.length > 0) this.setRandomQuestion();
+    if (this.status !== 'game over' && this.questions.length > 0) this.setRandomQuestion();
     else this.stop(true);
   }
 
@@ -161,14 +167,14 @@ export default class RoundClass {
 
   riseLifeBar () {
     let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question);
-    let gap = gameplay.gaps.winning[complexity] * FPS;
+    let gap = this.gameplay.gaps.winning[complexity] * FPS;
 
     this.config.iteration = Math.max(this.config.iteration - gap, 0);
   }
 
   dropLifeBar () {
     let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question);
-    let gap = gameplay.gaps.losing[complexity] * FPS;
+    let gap = this.gameplay.gaps.losing[complexity] * FPS;
 
     this.config.iteration = Math.min(this.config.iteration + gap, this.config.totalIterations);
   }

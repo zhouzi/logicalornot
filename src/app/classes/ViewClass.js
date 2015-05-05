@@ -59,6 +59,22 @@ export default class ViewClass {
         }
       }
     });
+
+    this.on('normal-mode', 'click', function () {
+      if (!this.render('normal-mode', 'hasClass', 'active')) {
+        this.render('normal-mode', 'addClass', 'active');
+        this.render('hardcore-mode', 'removeClass', 'active');
+        this.stream.publish('view:normal-mode');
+      }
+    }, this);
+
+    this.on('hardcore-mode', 'click', function () {
+      if (!this.render('hardcore-mode', 'hasClass', 'active')) {
+        this.render('hardcore-mode', 'addClass', 'active');
+        this.render('normal-mode', 'removeClass', 'active');
+        this.stream.publish('view:hardcore-mode');
+      }
+    }, this);
   }
 
   publishButtonData (button) {
@@ -80,6 +96,15 @@ export default class ViewClass {
     return ViewClass[method].apply(this, args);
   }
 
+  on (selector, eventName, handler, context = this) {
+    let cb = handler.bind(context);
+    this.$proxy.addEventListener(eventName, function (event) {
+      let target = event.target;
+      let matcher = target.matches || target.matchesSelector || target.webkitMatchesSelector || target.msMatchesSelector;
+      if (matcher.call(target, '#bind-' + selector)) cb(event);
+    });
+  }
+
 
 
   /*-------------------------------------------*\
@@ -98,6 +123,10 @@ export default class ViewClass {
     }
 
     return element;
+  }
+
+  static hasClass (element, className) {
+    return element.classList.contains(className);
   }
 
   static addClass (element, className) {

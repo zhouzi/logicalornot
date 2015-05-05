@@ -22,10 +22,9 @@ A Game About JavaScript Logical Operators.
   * [x] Giving a right answer to an easy question increase a little
   * [x] Giving a wrong answer to a hard question decrease a little
   * [x] Giving a right answer to a hard question increase a lot
-* [ ] Add "hardcore" mode, remove timer form normal mode
- * [ ] **normal**: Life bar does not decrease with time anymore but is smaller
- * [ ] **hardcore**: This mode include the timer
- * [ ] **normal, hardcore**: Right and wrong answers still alter life bar
+* [x] Added two modes: "normal" and "hardcore"
+  * [x] **normal**: remove timer, set life bar to 6
+  * [x] **hardcore**: keep timer, set life bar to 15
 * [ ] Add a `<noscript></noscript>`
 * [ ] Add a clearer indicator of whether the answer is correct or not
 * [ ] Display "So, what's the result of..." only the first time

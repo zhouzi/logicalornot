@@ -1,7 +1,19 @@
 {
-  "duration": 15,
-  "gaps": {
-    "winning": [1, 2, 3],
-    "losing": [3, 2, 1]
+  "normal": {
+    "duration": 6,
+    "timer": false,
+    "gaps": {
+      "winning": [1, 2, 3],
+      "losing": [3, 2, 1]
+    }
+  },
+
+  "hardcore": {
+    "duration": 15,
+    "timer": true,
+    "gaps": {
+      "winning": [1, 2, 3],
+      "losing": [3, 2, 1]
+    }
   }
 }

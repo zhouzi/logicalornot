@@ -33,7 +33,7 @@ beforeEach(() => {
   };
 
   stream = new PubSubClass();
-  round = new RoundClass(questions, taunts, stream);
+  round = new RoundClass(questions, taunts, stream, 'normal');
 });
 
 it('should bootstrap the new round', () => {

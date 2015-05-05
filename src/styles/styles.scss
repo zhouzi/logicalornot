@@ -257,7 +257,8 @@ h2 {
     margin-left: .4rem;
 
     &:focus,
-    &:hover {
+    &:hover,
+    &.active {
       color: $white;
       border-color: $gold;
       background: linear-gradient(0deg, rgba($gold, .2) 0%, rgba($white, 0) 80%);
@@ -271,6 +272,10 @@ h2 {
       color: $reddish-light;
     }
   }
+}
+
+.best-score {
+  margin-right: $gutter;
 }
 
 
