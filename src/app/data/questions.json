@@ -272,7 +272,7 @@
   {
     "question": "Array(3).join('foo')",
     "answers": {
-      "left": { "answer": "foofoo" "correct": true },
+      "left": { "answer": "foofoo", "correct": true },
       "up": { "answer": "foofoofoo" },
       "right": { "answer": "undefined" }
     }
@@ -283,7 +283,7 @@
     "answers": {
       "left": { "answer": "foo1foo1foo1" },
       "up": { "answer": "NaNNaN" },
-      "right": { "answer": "foo1foo1" }
+      "right": { "answer": "foo1foo1", "correct": true }
     }
   },
 
