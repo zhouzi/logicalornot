@@ -270,138 +270,56 @@
   },
 
   {
-    "question": "Array(3).join('foo')",
-    "answers": {
-      "left": { "answer": "foofoo", "correct": true },
-      "up": { "answer": "foofoofoo" },
-      "right": { "answer": "undefined" }
-    }
-  },
-
-  {
-    "question": "Array(3).join('foo' + 1)",
-    "answers": {
-      "left": { "answer": "foo1foo1foo1" },
-      "up": { "answer": "NaNNaN" },
-      "right": { "answer": "foo1foo1", "correct": true }
-    }
-  },
-
-  {
-    "question": "Array(3).join('foo' - 1)",
-    "answers": {
-      "left": { "answer": "foo1foo1" },
-      "up": { "answer": "NaNNaN", "correct": true },
-      "right": { "answer": "foofoo" }
-    }
-  },
-
-  {
-    "question": "{} + {}",
-    "answers": {
-      "left": { "answer": "undefined" },
-      "up": { "answer": "[throw error]" },
-      "right": { "answer": "[object Object][object Object]", "correct": true }
-    }
-  },
-
-  {
-    "question": "[] + {}",
-    "answers": {
-      "left": { "answer": "undefined" },
-      "up": { "answer": "[object Object][object Object]" },
-      "right": { "answer": "[object Object]", "correct": true }
-    }
-  },
-
-  {
-    "question": "[] + []",
-    "answers": {
-      "left": { "answer": "undefined" },
-      "up": { "answer": "'' (blank string)", "correct": true },
-      "right": { "answer": "[object Object]" }
-    }
-  },
-
-  {
-    "question": "({}).constructor.prototype",
-    "answers": {
-      "left": { "answer": "'function'" },
-      "up": { "answer": "{}", "correct": true },
-      "right": { "answer": "[object Object]" }
-    }
-  },
-
-  {
-    "question": "typeof null === 'undefined'",
-    "answers": {
-      "left": { "answer": "true" },
-      "up": { "answer": "false", "correct": true },
-      "right": { "answer": "" }
-    }
-  },
-
-  {
     "question": "null == undefined",
     "answers": {
-      "left": { "answer": "undefined" },
-      "up": { "answer": "false" },
-      "right": { "answer": "true", "correct": true }
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
     }
   },
 
   {
     "question": "null == 0",
     "answers": {
-      "left": { "answer": "true" },
-      "up": { "answer": "false", "correct": true },
-      "right": { "answer": "0" }
+      "left": { "answer": "null" },
+      "up": { "answer": "0" },
+      "right": { "answer": "false", "correct": true }
     }
   },
 
   {
-    "question": "null > -10",
+    "question": "null > -1",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "null < 1",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "false == ''",
     "answers": {
       "left": { "answer": "true", "correct": true },
       "up": { "answer": "false" },
-      "right": { "answer": "-10" }
+      "right": { "answer": "''" }
     }
   },
 
   {
-    "question": "null < 10",
+    "question": "(function(){}).length == 0",
     "answers": {
-      "left": { "answer": "true", "correct": true },
+      "left": { "answer": "0" },
       "up": { "answer": "false" },
-      "right": { "answer": "10" }
-    }
-  },
-
-  {
-    "question": "typeof []",
-    "answers": {
-      "left": { "answer": "array" },
-      "up": { "answer": "object", "correct": true },
-      "right": { "answer": "undefined" }
-    }
-  },
-
-  {
-    "question": "false == '   '",
-    "answers": {
-      "left": { "answer": "true", "correct": true },
-      "up": { "answer": "false" },
-      "right": { "answer": "'   '" }
-    }
-  },
-
-  {
-    "question": "(function(){}).length",
-    "answers": {
-      "left": { "answer": "undefined" },
-      "up": { "answer": "0", "correct": true },
-      "right": { "answer": "1" }
+      "right": { "answer": "true", "correct": true }
     }
   }
-
 ]
