@@ -2,6 +2,7 @@ import gameplay from '../data/gameplay.json';
 
 import requestAnimationFrame from '../utils/requestAnimationFrame';
 import cancelAnimationFrame from '../utils/cancelAnimationFrame';
+import copy from '../utils/copy';
 import rand from '../utils/rand';
 import ease from '../utils/ease';
 
@@ -9,17 +10,16 @@ const FPS = 60;
 
 export default class RoundClass {
   constructor (questions, taunts, stream) {
-    this.questions     = questions;
-    this.taunts        = taunts;
-    this.stream        = stream;
-    this.status        = 'ready';
-    this.taunt         = null;
-    this.score         = [];
-    this.currentIndex  = null;
-    this.pickedIndexes = [];
-    this.lifeBar       = 100;
-    this.lifeBarState  = null;
-    this._animateId    = null;
+    this.questions       = copy(questions);
+    this.taunts          = taunts;
+    this.stream          = stream;
+    this.status          = 'ready';
+    this.taunt           = null;
+    this.score           = [];
+    this.currentQuestion = {};
+    this.lifeBar         = 100;
+    this.lifeBarState    = null;
+    this._animateId      = null;
 
     this.config = {
       minValue:        0,
@@ -40,27 +40,6 @@ export default class RoundClass {
 
 
   /*-------------------------------------------*\
-    question
-  \*-------------------------------------------*/
-
-  get currentQuestion () {
-    return this.questions[this.currentIndex];
-  }
-
-  get randomIndex () {
-    let index   = rand(0, this.questions.length - 1);
-    let maxExec = 10;
-
-    while (this.pickedIndexes.indexOf(index) > -1 && --maxExec > 0) {
-      index = rand(0, this.questions.length - 1);
-    }
-
-    return index;
-  }
-
-
-
-  /*-------------------------------------------*\
     animation
   \*-------------------------------------------*/
 
@@ -69,8 +48,7 @@ export default class RoundClass {
 
     if (this.status === 'playing') {
       if (this.config.iteration >= this.config.totalIterations) {
-        this.stop();
-        this.stream.publish('round:gameOver', this.score);
+        this.stop(true);
         return;
       }
 
@@ -83,9 +61,11 @@ export default class RoundClass {
     this._animateId = requestAnimationFrame(thisMethod);
   }
 
-  stop () {
+  stop (notify = false) {
     this.status = 'game over';
     cancelAnimationFrame(this._animateId);
+
+    if (notify) this.stream.publish('round:gameOver', this.score);
   }
 
 
@@ -94,16 +74,18 @@ export default class RoundClass {
     question, answer
   \*-------------------------------------------*/
 
-  setQuestion (index) {
-    this.pickedIndexes.push(index);
-    this.currentIndex = index;
+  setQuestion (question) {
+    this.currentQuestion = question;
 
     this.stream.publish('round:newQuestion', this.currentQuestion);
     return this.currentQuestion;
   }
 
   setRandomQuestion () {
-    this.setQuestion(this.randomIndex);
+    let index = rand(0, this.questions.length - 1);
+    let question = this.questions.splice(index, 1)[0];
+
+    this.setQuestion(question);
   }
 
   submitAnswer (answer) {
@@ -111,18 +93,18 @@ export default class RoundClass {
 
     this.status = 'playing';
 
-    let isCorrect = this.currentQuestion.answers[answer].correct === true;
-
-    if (isCorrect) {
+    if (this.currentQuestion.answers[answer].correct === true) {
       this.riseLifeBar();
       this.score.push(1);
+      this.setRandomTaunt('nice');
     } else {
       this.dropLifeBar();
       this.score.push(0);
+      this.setRandomTaunt('mean');
     }
 
-    this.setRandomTaunt(isCorrect ? 'nice' : 'mean');
-    this.setRandomQuestion();
+    if (this.questions.length > 0) this.setRandomQuestion();
+    else this.stop(true);
   }
 
 

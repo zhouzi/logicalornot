@@ -13,7 +13,10 @@ A Game About JavaScript Logical Operators.
 
 * [x] Design the mobile experience
 * [x] Increase round duration from 12 to 15
-* [ ] Improve random pick to avoid repetition *(copy list, splice picked items)*
+* [x] Improve random pick to avoid repetition *(copy list, splice picked items)*
+  * [x] Make a local copy of the questions
+  * [x] When picking a random question, remove it from the local copy
+  * [x] When running out of questions, show the game over modal
 * [ ] Make the winning and losing gap depends on the complexity of the question
   * [ ] Giving a wrong answer to an easy question decrease a lot
   * [ ] Giving a right answer to an easy question increase a little
