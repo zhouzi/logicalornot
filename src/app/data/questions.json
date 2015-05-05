@@ -267,5 +267,59 @@
       "up": { "answer": "true" },
       "right": { "answer": "false", "correct": true }
     }
+  },
+
+  {
+    "question": "null == undefined",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "null == 0",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "0" },
+      "right": { "answer": "false", "correct": true }
+    }
+  },
+
+  {
+    "question": "null > -1",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "null < 1",
+    "answers": {
+      "left": { "answer": "null" },
+      "up": { "answer": "true", "correct": true },
+      "right": { "answer": "false" }
+    }
+  },
+
+  {
+    "question": "false == ''",
+    "answers": {
+      "left": { "answer": "true", "correct": true },
+      "up": { "answer": "false" },
+      "right": { "answer": "''" }
+    }
+  },
+
+  {
+    "question": "(function(){}).length == 0",
+    "answers": {
+      "left": { "answer": "0" },
+      "up": { "answer": "false" },
+      "right": { "answer": "true", "correct": true }
+    }
   }
 ]
