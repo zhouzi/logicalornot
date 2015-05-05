@@ -8,7 +8,9 @@
     "Bingo!",
     "You really know your stuff!",
     "Score!",
-    "Excellent!"
+    "Excellent!",
+    "You're an inspiration",
+    "Like the Willy Wonka of JS. Magical."
   ],
 
   "mean": [
@@ -19,6 +21,7 @@
     "Haha!",
     "Are u kidding me?",
     "Oh dear...",
-    "*sigh*"
+    "*sigh*",
+    "Try using the force, Luke"
   ]
 }
