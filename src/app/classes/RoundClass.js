@@ -48,7 +48,10 @@ export default class RoundClass {
 
     if (this.status === 'playing') {
       if (this.config.iteration >= this.config.totalIterations) {
+        this.setLifeBarHp(0);
+        this.updateLifeBarState();
         this.stop(true);
+
         return;
       }
 
@@ -65,11 +68,7 @@ export default class RoundClass {
     this.status = 'game over';
     cancelAnimationFrame(this._animateId);
 
-    if (notify) {
-      this.setLifeBarHp(0);
-      this.updateLifeBarState();
-      this.stream.publish('round:gameOver', this.score);
-    }
+    if (notify) this.stream.publish('round:gameOver', this.score);
   }
 
 
