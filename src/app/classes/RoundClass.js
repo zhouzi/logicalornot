@@ -25,9 +25,7 @@ export default class RoundClass {
       minValue:        0,
       maxValue:        100,
       iteration:       0,
-      totalIterations: gameplay.duration   * FPS,
-      winningGap:      gameplay.winningGap * FPS,
-      losingGap:       gameplay.losingGap  * FPS
+      totalIterations: gameplay.duration * FPS
     };
 
     this.setLifeBarHp(this.config.maxValue);
@@ -86,6 +84,16 @@ export default class RoundClass {
     let question = this.questions.splice(index, 1)[0];
 
     this.setQuestion(question);
+  }
+
+  static getQuestionComplexity (question) {
+    let complexity;
+
+    if (question.length >= 15) complexity = 2;
+    else if (question.length >= 10) complexity = 1;
+    else complexity = 0;
+
+    return complexity;
   }
 
   submitAnswer (answer) {
@@ -152,10 +160,16 @@ export default class RoundClass {
   }
 
   riseLifeBar () {
-    this.config.iteration = Math.max(this.config.iteration - this.config.winningGap, 0);
+    let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question);
+    let gap = gameplay.gaps.winning[complexity] * FPS;
+
+    this.config.iteration = Math.max(this.config.iteration - gap, 0);
   }
 
   dropLifeBar () {
-    this.config.iteration = Math.min(this.config.iteration + this.config.losingGap, this.config.totalIterations);
+    let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question);
+    let gap = gameplay.gaps.losing[complexity] * FPS;
+
+    this.config.iteration = Math.min(this.config.iteration + gap, this.config.totalIterations);
   }
 }

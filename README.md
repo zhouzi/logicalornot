@@ -17,11 +17,11 @@ A Game About JavaScript Logical Operators.
   * [x] Make a local copy of the questions
   * [x] When picking a random question, remove it from the local copy
   * [x] When running out of questions, show the game over modal
-* [ ] Make the winning and losing gap depends on the complexity of the question
-  * [ ] Giving a wrong answer to an easy question decrease a lot
-  * [ ] Giving a right answer to an easy question increase a little
-  * [ ] Giving a wrong answer to a hard question decrease a little
-  * [ ] Giving a right answer to a hard question increase a lot
+* [x] Make the winning and losing gap depends on the complexity of the question
+  * [x] Giving a wrong answer to an easy question decrease a lot
+  * [x] Giving a right answer to an easy question increase a little
+  * [x] Giving a wrong answer to a hard question decrease a little
+  * [x] Giving a right answer to a hard question increase a lot
 * [ ] Add "hardcore" mode, remove timer form normal mode
  * [ ] **normal**: Life bar does not decrease with time anymore but is smaller
  * [ ] **hardcore**: This mode include the timer

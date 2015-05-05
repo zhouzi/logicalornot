@@ -1,5 +1,7 @@
 {
   "duration": 15,
-  "winningGap": 1,
-  "losingGap": 1
+  "gaps": {
+    "winning": [1, 2, 3],
+    "losing": [3, 2, 1]
+  }
 }

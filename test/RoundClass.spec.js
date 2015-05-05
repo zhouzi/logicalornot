@@ -62,6 +62,12 @@ it('should set current question to a random one that have not be picked yet', ()
   expect(round.currentQuestion.question).toBe(questions[0].question);
 });
 
+it('should judge the complexity of a question and return a multiplicator', () => {
+  expect(RoundClass.getQuestionComplexity('123456789012345')).toBe(2);
+  expect(RoundClass.getQuestionComplexity('1234567890')).toBe(1);
+  expect(RoundClass.getQuestionComplexity('123456789')).toBe(0);
+});
+
 describe('when submitting an answer', () => {
   it('should update status to playing if current status is ready', () => {
     expect(round.status).toBe('ready');
@@ -112,12 +118,10 @@ describe('when submitting an answer', () => {
       spyOn(round, 'setRandomTaunt');
 
       round.setQuestion(questions[0]);
-      console.log(round.currentQuestion);
       round.submitAnswer('left');
       expect(round.setRandomTaunt).toHaveBeenCalledWith('mean');
 
       round.setQuestion(questions[0]);
-      console.log(round.currentQuestion);
       round.submitAnswer('up');
       expect(round.setRandomTaunt).toHaveBeenCalledWith('nice');
     });
