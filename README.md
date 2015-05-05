@@ -11,7 +11,7 @@ A Game About JavaScript Logical Operators.
 
 # v2.0.0 - [Unreleased]
 
-* [ ] Design the mobile experience
+* [x] Design the mobile experience
 * [x] Increase round duration from 12 to 15
 * [ ] Improve random pick to avoid repetition *(copy list, splice picked items)*
 * [ ] Make the winning and losing gap depends on the complexity of the question
