@@ -9,7 +9,7 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
-# v2.0.0 - [Unreleased]
+## v2.0.0 - [Unreleased]
 
 * [x] Design the mobile experience
 * [x] Increase round duration from 12 to 15
