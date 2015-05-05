@@ -9,11 +9,21 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
-# v1.2.0 - [Unreleased]
+# v2.0.0 - [Unreleased]
 
-* [ ] When giving a right or wrong answer, make the gap depend on the complexity of the question
+* [ ] Design the mobile experience
 * [x] Increase round duration from 12 to 15
-* [ ] Add `<noscript></noscript>`
+* [ ] Improve random pick to avoid repetition *(copy list, splice picked items)*
+* [ ] Make the winning and losing gap depends on the complexity of the question
+  * [ ] Giving a wrong answer to an easy question decrease a lot
+  * [ ] Giving a right answer to an easy question increase a little
+  * [ ] Giving a wrong answer to a hard question decrease a little
+  * [ ] Giving a right answer to a hard question increase a lot
+* [ ] Add "hardcore" mode, remove timer form normal mode
+ * [ ] **normal**: Life bar does not decrease with time anymore but is smaller
+ * [ ] **hardcore**: This mode include the timer
+ * [ ] **normal, hardcore**: Right and wrong answers still alter life bar
+* [ ] Add a `<noscript></noscript>`
 * [ ] Add a clearer indicator of whether the answer is correct or not
 * [ ] Display "So, what's the result of..." only the first time
 
