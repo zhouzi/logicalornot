@@ -5,6 +5,7 @@ import cancelAnimationFrame from '../utils/cancelAnimationFrame';
 import copy from '../utils/copy';
 import rand from '../utils/rand';
 import equals from '../utils/equals';
+import shuffle from '../utils/shuffle';
 import ease from '../utils/ease';
 
 const FPS = 60;
@@ -79,6 +80,7 @@ export default class RoundClass {
   \*-------------------------------------------*/
 
   setQuestion (question) {
+    shuffle(question.answers);
     this.currentQuestion = question;
 
     this.stream.publish('round:newQuestion', this.currentQuestion);
