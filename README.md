@@ -31,7 +31,7 @@ A Game About JavaScript Specificities.
 * [x] Simplify the model of a question
 * [x] Add spec to make sure that every questions has its correct answer
 * [x] Shuffle answers before display
-* [ ] Update CONTRIBUTING.md
+* [x] Update CONTRIBUTING.md
 * [x] Improve some questions
 * [x] Change description to remove restriction to "logical operators"
 

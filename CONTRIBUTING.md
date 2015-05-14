@@ -8,11 +8,23 @@ Below are the different ways you can contribute to the project.
 ## Questions
 
 Logical (Or Not) is a question based game.
-The questions are stored in the [`src/app/data/questions`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/questions.json) file.
+The questions are stored in the [`src/app/data/questions.json`](https://github.com/Zhouzi/logicalornot/blob/gh-pages/src/app/data/questions.json) file.
 If you want to submit new ones, please make sure that:
 
 * It doesn't involve any external context (`'foo' || 'bar'` is ok while `!variable || func()` is not)
 * It is short and not too complex
+
+The structure of a question is pretty simple and looks like this:
+
+```javascript
+{
+  question: "'foo' || 'bar'",
+  answers: ["'foo'", "'bar'", "true"]
+}
+```
+
+There's no need to indicate which answer is correct as it is then dynamically calculated.
+Note that the `gulp test` task checks that each question in the `questions.json` file has its right answer.
 
 
 
@@ -58,6 +70,7 @@ To take full advantages of the ES6 capabilities, this project uses:
 * `gulp watch`: watch for changes and run `styles` or `scripts`
 * `gulp test`: run the tests using karma
 * `gulp serve`: serve the game, watch for changes and reload the browser automatically
+
 
 
 #### Guidelines
