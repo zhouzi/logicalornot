@@ -27,7 +27,8 @@ A Game About JavaScript Logical Operators.
   * [x] **hardcore**: keep timer, set life bar to 15
 * [ ] Add a `<noscript></noscript>` tag
 * [ ] Display "So, what's the result of..." only the first time
-* [ ] Simplify the model of a question
+* [x] Simplify the model of a question
+* [ ] Add spec to make sure that every questions has its correct answer
 
 ## v1.1.0 - 2015-05-02
 
