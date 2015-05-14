@@ -28,7 +28,10 @@ A Game About JavaScript Logical Operators.
 * [ ] Add a `<noscript></noscript>` tag
 * [ ] Display "So, what's the result of..." only the first time
 * [x] Simplify the model of a question
-* [ ] Add spec to make sure that every questions has its correct answer
+* [x] Add spec to make sure that every questions has its correct answer
+* [ ] Shuffle the answers' order
+* [ ] Update CONTRIBUTING.md
+* [ ] Improve some questions
 
 ## v1.1.0 - 2015-05-02
 
