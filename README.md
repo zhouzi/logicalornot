@@ -9,31 +9,25 @@ A Game About JavaScript Specificities.
 
 # Change Log
 
-## v2.0.0 - [Unreleased]
+## v2.0.0 - 2015-05-14
 
-* [x] Design the mobile experience
-* [x] Increase round duration from 12 to 15
-* [x] Improve random pick to avoid repetition *(copy list, splice picked items)*
-  * [x] Make a local copy of the questions
-  * [x] When picking a random question, remove it from the local copy
-  * [x] When running out of questions, show the game over modal
-* [x] Make the winning and losing gap depends on the complexity of the question
-  * [x] Giving a wrong answer to an easy question decrease a lot
-  * [x] Giving a right answer to an easy question increase a little
-  * [x] Giving a wrong answer to a hard question decrease a little
-  * [x] Giving a right answer to a hard question increase a lot
-* [x] Added two modes: "normal" and "hardcore"
-  * [x] Both modes have a timer of 15 seconds but...
-  * [x] **normal mode**: a right answer gives 15 seconds (reseting the life bar to 100%) while a wrong one has no effects
-  * [x] **hardcore**: a right answer gives 1-3 seconds while a wrong one drops the life bar of 1-3 seconds (the amount depends on the complexity of the question)
-* [x] Add a `<noscript></noscript>` tag
-* [x] Display "So, what's the result of..." only the first time
-* [x] Simplify the model of a question
-* [x] Add spec to make sure that every questions has its correct answer
-* [x] Shuffle answers before display
-* [ ] Update CONTRIBUTING.md
-* [x] Improve some questions
-* [x] Change description to remove restriction to "logical operators"
+* The game is now responsive, meaning it works on smartphones as well as desktop computers
+* The timer for a round has been increased from 12 to 15
+* Improved the random pick of questions to avoid repetition
+* The game now also ends when the player answered all the questions
+* There is now two modes:
+ * **normal**: A right answer rise the timer to its maximum
+ * **normal**: A wrong answer doesn't affect the timer
+ * **hardcore**: A right answer rise the timer of 1 to 3 seconds
+ * **hardcore**: A wrong answer drop the timer of 1 to 3 seconds
+ * **hardcore**: The amount of the "gap" depends on the complexity of the question
+* The answers are now displayed randomly
+* The structure of a question is now pretty simple and tested
+* Fixed and improved some questions
+* Fixed taunts to display "So, what's the result of..." only at the start of a new round
+* Added a `<noscript>` tag
+* Updated description to remove restriction to JavaScript "logical operators"
+* Updated CONTRIBUTING.md according to the new changes
 
 ## v1.1.0 - 2015-05-02
 
