@@ -34,7 +34,7 @@ export default class RoundClass {
 
     this.setLifeBarHp(this.config.maxValue);
     this.updateLifeBarState();
-    this.setTaunt(0, 'nice');
+    this.setTaunt("So, what's the result of...");
     this.setRandomQuestion();
     this.animate();
   }
@@ -130,7 +130,8 @@ export default class RoundClass {
   \*-------------------------------------------*/
 
   setTaunt (index, type = 'nice') {
-    this.stream.publish('round:newTaunt', this.taunt = this.taunts[type][index], type);
+    this.taunt = typeof index === 'string' ? index : this.taunts[type][index];
+    this.stream.publish('round:newTaunt', this.taunt, type);
   }
 
   setRandomTaunt (type) {
