@@ -1,10 +1,10 @@
 {
   "normal": {
-    "duration": 6,
-    "timer": false,
+    "duration": 15,
+    "timer": true,
     "gaps": {
-      "winning": [1, 2, 3],
-      "losing": [3, 2, 1]
+      "winning": [15, 15, 15],
+      "losing": [0, 0, 0]
     }
   },
 
