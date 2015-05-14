@@ -26,7 +26,7 @@ A Game About JavaScript Logical Operators.
   * [x] Both modes have a timer of 15 seconds but...
   * [x] **normal mode**: a right answer gives 15 seconds (reseting the life bar to 100%) while a wrong one has no effects
   * [x] **hardcore**: a right answer gives 1-3 seconds while a wrong one drops the life bar of 1-3 seconds (the amount depends on the complexity of the question)
-* [ ] Add a `<noscript></noscript>` tag
+* [x] Add a `<noscript></noscript>` tag
 * [ ] Display "So, what's the result of..." only the first time
 * [x] Simplify the model of a question
 * [x] Add spec to make sure that every questions has its correct answer
