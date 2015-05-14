@@ -1,6 +1,6 @@
 # Logical (Or Not)
 
-A Game About JavaScript Logical Operators.
+A Game About JavaScript Specificities.
 
 * [Play Now!](http://gabinaureche.com/logicalornot/)
 * [Contribute](https://github.com/Zhouzi/logicalornot/blob/gh-pages/CONTRIBUTING.md)
@@ -33,7 +33,7 @@ A Game About JavaScript Logical Operators.
 * [x] Shuffle answers before display
 * [ ] Update CONTRIBUTING.md
 * [x] Improve some questions
-* [ ] Change description to remove restriction to "logical operators"
+* [x] Change description to remove restriction to "logical operators"
 
 ## v1.1.0 - 2015-05-02
 
