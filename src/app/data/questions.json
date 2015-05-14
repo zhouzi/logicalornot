@@ -26,7 +26,7 @@
 
   {
     "question": "!'foo' && 'bar'",
-    "answers": ["'foo'", "'bar'", "false"]
+    "answers": ["true", "'bar'", "false"]
   },
 
   {
@@ -71,7 +71,7 @@
 
   {
     "question": "null || [] || {}",
-    "answers": ["null", "[]", "'{}'"]
+    "answers": ["null", "[]", "{}"]
   },
 
   {
@@ -116,7 +116,7 @@
 
   {
     "question": "!!['foo'].indexOf('foo')",
-    "answers": ["0", "1", "false"]
+    "answers": ["0", "true", "false"]
   },
 
   {
@@ -156,7 +156,7 @@
 
   {
     "question": "null == 0",
-    "answers": ["null", "0", "false"]
+    "answers": ["null", "true", "false"]
   },
 
   {
