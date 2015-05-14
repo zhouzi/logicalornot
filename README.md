@@ -32,7 +32,8 @@ A Game About JavaScript Logical Operators.
 * [x] Add spec to make sure that every questions has its correct answer
 * [ ] Shuffle the answers' order
 * [ ] Update CONTRIBUTING.md
-* [ ] Improve some questions
+* [x] Improve some questions
+* [ ] Change description to remove restriction to "logical operators"
 
 ## v1.1.0 - 2015-05-02
 
