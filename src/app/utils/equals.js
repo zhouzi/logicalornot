@@ -1,9 +1,3 @@
-export default (question, answer) => {
-  question = eval.call(this, question);
-  answer   = eval.call(this, answer);
+import evalToString from './evalToString';
 
-  if (typeof question !== 'string') question = JSON.stringify(question);
-  if (typeof answer !== 'string')   answer   = JSON.stringify(answer);
-
-  return question === answer;
-};
+export default (question, answer) => evalToString(question) === evalToString(answer);
