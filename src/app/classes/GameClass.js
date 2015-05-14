@@ -27,9 +27,15 @@ export default class GameClass {
       .stream
       .subscribe('round:newQuestion', newQuestion => {
         this.view.render('question',           'html', newQuestion.question);
-        this.view.render('answer-left-label',  'html', newQuestion.answers.left.answer);
-        this.view.render('answer-up-label',    'html', newQuestion.answers.up.answer);
-        this.view.render('answer-right-label', 'html', newQuestion.answers.right.answer);
+
+        this.view.render('answer-left-label',  'html', newQuestion.answers[0]);
+        this.view.render('answer-left-button', 'attr', {'data-event-data': newQuestion.answers[0].toString()});
+
+        this.view.render('answer-up-label',  'html', newQuestion.answers[1]);
+        this.view.render('answer-up-button', 'attr', {'data-event-data': newQuestion.answers[1].toString()});
+
+        this.view.render('answer-right-label',  'html', newQuestion.answers[2]);
+        this.view.render('answer-right-button', 'attr', {'data-event-data': newQuestion.answers[2].toString()});
       })
       .subscribe('round:updateLifeBar', hp => {
         this.view.render('life-bar', 'css', { width: `${hp}%` });
@@ -92,7 +98,7 @@ export default class GameClass {
       .subscribe('view:selectAnswer', answer => this.round.submitAnswer(answer))
       .subscribe('view:normal-mode', () =>  {
         this.mode = 'normal';
-        this.newRound.call(this, 'normal')
+        this.newRound.call(this, 'normal');
       })
       .subscribe('view:hardcore-mode', () => {
         this.mode = 'hardcore';

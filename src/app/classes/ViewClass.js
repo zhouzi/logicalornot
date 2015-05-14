@@ -23,8 +23,7 @@ export default class ViewClass {
 
       self.$buttons[keyShortcut] = {
         element:   button,
-        eventName: ViewClass.getAttribute(button, 'data-event'),
-        eventData: ViewClass.getAttribute(button, 'data-event-data')
+        eventName: ViewClass.getAttribute(button, 'data-event')
       };
     }
 
@@ -78,7 +77,8 @@ export default class ViewClass {
   }
 
   publishButtonData (button) {
-    this.stream.publish(button.eventName, button.eventData);
+    let data = ViewClass.getAttribute(button.element, 'data-event-data');
+    this.stream.publish(button.eventName, data);
   }
 
   $get (selector) {

@@ -4,6 +4,7 @@ import requestAnimationFrame from '../utils/requestAnimationFrame';
 import cancelAnimationFrame from '../utils/cancelAnimationFrame';
 import copy from '../utils/copy';
 import rand from '../utils/rand';
+import equals from '../utils/equals';
 import ease from '../utils/ease';
 
 const FPS = 60;
@@ -106,7 +107,7 @@ export default class RoundClass {
 
     this.status = 'playing';
 
-    if (this.currentQuestion.answers[answer].correct === true) {
+    if (equals(this.currentQuestion.question, answer)) {
       this.riseLifeBar();
       this.score.push(1);
       this.setRandomTaunt('nice');

@@ -1,325 +1,181 @@
 [
   {
     "question": "false || true",
-    "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "undefined" }
-    }
+    "answers": ["false", "true", "undefined"]
   },
 
   {
     "question": "null && false",
-    "answers": {
-      "left": { "answer": "null", "correct": true },
-      "up": { "answer": "false" },
-      "right": { "answer": "true" }
-    }
+    "answers": ["null", "false", "true"]
   },
 
   {
     "question": "(false && 'bar') || 'foo'",
-    "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "'bar'" },
-      "right": { "answer": "'foo'", "correct": true }
-    }
+    "answers": ["false", "'bar'", "'foo'"]
   },
 
   {
     "question": "'foo' || 'bar'",
-    "answers": {
-      "left": { "answer": "'foo'", "correct": true },
-      "up": { "answer": "'bar'" },
-      "right": { "answer": "true" }
-    }
+    "answers": ["'foo'", "'bar'", "true"]
   },
 
   {
     "question": "'foo' && 'bar' || 'quz'",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "'bar'", "correct": true },
-      "right": { "answer": "'quz'" }
-    }
+    "answers": ["'foo'", "'bar'", "'quz'"]
   },
 
   {
     "question": "!'foo' && 'bar'",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "'bar'" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["'foo'", "'bar'", "false"]
   },
 
   {
     "question": "'foo' && !(false && null)",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "false" },
-      "right": { "answer": "true", "correct": true }
-    }
+    "answers": ["'foo'", "false", "true"]
   },
 
   {
     "question": "!undefined || 'foo'",
-    "answers": {
-      "left": { "answer": "true", "correct": true },
-      "up": { "answer": "'foo'" },
-      "right": { "answer": "false" }
-    }
+    "answers": ["true", "'foo'", "false"]
   },
 
   {
     "question": "'foo' || !!'bar'",
-    "answers": {
-      "left": { "answer": "'foo'", "correct": true },
-      "up": { "answer": "true" },
-      "right": { "answer": "false" }
-    }
+    "answers": ["'foo'", "true", "false"]
   },
 
   {
     "question": "(null && 'foo') || 'bar'",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "'foo'" },
-      "right": { "answer": "'bar'", "correct": true }
-    }
+    "answers": ["null", "'foo'", "'bar'"]
   },
 
   {
     "question": "(null || []).push('foo')",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "['foo']" },
-      "right": { "answer": "1", "correct": true }
-    }
+    "answers": ["null", "['foo']", "1"]
   },
 
   {
     "question": "('foo' || 'bar').indexOf('f')",
-    "answers": {
-      "left": { "answer": "-1" },
-      "up": { "answer": "0", "correct": true },
-      "right": { "answer": "1" }
-    }
+    "answers": ["-1", "0", "1"]
   },
 
   {
     "question": "null || 'foo' && 'bar'",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "'foo'" },
-      "right": { "answer": "'bar'", "correct": true }
-    }
+    "answers": ["null", "'foo'", "'bar'"]
   },
 
   {
     "question": "[] && [].push('foo')",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "['foo']" },
-      "right": { "answer": "1", "correct": true }
-    }
+    "answers": ["'foo'", "['foo']", "1"]
   },
 
   {
     "question": "null || [] || {}",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "[]", "correct": true },
-      "right": { "answer": "'{}'" }
-    }
+    "answers": ["null", "[]", "'{}'"]
   },
 
   {
     "question": "!!!'foo'",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "true" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["'foo'", "true", "false"]
   },
 
   {
     "question": "![].length",
-    "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "0" }
-    }
+    "answers": ["false", "true", "0"]
   },
 
   {
     "question": "'foo' && ('bar' || null)",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "'bar'", "correct": true },
-      "right": { "answer": "null" }
-    }
+    "answers": ["'foo'", "'bar'", "null"]
   },
 
   {
     "question": "'foo' !== ('foo' && 'bar')",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["'foo'", "true", "false"]
   },
 
   {
     "question": "2 > (3 && 0)",
-    "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "2" }
-    }
+    "answers": ["false", "true", "2"]
   },
 
   {
     "question": "false && false",
-    "answers": {
-      "left": { "answer": "false", "correct": true },
-      "up": { "answer": "true" },
-      "right": { "answer": "null" }
-    }
+    "answers": ["false", "true", "null"]
   },
 
   {
     "question": "!false || 'foo'",
-    "answers": {
-      "left": { "answer": "false" },
-      "up": { "answer": "'foo'" },
-      "right": { "answer": "true", "correct": true }
-    }
+    "answers": ["false", "'foo'", "true"]
   },
 
   {
     "question": "1 >= 1",
-    "answers": {
-      "left": { "answer": "1" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["1", "true", "false"]
   },
 
   {
     "question": "!!['foo'].indexOf('foo')",
-    "answers": {
-      "left": { "answer": "0" },
-      "up": { "answer": "1" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["0", "1", "false"]
   },
 
   {
     "question": "0 == false",
-    "answers": {
-      "left": { "answer": "0" },
-      "up": { "answer": "false" },
-      "right": { "answer": "true", "correct": true }
-    }
+    "answers": ["0", "false", "true"]
   },
 
   {
     "question": "1 > 2",
-    "answers": {
-      "left": { "answer": "1" },
-      "up": { "answer": "true" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["1", "true", "false"]
   },
 
   {
     "question": "!!'foo'",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["'foo'", "true", "false"]
   },
 
   {
     "question": "'foo' == 'bar'",
-    "answers": {
-      "left": { "answer": "'foo'" },
-      "up": { "answer": "true" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["'foo'", "true", "false"]
   },
 
   {
     "question": "0 || 1",
-    "answers": {
-      "left": { "answer": "0" },
-      "up": { "answer": "1", "correct": true },
-      "right": { "answer": "true" }
-    }
+    "answers": ["0", "1", "true"]
   },
 
   {
     "question": "1 === true",
-    "answers": {
-      "left": { "answer": "1" },
-      "up": { "answer": "true" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["1", "true", "false"]
   },
 
   {
     "question": "null == undefined",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["null", "true", "false"]
   },
 
   {
     "question": "null == 0",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "0" },
-      "right": { "answer": "false", "correct": true }
-    }
+    "answers": ["null", "0", "false"]
   },
 
   {
     "question": "null > -1",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["null", "true", "false"]
   },
 
   {
     "question": "null < 1",
-    "answers": {
-      "left": { "answer": "null" },
-      "up": { "answer": "true", "correct": true },
-      "right": { "answer": "false" }
-    }
+    "answers": ["null", "true", "false"]
   },
 
   {
     "question": "false == ''",
-    "answers": {
-      "left": { "answer": "true", "correct": true },
-      "up": { "answer": "false" },
-      "right": { "answer": "''" }
-    }
+    "answers": ["true", "false", "''"]
   },
 
   {
     "question": "(function(){}).length == 0",
-    "answers": {
-      "left": { "answer": "0" },
-      "up": { "answer": "false" },
-      "right": { "answer": "true", "correct": true }
-    }
+    "answers": ["0", "false", "true"]
   }
 ]
