@@ -10,20 +10,12 @@ beforeEach(() => {
   questions = [
     {
       "question": "false || true",
-      "answers": {
-        "left": { "answer": "false" },
-        "up": { "answer": "true", "correct": true },
-        "right": { "answer": "undefined" }
-      }
+      "answers": ["false", "true", "undefined"]
     },
 
     {
       "question": "null && false",
-      "answers": {
-        "left": { "answer": "null", "correct": true },
-        "up": { "answer": "false" },
-        "right": { "answer": "true" }
-      }
+      "answers": ["null", "false", "true"]
     }
   ];
 
@@ -72,14 +64,14 @@ describe('when submitting an answer', () => {
   it('should update status to playing if current status is ready', () => {
     expect(round.status).toBe('ready');
 
-    round.submitAnswer('left');
+    round.submitAnswer("'whatever'");
     expect(round.status).toBe('playing');
   });
 
   it('should set a random question', () => {
     spyOn(round, 'setRandomQuestion');
 
-    round.submitAnswer('left');
+    round.submitAnswer("'whatever'");
     expect(round.setRandomQuestion).toHaveBeenCalled();
   });
 
@@ -89,7 +81,7 @@ describe('when submitting an answer', () => {
       spyOn(round, 'dropLifeBar');
 
       round.setQuestion(questions[0]);
-      round.submitAnswer('left');
+      round.submitAnswer('false');
       expect(round.riseLifeBar).not.toHaveBeenCalled();
       expect(round.dropLifeBar).toHaveBeenCalled();
     });
@@ -99,18 +91,18 @@ describe('when submitting an answer', () => {
       spyOn(round, 'dropLifeBar');
 
       round.setQuestion(questions[0]);
-      round.submitAnswer('up');
+      round.submitAnswer('true');
       expect(round.riseLifeBar).toHaveBeenCalled();
       expect(round.dropLifeBar).not.toHaveBeenCalled();
     });
 
     it('should update the score', () => {
       round.setQuestion(questions[0]);
-      round.submitAnswer('left');
+      round.submitAnswer('false');
       expect(round.score).toEqual([0]);
 
       round.setQuestion(questions[1]);
-      round.submitAnswer('left');
+      round.submitAnswer('null');
       expect(round.score).toEqual([0, 1]);
     });
 
@@ -118,11 +110,11 @@ describe('when submitting an answer', () => {
       spyOn(round, 'setRandomTaunt');
 
       round.setQuestion(questions[0]);
-      round.submitAnswer('left');
+      round.submitAnswer('false');
       expect(round.setRandomTaunt).toHaveBeenCalledWith('mean');
 
       round.setQuestion(questions[0]);
-      round.submitAnswer('up');
+      round.submitAnswer('true');
       expect(round.setRandomTaunt).toHaveBeenCalledWith('nice');
     });
   });
@@ -130,7 +122,7 @@ describe('when submitting an answer', () => {
 
 it('should set game to game over when there\'s no more questions', function () {
   round.questions = [];
-  round.submitAnswer('left');
+  round.submitAnswer("'whatever'");
   expect(round.status).toBe('game over');
 });
 
