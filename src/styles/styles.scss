@@ -57,8 +57,8 @@ small {
   vertical-align: middle;
 }
 
-h1,
-h2 {
+h1, .h1,
+h2, .h2 {
   font-family: 'Bigshot One', cursive;
   font-size: $font-size-large;
   line-height: 1;
@@ -78,11 +78,11 @@ h2 {
   }
 }
 
-h1 {
+h1, .h1 {
   color: $gold;
 }
 
-h2 {
+h2, .h2 {
   color: $reddish;
   margin-bottom: $gutter;
 }
@@ -251,28 +251,29 @@ h2 {
       flex-grow: 1;
     }
   }
+}
 
-  a {
-    display: inline-block;
-    padding: .2em;
-    border-bottom: 2px solid $reddish-light;
-    margin-left: .4rem;
+footer a,
+.link {
+  display: inline-block;
+  padding: .2em;
+  border-bottom: 2px solid $reddish-light;
+  margin-left: .4rem;
 
-    &:focus,
-    &:hover,
-    &.active {
-      color: $white;
-      border-color: $gold;
-      background: linear-gradient(0deg, rgba($gold, .2) 0%, rgba($white, 0) 80%);
-
-      [class*="icon-"] {
-        color: $gold;
-      }
-    }
+  &:focus,
+  &:hover,
+  &.active {
+    color: $white;
+    border-color: $gold;
+    background: linear-gradient(0deg, rgba($gold, .2) 0%, rgba($white, 0) 80%);
 
     [class*="icon-"] {
-      color: $reddish-light;
+      color: $gold;
     }
+  }
+
+  [class*="icon-"] {
+    color: $reddish-light;
   }
 }
 
