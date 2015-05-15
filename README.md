@@ -1,6 +1,6 @@
 # Logical (Or Not)
 
-A Game About JavaScript Specificities.
+A Game About JavaScript Logical Operators.
 
 * [Play Now!](http://gabinaureche.com/logicalornot/)
 * [Contribute](https://github.com/Zhouzi/logicalornot/blob/gh-pages/CONTRIBUTING.md)
@@ -8,6 +8,11 @@ A Game About JavaScript Specificities.
 
 
 # Change Log
+
+## v2.1.0 - [Unreleased]
+
+* [x] Set back restriction to "logical operators"
+* [ ] Set `shuffleAnswers` as an option of the gameplay
 
 ## v2.0.0 - 2015-05-14
 
