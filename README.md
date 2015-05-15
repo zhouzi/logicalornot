@@ -12,7 +12,7 @@ A Game About JavaScript Logical Operators.
 ## v2.1.0 - [Unreleased]
 
 * [x] Set back restriction to "logical operators"
-* [ ] Set `shuffleAnswers` as an option of the gameplay
+* [x] Set `shuffleAnswers` as an option of the gameplay, don't shuffle in hardcore mode
 
 ## v2.0.0 - 2015-05-14
 

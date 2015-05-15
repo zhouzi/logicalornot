@@ -80,7 +80,7 @@ export default class RoundClass {
   \*-------------------------------------------*/
 
   setQuestion (question) {
-    shuffle(question.answers);
+    if (this.gameplay.shuffleAnswers) shuffle(question.answers);
     this.currentQuestion = question;
 
     this.stream.publish('round:newQuestion', this.currentQuestion);
