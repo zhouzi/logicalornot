@@ -9,10 +9,10 @@ A Game About JavaScript Logical Operators.
 
 # Change Log
 
-## v2.1.0 - [Unreleased]
+## v2.1.0 - 2015-05-17
 
-* [x] Set back restriction to "logical operators"
-* [x] Set `shuffleAnswers` as an option of the gameplay, don't shuffle in hardcore mode
+* Set back restriction to "logical operators"
+* `shuffleAnswers` is now part of the gameplay's options, the answers are no more shuffled in hardcore mode
 
 ## v2.0.0 - 2015-05-14
 
