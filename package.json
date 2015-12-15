@@ -1,23 +1,5 @@
 {
-  "name": "logicalornot",
-  "version": "0.0.1",
-  "description": "A Game About JavaScript Logical Operators.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Zhouzi/logicalornot.git"
-  },
-  "keywords": [
-    "logical",
-    "operators",
-    "javascript",
-    "game"
-  ],
-  "author": "Gabin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Zhouzi/logicalornot/issues"
-  },
-  "homepage": "https://github.com/Zhouzi/logicalornot",
+  "private": true,
   "scripts": {
     "lint": "standard src/app/**/**/*.js"
   },
