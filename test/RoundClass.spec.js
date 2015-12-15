@@ -1,3 +1,4 @@
+import './polyfills'
 import PubSubClass from '../src/app/classes/PubSubClass';
 import RoundClass from '../src/app/classes/RoundClass';
 
