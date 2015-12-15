@@ -1,10 +1,10 @@
 export default (w => {
-  let fn = w.cancelAnimationFrame       ||
-           w.mozCancelAnimationFrame    ||
+  let fn = w.cancelAnimationFrame ||
+           w.mozCancelAnimationFrame ||
            w.webkitCancelAnimationFrame ||
-           w.msCancelAnimationFrame     ||
-           w.clearTimeout;
+           w.msCancelAnimationFrame ||
+           w.clearTimeout
 
   // make sure the function is called with context set to window, otherwise it causes an illegal invocation
-  return (...args) => fn.apply(w, args);
-})(window);
+  return (...args) => fn.apply(w, args)
+})(window)

@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+var webpack = require('webpack')
 
 module.exports = {
   entry: './src/app/app.js',
@@ -23,4 +23,4 @@ module.exports = {
   },
 
   plugins: [new webpack.optimize.UglifyJsPlugin()]
-};
+}

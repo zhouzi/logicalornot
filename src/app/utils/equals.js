@@ -1,3 +1,3 @@
-import evalToString from './evalToString';
+import evalToString from './evalToString'
 
-export default (question, answer) => evalToString(question) === evalToString(answer);
+export default (question, answer) => evalToString(question) === evalToString(answer)
