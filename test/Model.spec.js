@@ -32,7 +32,7 @@ beforeEach(() => {
 })
 
 it('should bootstrap the new round', () => {
-  expect(round.questions.length).toBe(questions.length - 1)
+  expect(round.questions.length).toBe(questions.length)
   expect(round.taunts).toEqual(taunts)
   expect(round.stream).toEqual(stream)
 })
@@ -65,17 +65,11 @@ it('should judge the complexity of a question and return a multiplicator', () =>
 
 describe('when submitting an answer', () => {
   it('should update status to playing if current status is ready', () => {
+    round.setRandomQuestion()
     expect(round.status).toBe('ready')
 
     round.submitAnswer("'whatever'")
     expect(round.status).toBe('playing')
-  })
-
-  it('should set a random question', () => {
-    spyOn(round, 'setRandomQuestion')
-
-    round.submitAnswer("'whatever'")
-    expect(round.setRandomQuestion).toHaveBeenCalled()
   })
 
   describe('depending on the answer', () => {
@@ -121,12 +115,6 @@ describe('when submitting an answer', () => {
       expect(round.setRandomTaunt).toHaveBeenCalledWith('nice')
     })
   })
-})
-
-it('should set game to game over when there\'s no more questions', function () {
-  round.questions = []
-  round.submitAnswer("'whatever'")
-  expect(round.status).toBe('game over')
 })
 
 it('should set taunt at given index and type', () => {

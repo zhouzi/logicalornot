@@ -35,7 +35,6 @@ export default class Model {
     this.setLifeBarHp(this.config.maxValue)
     this.updateLifeBarState()
     this.setTaunt("So, what's the result of...")
-    this.setRandomQuestion()
     this.animate()
   }
 
@@ -108,9 +107,6 @@ export default class Model {
       this.score.push(0)
       this.setRandomTaunt('mean')
     }
-
-    if (this.status !== 'game over' && this.questions.length > 0) this.setRandomQuestion()
-    else this.stop(true)
   }
 
   // taunt

@@ -19,7 +19,16 @@ export default class Presenter {
 
     this.bind()
 
-    this.view.onSelectAnswer = answer => this.round.submitAnswer(answer)
+    this.view.onSelectAnswer = answer => {
+      this.round.submitAnswer(answer)
+
+      if (this.round.status !== 'game over' && this.round.questions.length > 0) {
+        this.setRandomQuestion()
+      } else {
+        this.round.stop(true)
+      }
+    }
+
     this.view.onNewRound = this.newRound.bind(this)
 
     this.newRound()
@@ -29,7 +38,6 @@ export default class Presenter {
   bind () {
     this
       .stream
-      .subscribe('round:newQuestion', newQuestion => this.view.setQuestion(newQuestion))
       .subscribe('round:updateLifeBar', hp => this.view.setLifeBarHp(hp))
       .subscribe('round:updateLifeBarState', lifeBarState => this.view.setLifeBarState(lifeBarState))
       .subscribe('round:newTaunt', (taunt, type) => this.view.setTaunt(taunt, type))
@@ -50,6 +58,11 @@ export default class Presenter {
     this.view.setBestScore(this.bestScore)
   }
 
+  setRandomQuestion () {
+    this.round.setRandomQuestion()
+    this.view.setQuestion(this.round.currentQuestion)
+  }
+
   newRound (mode) {
     if (mode != null) this.mode = mode
 
@@ -62,5 +75,6 @@ export default class Presenter {
     }
 
     this.round = new Model(this.questions, this.taunts, this.stream, this.mode)
+    this.setRandomQuestion()
   }
 }
