@@ -1,5 +1,4 @@
 import Model from './Model'
-import PubSubClass from './PubSubClass'
 import Timer from './Timer'
 
 import questions from '../data/questions.json'
@@ -16,7 +15,7 @@ export default class Presenter {
 
     stream.context = this
 
-    this.updateBestScore(localStorage.getItem('bestScore') || 0)
+    this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
     this.bind()
 
@@ -61,7 +60,7 @@ export default class Presenter {
       .subscribe('round:newTaunt', (taunt, type) => this.view.setTaunt(taunt, type))
       .subscribe('round:gameOver', score => {
         const total = score.length
-        const wins = score.reduce((nbWins, point) => point == 1 ? nbWins + 1 : nbWins, 0)
+        const wins = score.reduce((nbWins, point) => nbWins + point, 0)
         const loses = total - wins
 
         this.updateBestScore(Math.max(this.bestScore, wins))
@@ -72,7 +71,7 @@ export default class Presenter {
   updateBestScore (score) {
     this.bestScore = score
 
-    localStorage.setItem('bestScore', this.bestScore)
+    window.localStorage.setItem('bestScore', this.bestScore)
     this.view.setBestScore(this.bestScore)
   }
 
