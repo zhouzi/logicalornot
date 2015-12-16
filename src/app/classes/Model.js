@@ -10,7 +10,7 @@ import ease from '../utils/ease'
 
 const FPS = 60
 
-export default class RoundClass {
+export default class Model {
   constructor (questions, taunts, stream, mode) {
     this.questions = copy(questions)
     this.taunts = taunts
@@ -149,14 +149,14 @@ export default class RoundClass {
   }
 
   riseLifeBar () {
-    let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question)
+    let complexity = Model.getQuestionComplexity(this.currentQuestion.question)
     let gap = this.gameplay.gaps.winning[complexity] * FPS
 
     this.config.iteration = Math.max(this.config.iteration - gap, 0)
   }
 
   dropLifeBar () {
-    let complexity = RoundClass.getQuestionComplexity(this.currentQuestion.question)
+    let complexity = Model.getQuestionComplexity(this.currentQuestion.question)
     let gap = this.gameplay.gaps.losing[complexity] * FPS
 
     this.config.iteration = Math.min(this.config.iteration + gap, this.config.totalIterations)

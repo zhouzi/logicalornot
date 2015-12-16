@@ -1,6 +1,8 @@
-import GameClass from './classes/GameClass'
-import questions from './data/questions.json'
-import taunts from './data/taunts.json'
+import PubSubClass from './classes/PubSubClass'
+import View from './classes/View'
+import Presenter from './classes/Presenter'
 
-let app = new GameClass(document, questions, taunts)
-setTimeout(() => app.animateIntro(), 500)
+const stream = new PubSubClass()
+const view = new View()
+
+new Presenter(stream, view)

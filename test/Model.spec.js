@@ -2,7 +2,7 @@
 
 import './polyfills'
 import PubSubClass from '../src/app/classes/PubSubClass'
-import RoundClass from '../src/app/classes/RoundClass'
+import Model from '../src/app/classes/Model'
 
 let round
 let questions
@@ -28,7 +28,7 @@ beforeEach(() => {
   }
 
   stream = new PubSubClass()
-  round = new RoundClass(questions, taunts, stream, 'normal')
+  round = new Model(questions, taunts, stream, 'normal')
 })
 
 it('should bootstrap the new round', () => {
@@ -58,9 +58,9 @@ it('should set current question to a random one that have not be picked yet', ()
 })
 
 it('should judge the complexity of a question and return a multiplicator', () => {
-  expect(RoundClass.getQuestionComplexity('123456789012345')).toBe(2)
-  expect(RoundClass.getQuestionComplexity('1234567890')).toBe(1)
-  expect(RoundClass.getQuestionComplexity('123456789')).toBe(0)
+  expect(Model.getQuestionComplexity('123456789012345')).toBe(2)
+  expect(Model.getQuestionComplexity('1234567890')).toBe(1)
+  expect(Model.getQuestionComplexity('123456789')).toBe(0)
 })
 
 describe('when submitting an answer', () => {

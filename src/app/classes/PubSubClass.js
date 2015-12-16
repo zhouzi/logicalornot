@@ -1,6 +1,6 @@
 export default class PubSubClass {
-  constructor (context = this) {
-    this.context = context
+  constructor () {
+    this.context = null
     this.events = {}
   }
 
