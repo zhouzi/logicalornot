@@ -73,26 +73,6 @@ describe('when submitting an answer', () => {
   })
 
   describe('depending on the answer', () => {
-    it('should drop life bar when answer is not correct', () => {
-      spyOn(round, 'riseLifeBar')
-      spyOn(round, 'dropLifeBar')
-
-      round.setQuestion(questions[0])
-      round.submitAnswer('false')
-      expect(round.riseLifeBar).not.toHaveBeenCalled()
-      expect(round.dropLifeBar).toHaveBeenCalled()
-    })
-
-    it('should rise life bar when answer is correct', () => {
-      spyOn(round, 'riseLifeBar')
-      spyOn(round, 'dropLifeBar')
-
-      round.setQuestion(questions[0])
-      round.submitAnswer('true')
-      expect(round.riseLifeBar).toHaveBeenCalled()
-      expect(round.dropLifeBar).not.toHaveBeenCalled()
-    })
-
     it('should update the score', () => {
       round.setQuestion(questions[0])
       round.submitAnswer('false')
@@ -177,9 +157,6 @@ describe('when updating life bar state', () => {
     expect(round.lifeBarState).toBe('critical')
   })
 })
-
-it('should rise life bar', () => {})
-it('should drop life bar', () => {})
 
 it('should stop the round', () => {
   expect(round.status).toBe('ready')
