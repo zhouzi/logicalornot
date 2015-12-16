@@ -22,7 +22,6 @@ gulp.task('scripts', function () {
 gulp.task('watch', function () {
   gulp.watch('src/styles/*.scss', ['styles'])
   gulp.watch('src/**/*.js', ['scripts'])
-  gulp.watch('dist/app.min.js', ['lint'])
 })
 
 gulp.task('serve', ['default'], function () {
