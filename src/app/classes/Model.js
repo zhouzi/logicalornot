@@ -1,14 +1,9 @@
 import gameplay from '../data/gameplay.json'
 
-import requestAnimationFrame from '../utils/requestAnimationFrame'
-import cancelAnimationFrame from '../utils/cancelAnimationFrame'
 import copy from '../utils/copy'
 import rand from '../utils/rand'
 import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
-import ease from '../utils/ease'
-
-const FPS = 60
 
 export default class Model {
   constructor (questions, taunts, stream, mode) {
@@ -22,48 +17,14 @@ export default class Model {
     this.currentQuestion = {}
     this.lifeBar = 100
     this.lifeBarState = null
-    this._animateId = null
 
-    this.config = {
-      timer: this.gameplay.timer,
-      minValue: 0,
-      maxValue: 100,
-      iteration: 0,
-      totalIterations: this.gameplay.duration * FPS
-    }
-
-    this.setLifeBarHp(this.config.maxValue)
+    this.setLifeBarHp(100)
     this.updateLifeBarState()
     this.setTaunt("So, what's the result of...")
-    this.animate()
-  }
-
-  // animation
-  animate () {
-    if (this.status === 'game over') return
-
-    if (this.status === 'playing') {
-      if (this.config.iteration >= this.config.totalIterations) {
-        this.setLifeBarHp(0)
-        this.updateLifeBarState()
-        this.stop(true)
-
-        return
-      }
-
-      let easingValue = ease(this.config.iteration, this.config.minValue, this.config.maxValue, this.config.totalIterations)
-      this.setLifeBarHp(this.config.maxValue - easingValue)
-
-      if (this.config.timer) this.config.iteration++
-    }
-
-    this._animateId = requestAnimationFrame(this.animate.bind(this))
   }
 
   stop (notify = false) {
     this.status = 'game over'
-    cancelAnimationFrame(this._animateId)
-
     if (notify) this.stream.publish('round:gameOver', this.score)
   }
 
@@ -93,17 +54,19 @@ export default class Model {
     return complexity
   }
 
+  isCorrect (answer) {
+    return equals(this.currentQuestion.question, answer)
+  }
+
   submitAnswer (answer) {
     if (this.status === 'game over') return
 
     this.status = 'playing'
 
-    if (equals(this.currentQuestion.question, answer)) {
-      this.riseLifeBar()
+    if (this.isCorrect(answer)) {
       this.score.push(1)
       this.setRandomTaunt('nice')
     } else {
-      this.dropLifeBar()
       this.score.push(0)
       this.setRandomTaunt('mean')
     }
@@ -142,19 +105,5 @@ export default class Model {
       this.lifeBarState = state
       this.stream.publish('round:updateLifeBarState', state)
     }
-  }
-
-  riseLifeBar () {
-    let complexity = Model.getQuestionComplexity(this.currentQuestion.question)
-    let gap = this.gameplay.gaps.winning[complexity] * FPS
-
-    this.config.iteration = Math.max(this.config.iteration - gap, 0)
-  }
-
-  dropLifeBar () {
-    let complexity = Model.getQuestionComplexity(this.currentQuestion.question)
-    let gap = this.gameplay.gaps.losing[complexity] * FPS
-
-    this.config.iteration = Math.min(this.config.iteration + gap, this.config.totalIterations)
   }
 }

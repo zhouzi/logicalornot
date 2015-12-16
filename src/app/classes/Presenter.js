@@ -1,5 +1,6 @@
 import Model from './Model'
 import PubSubClass from './PubSubClass'
+import Timer from './Timer'
 
 import questions from '../data/questions.json'
 import taunts from '../data/taunts.json'
@@ -20,7 +21,14 @@ export default class Presenter {
     this.bind()
 
     this.view.onSelectAnswer = answer => {
+      if (this.round.status !== 'playing') {
+        this.startTimer()
+      }
+
       this.round.submitAnswer(answer)
+
+      if (this.round.isCorrect(answer)) this.riseLifeBar()
+      else this.dropLifeBar()
 
       if (this.round.status !== 'game over' && this.round.questions.length > 0) {
         this.setRandomQuestion()
@@ -33,6 +41,16 @@ export default class Presenter {
 
     this.newRound()
     this.view.animateIntro()
+  }
+
+  riseLifeBar () {
+    const complexity = Model.getQuestionComplexity(this.round.currentQuestion.question)
+    this.timer.delay(this.round.gameplay.gaps.winning[complexity])
+  }
+
+  dropLifeBar () {
+    const complexity = Model.getQuestionComplexity(this.round.currentQuestion.question)
+    this.timer.forward(this.round.gameplay.gaps.losing[complexity])
   }
 
   bind () {
@@ -76,5 +94,25 @@ export default class Presenter {
 
     this.round = new Model(this.questions, this.taunts, this.stream, this.mode)
     this.setRandomQuestion()
+  }
+
+  startTimer () {
+    this.timer = new Timer(0, 100, this.round.gameplay.duration)
+
+    this.timer.start((val) => {
+      if (this.round.status === 'game over') {
+        this.timer.stop()
+        return
+      }
+
+      if (val.done) {
+        this.round.setLifeBarHp(0)
+        this.round.updateLifeBarState()
+        this.round.stop(true)
+        return
+      }
+
+      this.round.setLifeBarHp(val.currentValue)
+    })
   }
 }
