@@ -92,6 +92,7 @@ export default class Presenter {
       this.round.stop()
     }
 
+    if (this.timer != null) this.timer.stop()
     this.round = new Model(this.questions, this.taunts, this.stream, gameplay[this.mode])
     this.setRandomQuestion()
   }
