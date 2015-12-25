@@ -83,13 +83,12 @@ export default class View {
   }
 
   publishButtonData (button) {
-    if (button.eventName === 'view:newRound') {
-      if (this.isGameOverScreenVisible()) this.onNewRound()
-      return
+    if (this.isGameOverScreenVisible()) {
+      if (button.eventName === 'view:newRound') this.onNewRound()
+    } else {
+      const data = button.element.getAttribute('data-event-data')
+      this.onSelectAnswer(data)
     }
-
-    const data = button.element.getAttribute('data-event-data')
-    this.onSelectAnswer(data)
   }
 
   $get (selector) {
