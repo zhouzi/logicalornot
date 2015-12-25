@@ -1,16 +1,14 @@
-import gameplay from '../data/gameplay.json'
-
 import copy from '../utils/copy'
 import rand from '../utils/rand'
 import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
 
 export default class Model {
-  constructor (questions, taunts, stream, mode) {
+  constructor (questions, taunts, stream, gameplay) {
     this.questions = copy(questions)
     this.taunts = taunts
     this.stream = stream
-    this.gameplay = gameplay[mode]
+    this.gameplay = gameplay
     this.status = 'ready'
     this.taunt = null
     this.score = []

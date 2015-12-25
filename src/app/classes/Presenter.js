@@ -1,6 +1,7 @@
 import Model from './Model'
 import Timer from './Timer'
 
+import gameplay from '../data/gameplay.json'
 import questions from '../data/questions.json'
 import taunts from '../data/taunts.json'
 
@@ -91,7 +92,7 @@ export default class Presenter {
       this.round.stop()
     }
 
-    this.round = new Model(this.questions, this.taunts, this.stream, this.mode)
+    this.round = new Model(this.questions, this.taunts, this.stream, gameplay[this.mode])
     this.setRandomQuestion()
   }
 
