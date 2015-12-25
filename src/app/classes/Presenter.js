@@ -34,6 +34,7 @@ export default class Presenter {
         this.setRandomQuestion()
       } else {
         this.round.stop()
+        this.timer.stop()
         this.showGameOverScreen()
       }
     }

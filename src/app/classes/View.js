@@ -2,6 +2,7 @@ const noop = () => {}
 
 export default class View {
   constructor () {
+    this.$modal = document.getElementById('bind-modal')
     this.$lifeBar = document.getElementById('bind-life-bar')
     this.$elements = {}
     this.$buttons = {}
@@ -83,7 +84,7 @@ export default class View {
 
   publishButtonData (button) {
     if (button.eventName === 'view:newRound') {
-      this.onNewRound()
+      if (this.isGameOverScreenVisible()) this.onNewRound()
       return
     }
 
@@ -158,15 +159,17 @@ export default class View {
     const tweetMessage = encodeURIComponent(`Boom! Just made a score of ${wins}/${total}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`)
     this.render('tweet-my-game-button', 'attr', { href: `https://twitter.com/home?status=${tweetMessage}` })
 
-    // show game over modal
-    this.render('modal', 'removeClass', 'u-hide')
-
-    setTimeout(() => this.render('modal', 'addClass', 'active'), 100)
+    this.$modal.classList.remove('u-hide')
+    setTimeout(() => this.$modal.classList.add('active'), 100)
   }
 
   hideGameOverScreen () {
-    this.render('modal', 'removeClass', 'active')
-    setTimeout(() => this.render('modal', 'addClass', 'u-hide'), 500)
+    this.$modal.classList.remove('active')
+    setTimeout(() => this.$modal.classList.add('u-hide'), 500)
+  }
+
+  isGameOverScreenVisible () {
+    return this.$modal.classList.contains('active')
   }
 
   setBestScore (score) {
