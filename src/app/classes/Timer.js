@@ -1,6 +1,5 @@
 import ease from '../utils/ease'
-import requestAnimationFrame from '../utils/requestAnimationFrame'
-import cancelAnimationFrame from '../utils/cancelAnimationFrame'
+import animationFrame from '../utils/animationFrame'
 
 const FPS = 60
 
@@ -26,12 +25,12 @@ export default class Timer {
       callback({ currentValue, done: false })
 
       this.iteration++
-      this._timerId = requestAnimationFrame(cycle.bind(this, callback))
+      this._timerId = animationFrame.request(cycle.bind(this, callback))
     }.bind(this))()
   }
 
   stop () {
-    cancelAnimationFrame(this._timerId)
+    animationFrame.cancel(this._timerId)
   }
 
   delay (frames) {
