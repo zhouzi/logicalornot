@@ -8,15 +8,12 @@ import taunts from '../data/taunts.json'
 import rand from '../utils/rand'
 
 export default class Presenter {
-  constructor (stream, view) {
+  constructor (view) {
     this.questions = questions
     this.taunts = taunts
-    this.stream = stream
     this.view = view
     this.mode = 'normal'
     this.round = null
-
-    stream.context = this
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
@@ -94,7 +91,7 @@ export default class Presenter {
     }
 
     if (this.timer != null) this.timer.stop()
-    this.round = new Model(this.questions, this.taunts, this.stream, gameplay[this.mode])
+    this.round = new Model(this.questions, this.taunts, gameplay[this.mode])
     this.setTaunt("So, what's the result of...")
     this.updateLifeBar()
     this.setRandomQuestion()

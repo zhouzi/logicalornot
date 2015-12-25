@@ -4,10 +4,9 @@ import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
 
 export default class Model {
-  constructor (questions, taunts, stream, gameplay) {
+  constructor (questions, taunts, gameplay) {
     this.questions = copy(questions)
     this.taunts = taunts
-    this.stream = stream
     this.gameplay = gameplay
     this.status = 'ready'
     this.taunt = null
@@ -28,7 +27,6 @@ export default class Model {
     if (this.gameplay.shuffleAnswers) shuffle(question.answers)
     this.currentQuestion = question
 
-    this.stream.publish('round:newQuestion', this.currentQuestion)
     return this.currentQuestion
   }
 
