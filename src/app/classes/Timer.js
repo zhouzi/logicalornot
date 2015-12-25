@@ -1,7 +1,7 @@
-import ease from '../utils/ease'
 import animationFrame from '../utils/animationFrame'
 
 const FPS = 60
+const ease = (currentIteration, startValue, changeInValue, totalIterations) => -changeInValue * (currentIteration /= totalIterations) * (currentIteration - 2) + startValue
 
 export default class Timer {
   constructor (minValue, maxValue, duration) {
