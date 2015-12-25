@@ -3,9 +3,8 @@ import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
 
 export default class Model {
-  constructor (questions, taunts, gameplay) {
+  constructor (questions, gameplay) {
     this.questions = questions
-    this.taunts = taunts
     this.gameplay = gameplay
     this.status = 'ready'
     this.taunt = null
