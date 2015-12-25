@@ -1,11 +1,10 @@
-import copy from '../utils/copy'
 import rand from '../utils/rand'
 import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
 
 export default class Model {
   constructor (questions, taunts, gameplay) {
-    this.questions = copy(questions)
+    this.questions = questions
     this.taunts = taunts
     this.gameplay = gameplay
     this.status = 'ready'

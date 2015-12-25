@@ -9,7 +9,6 @@ import rand from '../utils/rand'
 
 export default class Presenter {
   constructor (view) {
-    this.questions = questions
     this.taunts = taunts
     this.view = view
     this.mode = 'normal'
@@ -91,7 +90,7 @@ export default class Presenter {
     }
 
     if (this.timer != null) this.timer.stop()
-    this.round = new Model(this.questions, this.taunts, gameplay[this.mode])
+    this.round = new Model(questions.slice(), this.taunts, gameplay[this.mode])
     this.setTaunt("So, what's the result of...")
     this.updateLifeBar()
     this.setRandomQuestion()
