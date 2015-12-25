@@ -20,8 +20,6 @@ export default class Presenter {
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
-    this.bind()
-
     this.view.onSelectAnswer = answer => {
       if (this.round.status !== 'playing') {
         this.startTimer()
@@ -62,13 +60,6 @@ export default class Presenter {
     this.timer.forward(this.round.gameplay.gaps.losing[complexity])
   }
 
-  bind () {
-    this
-      .stream
-      .subscribe('round:updateLifeBar', hp => this.view.setLifeBarHp(hp))
-      .subscribe('round:updateLifeBarState', lifeBarState => this.view.setLifeBarState(lifeBarState))
-  }
-
   showGameOverScreen () {
     const score = this.round.score
     const total = score.length
@@ -105,6 +96,7 @@ export default class Presenter {
     if (this.timer != null) this.timer.stop()
     this.round = new Model(this.questions, this.taunts, this.stream, gameplay[this.mode])
     this.setTaunt("So, what's the result of...")
+    this.updateLifeBar()
     this.setRandomQuestion()
   }
 
@@ -122,6 +114,11 @@ export default class Presenter {
     return this.setTaunt(rand(0, typedTaunts.length - 1), type)
   }
 
+  updateLifeBar () {
+    this.view.setLifeBarHp(this.round.lifeBar)
+    this.view.setLifeBarState(this.round.lifeBarState)
+  }
+
   startTimer () {
     this.timer = new Timer(0, 100, this.round.gameplay.duration)
 
@@ -132,14 +129,14 @@ export default class Presenter {
       }
 
       if (val.done) {
-        this.round.setLifeBarHp(0)
-        this.round.updateLifeBarState()
         this.round.stop()
+        this.round.setLifeBarHp(0)
         this.showGameOverScreen()
-        return
+      } else {
+        this.round.setLifeBarHp(val.currentValue)
       }
 
-      this.round.setLifeBarHp(val.currentValue)
+      this.updateLifeBar()
     })
   }
 }

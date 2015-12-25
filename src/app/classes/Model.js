@@ -17,7 +17,6 @@ export default class Model {
     this.lifeBarState = null
 
     this.setLifeBarHp(100)
-    this.updateLifeBarState()
   }
 
   stop () {
@@ -64,13 +63,12 @@ export default class Model {
   // life bar
   setLifeBarHp (hp) {
     this.lifeBar = hp
-
     this.updateLifeBarState()
-    this.stream.publish('round:updateLifeBar', hp)
   }
 
   updateLifeBarState () {
     let state
+
     if (this.lifeBar > 50) {
       state = 'normal'
     } else if (this.lifeBar > 20) {
@@ -79,9 +77,6 @@ export default class Model {
       state = 'critical'
     }
 
-    if (this.lifeBarState !== state) {
-      this.lifeBarState = state
-      this.stream.publish('round:updateLifeBarState', state)
-    }
+    this.lifeBarState = state
   }
 }
