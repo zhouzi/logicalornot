@@ -18,7 +18,6 @@ export default class Model {
 
     this.setLifeBarHp(100)
     this.updateLifeBarState()
-    this.setTaunt("So, what's the result of...")
   }
 
   stop () {
@@ -59,25 +58,7 @@ export default class Model {
     if (this.status === 'game over') return
 
     this.status = 'playing'
-
-    if (this.isCorrect(answer)) {
-      this.score.push(1)
-      this.setRandomTaunt('nice')
-    } else {
-      this.score.push(0)
-      this.setRandomTaunt('mean')
-    }
-  }
-
-  // taunt
-  setTaunt (index, type = 'nice') {
-    this.taunt = typeof index === 'string' ? index : this.taunts[type][index]
-    this.stream.publish('round:newTaunt', this.taunt, type)
-  }
-
-  setRandomTaunt (type) {
-    let taunts = this.taunts[type]
-    return this.setTaunt(rand(0, taunts.length - 1), type)
+    this.score.push(Number(this.isCorrect(answer)))
   }
 
   // life bar

@@ -5,6 +5,8 @@ import gameplay from '../data/gameplay.json'
 import questions from '../data/questions.json'
 import taunts from '../data/taunts.json'
 
+import rand from '../utils/rand'
+
 export default class Presenter {
   constructor (stream, view) {
     this.questions = questions
@@ -27,8 +29,13 @@ export default class Presenter {
 
       this.round.submitAnswer(answer)
 
-      if (this.round.isCorrect(answer)) this.riseLifeBar()
-      else this.dropLifeBar()
+      if (this.round.isCorrect(answer)) {
+        this.setRandomTaunt('nice')
+        this.riseLifeBar()
+      } else {
+        this.setRandomTaunt('mean')
+        this.dropLifeBar()
+      }
 
       if (this.round.status !== 'game over' && this.round.questions.length > 0) {
         this.setRandomQuestion()
@@ -60,7 +67,6 @@ export default class Presenter {
       .stream
       .subscribe('round:updateLifeBar', hp => this.view.setLifeBarHp(hp))
       .subscribe('round:updateLifeBarState', lifeBarState => this.view.setLifeBarState(lifeBarState))
-      .subscribe('round:newTaunt', (taunt, type) => this.view.setTaunt(taunt, type))
   }
 
   showGameOverScreen () {
@@ -98,7 +104,22 @@ export default class Presenter {
 
     if (this.timer != null) this.timer.stop()
     this.round = new Model(this.questions, this.taunts, this.stream, gameplay[this.mode])
+    this.setTaunt("So, what's the result of...")
     this.setRandomQuestion()
+  }
+
+  setTaunt (index, type = 'nice') {
+    const taunt =
+      typeof index === 'string'
+        ? index
+        : taunts[type][index]
+
+    this.view.setTaunt(taunt, type)
+  }
+
+  setRandomTaunt (type) {
+    let typedTaunts = taunts[type]
+    return this.setTaunt(rand(0, typedTaunts.length - 1), type)
   }
 
   startTimer () {
