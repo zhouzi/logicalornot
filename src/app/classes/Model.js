@@ -21,9 +21,8 @@ export default class Model {
     this.setTaunt("So, what's the result of...")
   }
 
-  stop (notify = false) {
+  stop () {
     this.status = 'game over'
-    if (notify) this.stream.publish('round:gameOver', this.score)
   }
 
   // question, answer

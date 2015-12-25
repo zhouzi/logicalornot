@@ -33,7 +33,8 @@ export default class Presenter {
       if (this.round.status !== 'game over' && this.round.questions.length > 0) {
         this.setRandomQuestion()
       } else {
-        this.round.stop(true)
+        this.round.stop()
+        this.showGameOverScreen()
       }
     }
 
@@ -59,14 +60,16 @@ export default class Presenter {
       .subscribe('round:updateLifeBar', hp => this.view.setLifeBarHp(hp))
       .subscribe('round:updateLifeBarState', lifeBarState => this.view.setLifeBarState(lifeBarState))
       .subscribe('round:newTaunt', (taunt, type) => this.view.setTaunt(taunt, type))
-      .subscribe('round:gameOver', score => {
-        const total = score.length
-        const wins = score.reduce((nbWins, point) => nbWins + point, 0)
-        const loses = total - wins
+  }
 
-        this.updateBestScore(Math.max(this.bestScore, wins))
-        this.view.showGameOverScreen(wins, loses, total)
-      })
+  showGameOverScreen () {
+    const score = this.round.score
+    const total = score.length
+    const wins = score.reduce((nbWins, point) => nbWins + point, 0)
+    const loses = total - wins
+
+    this.updateBestScore(Math.max(this.bestScore, wins))
+    this.view.showGameOverScreen(wins, loses, total)
   }
 
   updateBestScore (score) {
@@ -109,7 +112,8 @@ export default class Presenter {
       if (val.done) {
         this.round.setLifeBarHp(0)
         this.round.updateLifeBarState()
-        this.round.stop(true)
+        this.round.stop()
+        this.showGameOverScreen()
         return
       }
 
