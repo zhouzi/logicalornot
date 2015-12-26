@@ -12,7 +12,6 @@ export default class Model {
     this.taunt = null
     this.score = []
     this.currentQuestion = {}
-    this.lifebar = 100
   }
 
   stop () {
@@ -38,15 +37,5 @@ export default class Model {
 
     this.status = 'playing'
     this.score.push(Number(this.currentQuestion.isCorrect(answer)))
-  }
-
-  set lifebar (hp) {
-    this.hp = hp
-    this.state =
-      this.hp > 50
-        ? 'normal'
-        : this.hp > 20
-          ? 'low'
-          : 'critical'
   }
 }

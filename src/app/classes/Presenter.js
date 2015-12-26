@@ -1,4 +1,5 @@
 import Model from './Model'
+import Lifebar from './Lifebar'
 import Timer from './Timer'
 
 import gameplay from '../data/gameplay.json'
@@ -11,7 +12,9 @@ export default class Presenter {
   constructor (view) {
     this.view = view
     this.mode = 'normal'
+
     this.round = null
+    this.lifebar = null
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
@@ -91,7 +94,10 @@ export default class Presenter {
     }
 
     if (this.timer != null) this.timer.stop()
+
     this.round = new Model(questions.slice(), gameplay[this.mode])
+    this.lifebar = new Lifebar()
+
     this.setTaunt("So, what's the result of...")
     this.updateLifeBar()
     this.setRandomQuestion()
@@ -112,7 +118,7 @@ export default class Presenter {
   }
 
   updateLifeBar () {
-    this.view.setLifebar(this.round.hp, this.round.state)
+    this.view.setLifebar(this.lifebar.hp, this.lifebar.state)
   }
 
   startTimer () {
@@ -126,10 +132,11 @@ export default class Presenter {
 
       if (val.done) {
         this.round.stop()
-        this.round.lifebar = 0
+        this.lifebar.hp = 0
+
         this.showGameOverScreen()
       } else {
-        this.round.lifebar = val.currentValue
+        this.lifebar.hp = val.currentValue
       }
 
       this.updateLifeBar()
