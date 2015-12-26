@@ -91,10 +91,7 @@ export default class Presenter {
     if (this.game) this.game.stop()
 
     this.round = new Model(questions.slice(), gameplay[this.mode])
-
     this.game = new Game(gameplay[this.mode])
-    this.game.updateLifeBar = this.updateLifeBar.bind(this)
-    this.game.onGameOver = this.showGameOverScreen.bind(this)
 
     this.setTaunt("So, what's the result of...")
     this.updateLifeBar()
