@@ -1,4 +1,4 @@
-const noop = function () {}
+import PubSub from './PubSub'
 
 export default class View {
   constructor () {
@@ -30,9 +30,6 @@ export default class View {
     this.$normalModeButton = document.getElementById('normal-mode')
     this.$hardcoreModeButton = document.getElementById('hardcore-mode')
 
-    this.onSelectAnswer = noop
-    this.onNewRound = noop
-
     this.bind()
   }
 
@@ -40,12 +37,12 @@ export default class View {
     function answerButtonListener (element) {
       if (this.isGameOverScreenVisible()) return
 
-      const data = element.getAttribute('data-event-data')
-      this.onSelectAnswer(data)
+      const answer = element.getAttribute('data-event-data')
+      PubSub.publish('selectAnswer', answer)
     }
 
     function replayButtonListener () {
-      if (this.isGameOverScreenVisible()) this.onNewRound()
+      if (this.isGameOverScreenVisible()) PubSub.publish('newRound')
     }
 
     this.$answerLeftButton.addEventListener('click', answerButtonListener.bind(this, this.$answerLeftButton), false)
@@ -91,7 +88,7 @@ export default class View {
       this.$normalModeButton.classList.add('active')
       this.$hardcoreModeButton.classList.remove('active')
 
-      this.onNewRound('normal')
+      PubSub.publish('newRound', 'normal')
     }, false)
 
     this.$hardcoreModeButton.addEventListener('click', () => {
@@ -100,7 +97,7 @@ export default class View {
       this.$hardcoreModeButton.classList.add('active')
       this.$normalModeButton.classList.remove('active')
 
-      this.onNewRound('hardcore')
+      PubSub.publish('newRound', 'hardcore')
     }, false)
   }
 

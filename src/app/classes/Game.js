@@ -1,3 +1,4 @@
+import PubSub from './PubSub'
 import Timer from './Timer'
 import Lifebar from './Lifebar'
 
@@ -7,9 +8,6 @@ export default class Game {
     this.status = 'ready'
     this.timer = null
     this.lifebar = new Lifebar()
-
-    this.updateLifeBar = function () {}
-    this.onGameOver = function () {}
   }
 
   start () {
@@ -26,12 +24,12 @@ export default class Game {
         this.status = 'game over'
         this.lifebar.hp = 0
 
-        this.onGameOver()
+        PubSub.publish('gameOver')
       } else {
         this.lifebar.hp = val.currentValue
       }
 
-      this.updateLifeBar()
+      PubSub.publish('updateLifebar')
     })
   }
 

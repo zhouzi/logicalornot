@@ -1,3 +1,4 @@
+import PubSub from './PubSub'
 import Model from './Model'
 import Game from './Game'
 
@@ -17,31 +18,35 @@ export default class Presenter {
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
-    this.view.onSelectAnswer = answer => {
-      if (this.game.status === 'ready') this.game.start()
-
-      this.round.submitAnswer(answer)
-
-      if (this.round.currentQuestion.isCorrect(answer)) {
-        this.setRandomTaunt('nice')
-        this.riseLifeBar()
-      } else {
-        this.setRandomTaunt('mean')
-        this.dropLifeBar()
-      }
-
-      if (this.game.status !== 'game over' && this.round.questions.length > 0) {
-        this.setRandomQuestion()
-      } else {
-        this.game.stop()
-        this.showGameOverScreen()
-      }
-    }
-
-    this.view.onNewRound = this.newRound.bind(this)
+    PubSub
+      .subscribe('selectAnswer', this.selectAnswer.bind(this))
+      .subscribe('newRound', this.newRound.bind(this))
+      .subscribe('updateLifebar', this.updateLifeBar.bind(this))
+      .subscribe('gameOver', this.showGameOverScreen.bind(this))
 
     this.newRound()
     this.view.animateIntro()
+  }
+
+  selectAnswer (answer) {
+    if (this.game.status === 'ready') this.game.start()
+
+    this.round.submitAnswer(answer)
+
+    if (this.round.currentQuestion.isCorrect(answer)) {
+      this.setRandomTaunt('nice')
+      this.riseLifeBar()
+    } else {
+      this.setRandomTaunt('mean')
+      this.dropLifeBar()
+    }
+
+    if (this.game.status !== 'game over' && this.round.questions.length > 0) {
+      this.setRandomQuestion()
+    } else {
+      this.game.stop()
+      this.showGameOverScreen()
+    }
   }
 
   riseLifeBar () {
