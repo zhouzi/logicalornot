@@ -95,7 +95,7 @@ export default class Presenter {
   }
 
   setRandomTaunt (type) {
-    let typedTaunts = taunts[type]
+    const typedTaunts = taunts[type]
     return this.setTaunt(rand(0, typedTaunts.length - 1), type)
   }
 
