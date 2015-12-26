@@ -53,10 +53,6 @@ export default class Model {
     this.score.push(Number(this.isCorrect(answer)))
   }
 
-  get lifebar () {
-    return { hp: this.hp, state: this.state }
-  }
-
   set lifebar (hp) {
     this.hp = hp
     this.state =
