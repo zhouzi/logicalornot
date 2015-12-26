@@ -8,13 +8,8 @@ export default class Model {
     this.questions = questions
     this.gameplay = gameplay
     this.status = 'ready'
-    this.taunt = null
     this.score = []
     this.currentQuestion = {}
-  }
-
-  stop () {
-    this.status = 'game over'
   }
 
   setQuestion (question) {

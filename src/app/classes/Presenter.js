@@ -1,6 +1,5 @@
 import Model from './Model'
-import Lifebar from './Lifebar'
-import Timer from './Timer'
+import Game from './Game'
 
 import gameplay from '../data/gameplay.json'
 import questions from '../data/questions.json'
@@ -14,14 +13,12 @@ export default class Presenter {
     this.mode = 'normal'
 
     this.round = null
-    this.lifebar = null
+    this.game = null
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
     this.view.onSelectAnswer = answer => {
-      if (this.round.status !== 'playing') {
-        this.startTimer()
-      }
+      if (this.game.status === 'ready') this.game.start()
 
       this.round.submitAnswer(answer)
 
@@ -33,11 +30,10 @@ export default class Presenter {
         this.dropLifeBar()
       }
 
-      if (this.round.status !== 'game over' && this.round.questions.length > 0) {
+      if (this.game.status !== 'game over' && this.round.questions.length > 0) {
         this.setRandomQuestion()
       } else {
-        this.round.stop()
-        this.timer.stop()
+        this.game.stop()
         this.showGameOverScreen()
       }
     }
@@ -51,13 +47,13 @@ export default class Presenter {
   riseLifeBar () {
     const complexity = this.round.currentQuestion.complexity
     const points = this.round.gameplay.gaps.winning[complexity]
-    this.timer.delay(points)
+    this.game.timer.delay(points)
   }
 
   dropLifeBar () {
     const complexity = this.round.currentQuestion.complexity
     const points = this.round.gameplay.gaps.losing[complexity]
-    this.timer.forward(points)
+    this.game.timer.forward(points)
   }
 
   showGameOverScreen () {
@@ -85,18 +81,15 @@ export default class Presenter {
   newRound (mode) {
     if (mode != null) this.mode = mode
 
-    if (this.round) {
-      if (this.round.status === 'game over') {
-        this.view.hideGameOverScreen()
-      }
+    this.view.hideGameOverScreen()
 
-      this.round.stop()
-    }
-
-    if (this.timer != null) this.timer.stop()
+    if (this.game) this.game.stop()
 
     this.round = new Model(questions.slice(), gameplay[this.mode])
-    this.lifebar = new Lifebar()
+
+    this.game = new Game(gameplay[this.mode])
+    this.game.updateLifeBar = this.updateLifeBar.bind(this)
+    this.game.onGameOver = this.showGameOverScreen.bind(this)
 
     this.setTaunt("So, what's the result of...")
     this.updateLifeBar()
@@ -118,28 +111,6 @@ export default class Presenter {
   }
 
   updateLifeBar () {
-    this.view.setLifebar(this.lifebar.hp, this.lifebar.state)
-  }
-
-  startTimer () {
-    this.timer = new Timer(0, 100, this.round.gameplay.duration)
-
-    this.timer.start((val) => {
-      if (this.round.status === 'game over') {
-        this.timer.stop()
-        return
-      }
-
-      if (val.done) {
-        this.round.stop()
-        this.lifebar.hp = 0
-
-        this.showGameOverScreen()
-      } else {
-        this.lifebar.hp = val.currentValue
-      }
-
-      this.updateLifeBar()
-    })
+    this.view.setLifebar(this.game.lifebar.hp, this.game.lifebar.state)
   }
 }
