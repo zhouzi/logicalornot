@@ -1,11 +1,34 @@
-const noop = () => {}
+const noop = function () {}
 
 export default class View {
   constructor () {
-    this.$modal = document.getElementById('bind-modal')
-    this.$lifeBar = document.getElementById('bind-life-bar')
-    this.$elements = {}
-    this.$buttons = {}
+    this.$modal = document.getElementById('modal')
+    this.$lifebar = document.getElementById('life-bar')
+
+    this.$question = document.getElementById('question')
+    this.$taunt = document.getElementById('taunt')
+
+    this.$answerLeftLabel = document.getElementById('answer-left-label')
+    this.$answerLeftButton = document.getElementById('answer-left-button')
+
+    this.$answerUpLabel = document.getElementById('answer-up-label')
+    this.$answerUpButton = document.getElementById('answer-up-button')
+
+    this.$answerRightLabel = document.getElementById('answer-right-label')
+    this.$answerRightButton = document.getElementById('answer-right-button')
+
+    this.$replayButton = document.getElementById('replay-button')
+
+    this.$wins = document.getElementById('wins')
+    this.$loses = document.getElementById('loses')
+
+    this.$tweetMyGameButton = document.getElementById('tweet-my-game-button')
+    this.$bestScore = document.getElementById('best-score')
+
+    this.$bloody = document.getElementById('bloody')
+
+    this.$normalModeButton = document.getElementById('normal-mode')
+    this.$hardcoreModeButton = document.getElementById('hardcore-mode')
 
     this.onSelectAnswer = noop
     this.onNewRound = noop
@@ -14,147 +37,123 @@ export default class View {
   }
 
   bind () {
-    let self = this
-    let keys = { 37: 'left', 38: 'up', 39: 'right', 32: 'spacebar' }
+    function answerButtonListener (element) {
+      if (this.isGameOverScreenVisible()) return
 
-    // map data-bind buttons
-    let buttons = document.querySelectorAll('[data-bind]')
-
-    for (let i = 0, len = buttons.length, button; i < len; i++) {
-      button = buttons[i]
-
-      let keyShortcut = View.getAttribute(button, 'data-bind')
-
-      self.$buttons[keyShortcut] = {
-        element: button,
-        eventName: View.getAttribute(button, 'data-event')
-      }
+      const data = element.getAttribute('data-event-data')
+      this.onSelectAnswer(data)
     }
 
+    function replayButtonListener () {
+      if (this.isGameOverScreenVisible()) this.onNewRound()
+    }
+
+    this.$answerLeftButton.addEventListener('click', answerButtonListener.bind(this, this.$answerLeftButton), false)
+    this.$answerUpButton.addEventListener('click', answerButtonListener.bind(this, this.$answerUpButton), false)
+    this.$answerRightButton.addEventListener('click', answerButtonListener.bind(this, this.$answerRightButton), false)
+
+    this.$replayButton.addEventListener('click', replayButtonListener.bind(this), false)
+
+    const keys = { 37: 'left', 38: 'up', 39: 'right', 32: 'spacebar' }
+    const buttons = { left: this.$answerLeftButton, up: this.$answerUpButton, right: this.$answerRightButton, spacebar: this.$replayButton }
+
     document.addEventListener('keydown', event => {
-      let keyName = keys[event.which]
-      if (!keyName) return
+      const keyName = keys[event.which]
+      const button = buttons[keyName]
 
-      let button = self.$buttons[keyName]
-      View.addClass(button.element, 'active')
+      if (button == null) return
 
+      button.classList.add('active')
+
+      // prevent scroll when pressing arrows/spacebar
       event.preventDefault()
     })
 
     document.addEventListener('keyup', event => {
-      let keyName = keys[event.which]
-      if (!keyName) return
+      const keyName = keys[event.which]
+      const button = buttons[keyName]
 
-      let button = self.$buttons[keyName]
-      View.removeClass(button.element, 'active')
-      self.publishButtonData(button)
+      if (button == null) return
 
+      button.classList.remove('active')
+
+      // those functions have no implicit this as they are called from the "window"
+      if (button === this.$replayButton) replayButtonListener.call(this)
+      else answerButtonListener.call(this, button)
+
+      // prevent scroll when pressing arrows/spacebar
       event.preventDefault()
     })
 
-    document.addEventListener('click', event => {
-      for (let key in self.$buttons) {
-        if (!self.$buttons.hasOwnProperty(key)) continue
+    this.$normalModeButton.addEventListener('click', () => {
+      if (this.$normalModeButton.classList.contains('active')) return
 
-        if (self.$buttons[key].element.contains(event.target)) {
-          event.preventDefault()
-          return self.publishButtonData(self.$buttons[key])
-        }
-      }
-    })
+      this.$normalModeButton.classList.add('active')
+      this.$hardcoreModeButton.classList.remove('active')
 
-    this.on('normal-mode', 'click', function () {
-      if (!this.render('normal-mode', 'hasClass', 'active')) {
-        this.render('normal-mode', 'addClass', 'active')
-        this.render('hardcore-mode', 'removeClass', 'active')
+      this.onNewRound('normal')
+    }, false)
 
-        this.onNewRound('normal')
-      }
-    }, this)
+    this.$hardcoreModeButton.addEventListener('click', () => {
+      if (this.$hardcoreModeButton.classList.contains('active')) return
 
-    this.on('hardcore-mode', 'click', function () {
-      if (!this.render('hardcore-mode', 'hasClass', 'active')) {
-        this.render('hardcore-mode', 'addClass', 'active')
-        this.render('normal-mode', 'removeClass', 'active')
+      this.$hardcoreModeButton.classList.add('active')
+      this.$normalModeButton.classList.remove('active')
 
-        this.onNewRound('hardcore')
-      }
-    }, this)
-  }
-
-  publishButtonData (button) {
-    if (this.isGameOverScreenVisible()) {
-      if (button.eventName === 'view:newRound') this.onNewRound()
-    } else {
-      const data = button.element.getAttribute('data-event-data')
-      this.onSelectAnswer(data)
-    }
-  }
-
-  $get (selector) {
-    selector = 'bind-' + selector
-
-    if (!this.$elements[selector]) {
-      this.$elements[selector] = document.getElementById(selector)
-    }
-
-    return this.$elements[selector]
-  }
-
-  render (selector, method, ...args) {
-    args.unshift(this.$get(selector))
-    return View[method].apply(this, args)
+      this.onNewRound('hardcore')
+    }, false)
   }
 
   setTaunt (taunt, type) {
-    this.render('taunt', 'html', taunt)
+    this.$taunt.innerHTML = taunt
 
     if (type === 'mean') {
-      this.render('bloody', 'addClass', 'u-no-transition')
-      this.render('bloody', 'addClass', 'active')
-      this.render('bloody', 'removeClass', 'u-no-transition')
-      setTimeout(() => this.render('bloody', 'removeClass', 'active'), 200)
+      this.$bloody.classList.add('u-no-transition')
+      this.$bloody.classList.add('active')
+      this.$bloody.classList.remove('u-no-transition')
+
+      setTimeout(() => this.$bloody.classList.remove('active'), 200)
     }
   }
 
   setQuestion (newQuestion) {
-    this.render('question', 'html', newQuestion.question)
+    this.$question.innerHTML = newQuestion.question
 
-    this.render('answer-left-label', 'html', newQuestion.answers[0])
-    this.render('answer-left-button', 'attr', {'data-event-data': newQuestion.answers[0].toString()})
+    this.$answerLeftLabel.innerHTML = newQuestion.answers[0]
+    this.$answerLeftButton.setAttribute('data-event-data', newQuestion.answers[0])
 
-    this.render('answer-up-label', 'html', newQuestion.answers[1])
-    this.render('answer-up-button', 'attr', {'data-event-data': newQuestion.answers[1].toString()})
+    this.$answerUpLabel.innerHTML = newQuestion.answers[1]
+    this.$answerUpButton.setAttribute('data-event-data', newQuestion.answers[1])
 
-    this.render('answer-right-label', 'html', newQuestion.answers[2])
-    this.render('answer-right-button', 'attr', {'data-event-data': newQuestion.answers[2].toString()})
+    this.$answerRightLabel.innerHTML = newQuestion.answers[2]
+    this.$answerRightButton.setAttribute('data-event-data', newQuestion.answers[2])
   }
 
   setLifebar (hp, state) {
-    this.$lifeBar.style.width = hp + '%'
+    this.$lifebar.style.width = hp + '%'
 
     if (state === 'normal') {
-      this.$lifeBar.classList.remove('life-bar--low')
-      this.$lifeBar.classList.remove('life-bar--critical')
+      this.$lifebar.classList.remove('life-bar--low')
+      this.$lifebar.classList.remove('life-bar--critical')
     }
 
     if (state === 'low') {
-      this.$lifeBar.classList.remove('life-bar--critical')
-      this.$lifeBar.classList.add('life-bar--low')
+      this.$lifebar.classList.remove('life-bar--critical')
+      this.$lifebar.classList.add('life-bar--low')
     }
 
     if (state === 'critical') {
-      this.$lifeBar.classList.remove('life-bar--low')
-      this.$lifeBar.classList.add('life-bar--critical')
+      this.$lifebar.classList.remove('life-bar--low')
+      this.$lifebar.classList.add('life-bar--critical')
     }
   }
 
   showGameOverScreen (wins, loses, total) {
-    this.render('wins', 'html', wins)
-    this.render('loses', 'html', loses)
+    this.$wins.innerHTML = wins
+    this.$loses.innerHTML = loses
 
     const tweetMessage = encodeURIComponent(`Boom! Just made a score of ${wins}/${total}, come and beat me! #logicalornot http://gabinaureche.com/logicalornot via @zh0uzi`)
-    this.render('tweet-my-game-button', 'attr', { href: `https://twitter.com/home?status=${tweetMessage}` })
+    this.$tweetMyGameButton.setAttribute('href', `https://twitter.com/home?status=${tweetMessage}`)
 
     this.$modal.classList.remove('u-hide')
     setTimeout(() => this.$modal.classList.add('active'), 100)
@@ -170,65 +169,10 @@ export default class View {
   }
 
   setBestScore (score) {
-    this.render('best-score', 'html', score)
+    this.$bestScore.innerHTML = score
   }
 
   animateIntro () {
     setTimeout(() => document.body.classList.add('active'), 500)
-  }
-
-  on (selector, eventName, handler, context = this) {
-    let cb = handler.bind(context)
-
-    document.addEventListener(eventName, function (event) {
-      let target = event.target
-      let matcher = target.matches || target.matchesSelector || target.webkitMatchesSelector || target.msMatchesSelector
-
-      if (matcher.call(target, '#bind-' + selector)) {
-        cb(event)
-        event.preventDefault()
-      }
-    })
-  }
-
-  // statics (DOM manipulators)
-  static html (element, html) {
-    element.innerHTML = html
-  }
-
-  static css (element, styles) {
-    for (let prop in styles) {
-      if (styles.hasOwnProperty(prop)) {
-        element.style[prop] = styles[prop]
-      }
-    }
-
-    return element
-  }
-
-  static hasClass (element, className) {
-    return element.classList.contains(className)
-  }
-
-  static addClass (element, className) {
-    return element.classList.add(className)
-  }
-
-  static removeClass (element, className) {
-    return element.classList.remove(className)
-  }
-
-  static attr (element, attrs) {
-    for (let prop in attrs) {
-      if (attrs.hasOwnProperty(prop)) {
-        element.setAttribute(prop, attrs[prop])
-      }
-    }
-
-    return element
-  }
-
-  static getAttribute (element, attrName) {
-    return element.getAttribute(attrName)
   }
 }
