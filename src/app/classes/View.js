@@ -106,23 +106,6 @@ export default class View {
     return View[method].apply(this, args)
   }
 
-  setLifeBarState (lifeBarState) {
-    if (lifeBarState === 'normal') {
-      this.$lifeBar.classList.remove('life-bar--low')
-      this.$lifeBar.classList.remove('life-bar--critical')
-    }
-
-    if (lifeBarState === 'low') {
-      this.$lifeBar.classList.remove('life-bar--critical')
-      this.$lifeBar.classList.add('life-bar--low')
-    }
-
-    if (lifeBarState === 'critical') {
-      this.$lifeBar.classList.remove('life-bar--low')
-      this.$lifeBar.classList.add('life-bar--critical')
-    }
-  }
-
   setTaunt (taunt, type) {
     this.render('taunt', 'html', taunt)
 
@@ -147,8 +130,23 @@ export default class View {
     this.render('answer-right-button', 'attr', {'data-event-data': newQuestion.answers[2].toString()})
   }
 
-  setLifeBarHp (hp) {
+  setLifebar (hp, state) {
     this.$lifeBar.style.width = hp + '%'
+
+    if (state === 'normal') {
+      this.$lifeBar.classList.remove('life-bar--low')
+      this.$lifeBar.classList.remove('life-bar--critical')
+    }
+
+    if (state === 'low') {
+      this.$lifeBar.classList.remove('life-bar--critical')
+      this.$lifeBar.classList.add('life-bar--low')
+    }
+
+    if (state === 'critical') {
+      this.$lifeBar.classList.remove('life-bar--low')
+      this.$lifeBar.classList.add('life-bar--critical')
+    }
   }
 
   showGameOverScreen (wins, loses, total) {

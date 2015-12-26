@@ -110,8 +110,7 @@ export default class Presenter {
   }
 
   updateLifeBar () {
-    this.view.setLifeBarHp(this.round.lifeBar)
-    this.view.setLifeBarState(this.round.lifeBarState)
+    this.view.setLifebar(this.round.hp, this.round.state)
   }
 
   startTimer () {
@@ -125,10 +124,10 @@ export default class Presenter {
 
       if (val.done) {
         this.round.stop()
-        this.round.setLifeBarHp(0)
+        this.round.lifebar = 0
         this.showGameOverScreen()
       } else {
-        this.round.setLifeBarHp(val.currentValue)
+        this.round.lifebar = val.currentValue
       }
 
       this.updateLifeBar()

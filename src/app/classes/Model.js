@@ -10,10 +10,7 @@ export default class Model {
     this.taunt = null
     this.score = []
     this.currentQuestion = {}
-    this.lifeBar = 100
-    this.lifeBarState = null
-
-    this.setLifeBarHp(100)
+    this.lifebar = 100
   }
 
   stop () {
@@ -56,23 +53,17 @@ export default class Model {
     this.score.push(Number(this.isCorrect(answer)))
   }
 
-  // life bar
-  setLifeBarHp (hp) {
-    this.lifeBar = hp
-    this.updateLifeBarState()
+  get lifebar () {
+    return { hp: this.hp, state: this.state }
   }
 
-  updateLifeBarState () {
-    let state
-
-    if (this.lifeBar > 50) {
-      state = 'normal'
-    } else if (this.lifeBar > 20) {
-      state = 'low'
-    } else {
-      state = 'critical'
-    }
-
-    this.lifeBarState = state
+  set lifebar (hp) {
+    this.hp = hp
+    this.state =
+      this.hp > 50
+        ? 'normal'
+        : this.hp > 20
+          ? 'low'
+          : 'critical'
   }
 }
