@@ -22,6 +22,8 @@ export default class Game {
   }
 
   start () {
+    if (this.status !== 'ready') return
+
     this.status = 'playing'
     this.timer = new Timer(0, 100, this.gameplay.duration)
 
@@ -45,10 +47,13 @@ export default class Game {
   }
 
   stop () {
+    this.status = 'game over'
     if (this.timer != null) this.timer.stop()
   }
 
   setRandomQuestion () {
+    if (this.status === 'game over') return
+
     const index = rand(0, this.questions.length - 1)
     const question = this.questions.splice(index, 1)[0]
 
@@ -56,6 +61,7 @@ export default class Game {
     this.currentQuestion = new Question(question.question, question.answers)
 
     PubSub.publish('newQuestion', this.currentQuestion)
+    if (this.questions.length === 0) this.stop()
   }
 
   submitAnswer (answer) {

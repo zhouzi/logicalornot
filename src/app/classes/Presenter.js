@@ -40,11 +40,11 @@ export default class Presenter {
       this.dropLifeBar()
     }
 
-    if (this.game.status !== 'game over' && this.game.questions.length > 0) {
-      this.game.setRandomQuestion()
-    } else {
+    if (this.game.status === 'game over') {
       this.game.stop()
       this.showGameOverScreen()
+    } else {
+      this.game.setRandomQuestion()
     }
   }
 
