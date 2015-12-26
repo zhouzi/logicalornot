@@ -1,5 +1,4 @@
 import PubSub from './PubSub'
-import Model from './Model'
 import Game from './Game'
 
 import gameplay from '../data/gameplay.json'
@@ -13,27 +12,27 @@ export default class Presenter {
     this.view = view
     this.mode = 'normal'
 
-    this.round = null
     this.game = null
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
 
     PubSub
       .subscribe('selectAnswer', this.selectAnswer.bind(this))
-      .subscribe('newRound', this.newRound.bind(this))
+      .subscribe('newGame', this.newGame.bind(this))
       .subscribe('updateLifebar', this.updateLifeBar.bind(this))
       .subscribe('gameOver', this.showGameOverScreen.bind(this))
+      .subscribe('newQuestion', this.view.setQuestion.bind(this.view))
 
-    this.newRound()
+    this.newGame()
     this.view.animateIntro()
   }
 
   selectAnswer (answer) {
     if (this.game.status === 'ready') this.game.start()
 
-    this.round.submitAnswer(answer)
+    this.game.submitAnswer(answer)
 
-    if (this.round.currentQuestion.isCorrect(answer)) {
+    if (this.game.currentQuestion.isCorrect(answer)) {
       this.setRandomTaunt('nice')
       this.riseLifeBar()
     } else {
@@ -41,8 +40,8 @@ export default class Presenter {
       this.dropLifeBar()
     }
 
-    if (this.game.status !== 'game over' && this.round.questions.length > 0) {
-      this.setRandomQuestion()
+    if (this.game.status !== 'game over' && this.game.questions.length > 0) {
+      this.game.setRandomQuestion()
     } else {
       this.game.stop()
       this.showGameOverScreen()
@@ -50,19 +49,19 @@ export default class Presenter {
   }
 
   riseLifeBar () {
-    const complexity = this.round.currentQuestion.complexity
-    const points = this.round.gameplay.gaps.winning[complexity]
+    const complexity = this.game.currentQuestion.complexity
+    const points = this.game.gameplay.gaps.winning[complexity]
     this.game.timer.delay(points)
   }
 
   dropLifeBar () {
-    const complexity = this.round.currentQuestion.complexity
-    const points = this.round.gameplay.gaps.losing[complexity]
+    const complexity = this.game.currentQuestion.complexity
+    const points = this.game.gameplay.gaps.losing[complexity]
     this.game.timer.forward(points)
   }
 
   showGameOverScreen () {
-    const score = this.round.score
+    const score = this.game.score
     const total = score.length
     const wins = score.reduce((nbWins, point) => nbWins + point, 0)
     const loses = total - wins
@@ -78,24 +77,16 @@ export default class Presenter {
     this.view.setBestScore(this.bestScore)
   }
 
-  setRandomQuestion () {
-    this.round.setRandomQuestion()
-    this.view.setQuestion(this.round.currentQuestion)
-  }
-
-  newRound (mode) {
+  newGame (mode) {
     if (mode != null) this.mode = mode
 
     this.view.hideGameOverScreen()
 
     if (this.game) this.game.stop()
 
-    this.round = new Model(questions.slice(), gameplay[this.mode])
-    this.game = new Game(gameplay[this.mode])
-
-    this.setTaunt("So, what's the result of...")
+    this.game = new Game(gameplay[this.mode], questions.slice())
     this.updateLifeBar()
-    this.setRandomQuestion()
+    this.setTaunt("So, what's the result of...")
   }
 
   setTaunt (index, type = 'nice') {

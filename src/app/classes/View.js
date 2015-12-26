@@ -42,7 +42,7 @@ export default class View {
     }
 
     function replayButtonListener () {
-      if (this.isGameOverScreenVisible()) PubSub.publish('newRound')
+      if (this.isGameOverScreenVisible()) PubSub.publish('newGame')
     }
 
     this.$answerLeftButton.addEventListener('click', answerButtonListener.bind(this, this.$answerLeftButton), false)
@@ -88,7 +88,7 @@ export default class View {
       this.$normalModeButton.classList.add('active')
       this.$hardcoreModeButton.classList.remove('active')
 
-      PubSub.publish('newRound', 'normal')
+      PubSub.publish('newGame', 'normal')
     }, false)
 
     this.$hardcoreModeButton.addEventListener('click', () => {
@@ -97,7 +97,7 @@ export default class View {
       this.$hardcoreModeButton.classList.add('active')
       this.$normalModeButton.classList.remove('active')
 
-      PubSub.publish('newRound', 'hardcore')
+      PubSub.publish('newGame', 'hardcore')
     }, false)
   }
 

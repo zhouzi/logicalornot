@@ -1,13 +1,24 @@
 import PubSub from './PubSub'
 import Timer from './Timer'
 import Lifebar from './Lifebar'
+import Question from './Question'
+
+import rand from '../utils/rand'
+import shuffle from '../utils/shuffle'
 
 export default class Game {
-  constructor (gameplay) {
+  constructor (gameplay, questions) {
     this.gameplay = gameplay
+    this.questions = questions
+
+    this.lifebar = new Lifebar()
+
     this.status = 'ready'
     this.timer = null
-    this.lifebar = new Lifebar()
+    this.currentQuestion = {}
+    this.score = []
+
+    this.setRandomQuestion()
   }
 
   start () {
@@ -35,5 +46,22 @@ export default class Game {
 
   stop () {
     if (this.timer != null) this.timer.stop()
+  }
+
+  setRandomQuestion () {
+    const index = rand(0, this.questions.length - 1)
+    const question = this.questions.splice(index, 1)[0]
+
+    if (this.gameplay.shuffleAnswers) shuffle(question.answers)
+    this.currentQuestion = new Question(question.question, question.answers)
+
+    PubSub.publish('newQuestion', this.currentQuestion)
+  }
+
+  submitAnswer (answer) {
+    if (this.status === 'game over') return
+
+    this.status = 'playing'
+    this.score.push(Number(this.currentQuestion.isCorrect(answer)))
   }
 }
