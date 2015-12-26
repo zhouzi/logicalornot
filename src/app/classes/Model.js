@@ -33,16 +33,6 @@ export default class Model {
     this.setQuestion(question)
   }
 
-  static getQuestionComplexity (question) {
-    let complexity
-
-    if (question.length >= 15) complexity = 2
-    else if (question.length >= 10) complexity = 1
-    else complexity = 0
-
-    return complexity
-  }
-
   submitAnswer (answer) {
     if (this.status === 'game over') return
 

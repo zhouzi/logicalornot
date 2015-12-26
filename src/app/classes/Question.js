@@ -9,4 +9,13 @@ export default class Question {
   isCorrect (answer) {
     return equals(this.question, answer)
   }
+
+  get complexity () {
+    const len = this.question.length
+    return len >= 15
+      ? 2
+      : len >= 10
+        ? 1
+        : 0
+  }
 }

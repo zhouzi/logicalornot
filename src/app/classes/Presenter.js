@@ -46,13 +46,15 @@ export default class Presenter {
   }
 
   riseLifeBar () {
-    const complexity = Model.getQuestionComplexity(this.round.currentQuestion.question)
-    this.timer.delay(this.round.gameplay.gaps.winning[complexity])
+    const complexity = this.round.currentQuestion.complexity
+    const points = this.round.gameplay.gaps.winning[complexity]
+    this.timer.delay(points)
   }
 
   dropLifeBar () {
-    const complexity = Model.getQuestionComplexity(this.round.currentQuestion.question)
-    this.timer.forward(this.round.gameplay.gaps.losing[complexity])
+    const complexity = this.round.currentQuestion.complexity
+    const points = this.round.gameplay.gaps.losing[complexity]
+    this.timer.forward(points)
   }
 
   showGameOverScreen () {
