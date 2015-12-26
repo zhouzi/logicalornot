@@ -10,8 +10,6 @@ import rand from '../utils/rand'
 export default class Presenter {
   constructor (view) {
     this.view = view
-    this.mode = 'normal'
-
     this.game = null
 
     this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
@@ -77,14 +75,12 @@ export default class Presenter {
     this.view.setBestScore(this.bestScore)
   }
 
-  newGame (mode) {
-    if (mode != null) this.mode = mode
-
+  newGame (mode = 'normal') {
     this.view.hideGameOverScreen()
 
     if (this.game) this.game.stop()
 
-    this.game = new Game(gameplay[this.mode], questions.slice())
+    this.game = new Game(gameplay[mode], questions.slice())
     this.updateLifeBar()
     this.setTaunt("So, what's the result of...")
   }
