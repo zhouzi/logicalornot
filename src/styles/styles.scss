@@ -136,7 +136,15 @@ h2, .h2 {
 }
 
 .button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
   display: block;
+  width: 100%;
+  color: #fff;
   position: relative;
   padding: $gutter-small $gutter;
   border-radius: $border-radius;
@@ -153,7 +161,7 @@ h2, .h2 {
 
     [class*="icon-"],
     .muted {
-      display: inline;
+      display: inline-block;
     }
   }
 
@@ -255,6 +263,7 @@ h2, .h2 {
 
 footer a,
 .link {
+  cursor: pointer;
   display: inline-block;
   padding: .2em;
   border-bottom: 2px solid $reddish-light;

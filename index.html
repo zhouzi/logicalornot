@@ -39,10 +39,14 @@
           </li>
 
           <li>
-            <a href="#" id="replay-button" class="button button--secondary" data-bind="spacebar" data-event="view:newRound">
+            <button type="button"
+                    id="replay-button"
+                    class="button button--secondary"
+                    data-bind="spacebar"
+                    data-event="view:newRound">
               <small class="muted">(space)</small>
               Replay
-            </a>
+            </button>
           </li>
         </ul>
       </div>
@@ -66,24 +70,39 @@
 
         <ul class="button-list">
           <li>
-            <a href="#" id="answer-left-button" class="button" data-bind="left" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-left-button"
+                    class="button"
+                    data-bind="left"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-left"></span>
               <span id="answer-left-label"></span>
-            </a>
+            </button>
           </li>
 
           <li>
-            <a href="#" id="answer-up-button" class="button" data-bind="up" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-up-button"
+                    class="button"
+                    data-bind="up"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-up"></span>
               <span id="answer-up-label"></span>
-            </a>
+            </button>
           </li>
 
           <li>
-            <a href="#" id="answer-right-button" class="button" data-bind="right" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-right-button"
+                    class="button"
+                    data-bind="right"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-right"></span>
               <span id="answer-right-label"></span>
-            </a>
+            </button>
           </li>
         </ul>
       </section>
@@ -91,7 +110,7 @@
       <footer class="footer">
         <div class="footer__left">
           <span class="best-score">Best Score: <span id="best-score" class="u-gold">/</span></span>
-          <span class="modes">Mode: <a href="#" id="normal-mode" class="active">normal</a><a href="#" id="hardcore-mode">hardcore</a></span>
+          <span class="modes">Mode: <span id="normal-mode" class="link active">normal</span><span id="hardcore-mode" class="link">hardcore</span></span>
         </div>
 
         <div class="footer__right">
