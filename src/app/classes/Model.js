@@ -1,7 +1,6 @@
 import Question from './Question'
 
 import rand from '../utils/rand'
-import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
 
 export default class Model {
