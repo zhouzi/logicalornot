@@ -1,3 +1,5 @@
+import Question from './Question'
+
 import rand from '../utils/rand'
 import equals from '../utils/equals'
 import shuffle from '../utils/shuffle'
@@ -17,10 +19,9 @@ export default class Model {
     this.status = 'game over'
   }
 
-  // question, answer
   setQuestion (question) {
     if (this.gameplay.shuffleAnswers) shuffle(question.answers)
-    this.currentQuestion = question
+    this.currentQuestion = new Question(question.question, question.answers)
 
     return this.currentQuestion
   }
@@ -42,15 +43,11 @@ export default class Model {
     return complexity
   }
 
-  isCorrect (answer) {
-    return equals(this.currentQuestion.question, answer)
-  }
-
   submitAnswer (answer) {
     if (this.status === 'game over') return
 
     this.status = 'playing'
-    this.score.push(Number(this.isCorrect(answer)))
+    this.score.push(Number(this.currentQuestion.isCorrect(answer)))
   }
 
   set lifebar (hp) {

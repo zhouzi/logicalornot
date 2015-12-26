@@ -22,7 +22,7 @@ export default class Presenter {
 
       this.round.submitAnswer(answer)
 
-      if (this.round.isCorrect(answer)) {
+      if (this.round.currentQuestion.isCorrect(answer)) {
         this.setRandomTaunt('nice')
         this.riseLifeBar()
       } else {
