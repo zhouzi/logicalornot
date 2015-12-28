@@ -28,13 +28,8 @@ export default class Game {
     this.timer = new Timer(0, 100, this.gameplay.duration)
 
     this.timer.start((val) => {
-      if (this.status === 'game over') {
-        this.timer.stop()
-        return
-      }
-
       if (val.done) {
-        this.status = 'game over'
+        this.stop()
         this.lifebar.hp = 0
 
         PubSub.publish('gameOver')
@@ -47,6 +42,8 @@ export default class Game {
   }
 
   stop () {
+    if (this.status !== 'playing') return
+
     this.status = 'game over'
     if (this.timer != null) this.timer.stop()
   }
@@ -66,8 +63,8 @@ export default class Game {
 
   submitAnswer (answer) {
     if (this.status === 'game over') return
+    if (this.status === 'ready') this.start()
 
-    this.status = 'playing'
     this.score.push(Number(this.currentQuestion.isCorrect(answer)))
   }
 }

@@ -26,8 +26,6 @@ export default class Presenter {
   }
 
   selectAnswer (answer) {
-    if (this.game.status === 'ready') this.game.start()
-
     this.game.submitAnswer(answer)
 
     if (this.game.currentQuestion.isCorrect(answer)) {
@@ -38,12 +36,8 @@ export default class Presenter {
       this.dropLifeBar()
     }
 
-    if (this.game.status === 'game over') {
-      this.game.stop()
-      this.showGameOverScreen()
-    } else {
-      this.game.setRandomQuestion()
-    }
+    if (this.game.status === 'game over') this.showGameOverScreen()
+    else this.game.setRandomQuestion()
   }
 
   riseLifeBar () {
