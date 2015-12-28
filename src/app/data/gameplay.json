@@ -1,7 +1,6 @@
 {
   "normal": {
     "duration": 15,
-    "timer": true,
     "shuffleAnswers": true,
     "gaps": {
       "winning": [15, 15, 15],
@@ -11,7 +10,6 @@
 
   "hardcore": {
     "duration": 15,
-    "timer": true,
     "shuffleAnswers": false,
     "gaps": {
       "winning": [1, 2, 3],
