@@ -1,4 +1,4 @@
-import equals from '../utils/equals'
+import evalToString from '../utils/evalToString'
 
 export default class Question {
   constructor (question, answers) {
@@ -7,7 +7,7 @@ export default class Question {
   }
 
   isCorrect (answer) {
-    return equals(this.question, answer)
+    return evalToString(this.question) === evalToString(answer)
   }
 
   get complexity () {

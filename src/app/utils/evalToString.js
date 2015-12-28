@@ -1,1 +1,4 @@
-export default str => typeof (str = eval.call(this, str)) !== 'string' ? JSON.stringify(str) : str
+export default function (str) {
+  str = eval(str)
+  return typeof str !== 'string' ? JSON.stringify(str) : str
+}
