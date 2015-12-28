@@ -19,6 +19,7 @@
     "karma-jasmine": "0.3.6",
     "karma-phantomjs-launcher": "0.2.1",
     "karma-webpack": "1.7.0",
+    "lodash": "3.10.1",
     "phantomjs": "1.9.19",
     "standard": "5.4.1",
     "webpack": "1.12.9"

@@ -6,7 +6,7 @@ import gameplay from '../data/gameplay.json'
 import questions from '../data/questions.json'
 import taunts from '../data/taunts.json'
 
-import rand from '../utils/rand'
+import random from 'lodash/number/random'
 
 export default class Presenter {
   constructor (view) {
@@ -89,7 +89,7 @@ export default class Presenter {
 
   setRandomTaunt (type) {
     const typedTaunts = taunts[type]
-    return this.setTaunt(rand(0, typedTaunts.length - 1), type)
+    return this.setTaunt(random(0, typedTaunts.length - 1), type)
   }
 
   updateLifeBar () {

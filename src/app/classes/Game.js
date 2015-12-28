@@ -3,8 +3,8 @@ import Timer from './Timer'
 import Lifebar from './Lifebar'
 import Question from './Question'
 
-import rand from '../utils/rand'
-import shuffle from '../utils/shuffle'
+import random from 'lodash/number/random'
+import shuffle from 'lodash/collection/shuffle'
 
 export default class Game {
   constructor (gameplay, questions) {
@@ -51,7 +51,7 @@ export default class Game {
   setRandomQuestion () {
     if (this.status === 'game over') return
 
-    const index = rand(0, this.questions.length - 1)
+    const index = random(0, this.questions.length - 1)
     const question = this.questions.splice(index, 1)[0]
 
     if (this.gameplay.shuffleAnswers) shuffle(question.answers)
