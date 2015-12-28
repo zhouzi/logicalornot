@@ -1,5 +1,6 @@
 import PubSub from './PubSub'
 import Game from './Game'
+import BestScore from './BestScore'
 
 import gameplay from '../data/gameplay.json'
 import questions from '../data/questions.json'
@@ -11,8 +12,7 @@ export default class Presenter {
   constructor (view) {
     this.view = view
     this.game = null
-
-    this.updateBestScore(window.localStorage.getItem('bestScore') || 0)
+    this.bestScore = new BestScore()
 
     PubSub
       .subscribe('selectAnswer', this.selectAnswer.bind(this))
@@ -58,15 +58,13 @@ export default class Presenter {
     const wins = score.reduce((nbWins, point) => nbWins + point, 0)
     const loses = total - wins
 
-    this.updateBestScore(Math.max(this.bestScore, wins))
+    this.updateBestScore(wins)
     this.view.showGameOverScreen(wins, loses, total)
   }
 
   updateBestScore (score) {
-    this.bestScore = score
-
-    window.localStorage.setItem('bestScore', this.bestScore)
-    this.view.setBestScore(this.bestScore)
+    if (score != null) this.bestScore.set(score)
+    this.view.setBestScore(this.bestScore.get())
   }
 
   newGame (mode = 'normal') {
@@ -76,6 +74,7 @@ export default class Presenter {
 
     this.game = new Game(gameplay[mode], questions.slice())
     this.updateLifeBar()
+    this.updateBestScore()
     this.setTaunt("So, what's the result of...")
   }
 
