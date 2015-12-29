@@ -1,29 +1,26 @@
-@import "functions",
-        "variables",
-        "mixins";
-
-
-
-/*--------------------------------------------*\
-  Styles
-\*--------------------------------------------*/
+@import
+  "functions",
+  "variables",
+  "mixins"
+;
 
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html,
 body {
-  width: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 html {
   height: 100%;
   font-size: $font-size-root-small;
+  box-sizing: border-box;
 
   @media #{$sm-up} {
     font-size: $font-size-root;
@@ -31,7 +28,7 @@ html {
 }
 
 body {
-  font-family: 'Abel', sans-serif;
+  font-family: $font-family-base;
   font-size: $font-size-normal;
   line-height: 1.2;
   text-align: center;
@@ -59,7 +56,7 @@ small {
 
 h1, .h1,
 h2, .h2 {
-  font-family: 'Bigshot One', cursive;
+  font-family: $font-family-heading;
   font-size: $font-size-large;
   line-height: 1;
   margin: 0;
