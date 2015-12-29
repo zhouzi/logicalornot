@@ -21,6 +21,10 @@ export default class Presenter {
       .subscribe('gameOver', this.showGameOverScreen.bind(this))
       .subscribe('newQuestion', this.view.setQuestion.bind(this.view))
 
+    // the best score is updated every time a game ends
+    // so we need to update it manually the first time
+    this.updateBestScore()
+
     this.newGame()
     this.view.animateIntro()
   }
@@ -62,8 +66,8 @@ export default class Presenter {
     this.view.showGameOverScreen(wins, loses, total)
   }
 
-  updateBestScore (score) {
-    if (score != null) this.bestScore.set(score)
+  updateBestScore (score = 0) {
+    this.bestScore.set(score)
     this.view.setBestScore(this.bestScore.get())
   }
 
@@ -73,8 +77,8 @@ export default class Presenter {
     if (this.game) this.game.stop()
 
     this.game = new Game(gameplay[mode], questions.slice())
+
     this.updateLifeBar()
-    this.updateBestScore()
     this.setTaunt("So, what's the result of...")
   }
 
