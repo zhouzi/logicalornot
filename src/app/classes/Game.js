@@ -58,7 +58,6 @@ export default class Game {
     this.currentQuestion = new Question(question.question, question.answers)
 
     PubSub.publish('newQuestion', this.currentQuestion)
-    if (this.questions.length === 0) this.stop()
   }
 
   submitAnswer (answer) {
@@ -66,5 +65,6 @@ export default class Game {
     if (this.status === 'ready') this.start()
 
     this.score.push(Number(this.currentQuestion.isCorrect(answer)))
+    if (this.questions.length === 0) this.stop()
   }
 }
