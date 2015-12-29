@@ -1,4 +1,4 @@
-/* global it, expect */
+/* global describe, it, expect */
 
 import evalToString from '../src/app/utils/evalToString'
 import questions from '../src/app/data/questions.json'

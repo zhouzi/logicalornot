@@ -1,3 +1,5 @@
+/* global describe, beforeEach, it, spyOn, expect */
+
 import BestScore from '../src/app/classes/BestScore'
 
 describe('BestScore', function () {

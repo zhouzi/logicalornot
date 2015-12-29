@@ -1,3 +1,5 @@
+/* global describe, it, expect */
+
 import Lifebar from '../src/app/classes/Lifebar'
 
 describe('Lifebar', function () {
