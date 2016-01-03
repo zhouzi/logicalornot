@@ -71,22 +71,13 @@ export default class Presenter {
     })
 
     this.updateLifeBar()
-    this.setTaunt("So, what's the result of...")
-  }
-
-  // TODO: setTaunt might be useless and its usage could be replace by view.setTaunt
-  setTaunt (index, type = 'nice') {
-    const taunt =
-      typeof index === 'string'
-        ? index
-        : taunts[type][index]
-
-    this.view.setTaunt(taunt, type)
+    this.view.setTaunt("So, what's the result of...")
   }
 
   setRandomTaunt (type) {
     const typedTaunts = taunts[type]
-    return this.setTaunt(random(0, typedTaunts.length - 1), type)
+    const randomIndex = random(0, typedTaunts.length - 1)
+    return this.view.setTaunt(typedTaunts[randomIndex], type)
   }
 
   updateLifeBar () {

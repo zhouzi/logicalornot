@@ -83,7 +83,7 @@ describe('Presenter', function () {
       const gameOverScreenSpy = spyOn(view, 'hideGameOverScreen')
       const setQuestionSpy = spyOn(view, 'setQuestion')
       const updateLifebarSpy = spyOn(presenter, 'updateLifeBar')
-      const setTauntSpy = spyOn(presenter, 'setTaunt')
+      const setTauntSpy = spyOn(view, 'setTaunt')
 
       expect(presenter.game).toBe(oldGame)
 
@@ -96,19 +96,14 @@ describe('Presenter', function () {
       expect(setTauntSpy).toHaveBeenCalledWith("So, what's the result of...")
     })
 
-    it('should set taunt at given index and type', function () {
-      const viewSpy = spyOn(view, 'setTaunt')
-      presenter.setTaunt(2, 'nice')
+    it('should set a random taunt', function () {
+      const spy = spyOn(view, 'setTaunt')
+      presenter.setRandomTaunt('nice')
 
-      expect(presenter.taunt).not.toBe("So, what's the result of...")
-      expect(viewSpy).toHaveBeenCalled()
-    })
+      const args = spy.calls.argsFor(0)
 
-    it('should set a given taunt', function () {
-      const viewSpy = spyOn(view, 'setTaunt')
-      presenter.setTaunt('Hello there!')
-
-      expect(viewSpy).toHaveBeenCalledWith('Hello there!', 'nice')
+      expect(typeof args[0]).toBe('string')
+      expect(args[1]).toBe('nice')
     })
   })
 })
