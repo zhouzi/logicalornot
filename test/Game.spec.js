@@ -6,6 +6,7 @@ import Game from '../src/app/classes/Game'
 let game
 let updateLifebarCallback
 let gameOverCallback
+let setQuestionCallback
 
 const gameplay = {}
 const questions = [
@@ -17,10 +18,12 @@ describe('Game', function () {
   beforeEach(function () {
     updateLifebarCallback = jasmine.createSpy('updateLifebar callback')
     gameOverCallback = jasmine.createSpy('gameOver callback')
+    setQuestionCallback = jasmine.createSpy('setQuestion callback')
 
     game = new Game(gameplay, questions.slice(), {
       updateLifebar: updateLifebarCallback,
-      gameOver: gameOverCallback
+      gameOver: gameOverCallback,
+      setQuestion: setQuestionCallback
     })
   })
 
@@ -93,8 +96,6 @@ describe('Game', function () {
     const spy = spyOn(game, 'stop').and.callThrough()
 
     game.submitAnswer('')
-
-    game.setRandomQuestion('')
     game.submitAnswer('')
 
     expect(game.score).toEqual([0, 0])
@@ -105,5 +106,13 @@ describe('Game', function () {
 
   it('should return the score for given answer', function () {
     expect(game.submitAnswer('')).toBe(0)
+  })
+
+  it('should submit an answer and set a random question', function () {
+    const randomQuestionSpy = spyOn(game, 'setRandomQuestion')
+
+    game.submitAnswer('')
+
+    expect(randomQuestionSpy).toHaveBeenCalled()
   })
 })

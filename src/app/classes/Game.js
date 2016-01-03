@@ -56,7 +56,9 @@ export default class Game {
     const question = this.questions.splice(index, 1)[0]
 
     if (this.gameplay.shuffleAnswers) shuffle(question.answers)
+
     this.currentQuestion = new Question(question.question, question.answers)
+    this.callbacks.setQuestion(this.currentQuestion)
   }
 
   submitAnswer (answer) {
@@ -67,6 +69,7 @@ export default class Game {
     this.score.push(score)
 
     if (this.questions.length === 0) this.stop()
+    else this.setRandomQuestion()
 
     return score
   }

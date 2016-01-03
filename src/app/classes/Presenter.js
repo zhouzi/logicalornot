@@ -30,12 +30,6 @@ export default class Presenter {
       this.setRandomTaunt('mean')
       this.dropLifeBar()
     }
-
-    // TODO: setRandomQuestion should be called from Game, meaning it should accept a setQuestion callback
-    if (this.game.status !== 'game over') {
-      this.game.setRandomQuestion()
-      this.view.setQuestion(this.game.currentQuestion)
-    }
   }
 
   riseLifeBar () {
@@ -72,14 +66,12 @@ export default class Presenter {
 
     this.game = new Game(gameplay[mode], questions.slice(), {
       updateLifebar: this.updateLifeBar.bind(this),
-      gameOver: this.showGameOverScreen.bind(this)
+      gameOver: this.showGameOverScreen.bind(this),
+      setQuestion: this.view.setQuestion.bind(this.view)
     })
 
     this.updateLifeBar()
     this.setTaunt("So, what's the result of...")
-
-    // TODO: this will become useless when Game will accept a setQuestion callback
-    this.view.setQuestion(this.game.currentQuestion)
   }
 
   // TODO: setTaunt might be useless and its usage could be replace by view.setTaunt

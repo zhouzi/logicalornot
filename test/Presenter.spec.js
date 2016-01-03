@@ -53,16 +53,6 @@ describe('Presenter', function () {
       expect(tauntSpy).toHaveBeenCalledWith('nice')
     })
 
-    it('should submit an answer and set a random question', function () {
-      const randomQuestionSpy = spyOn(presenter.game, 'setRandomQuestion')
-      const randomQuestionViewSpy = spyOn(view, 'setQuestion')
-
-      presenter.selectAnswer('')
-
-      expect(randomQuestionSpy).toHaveBeenCalled()
-      expect(randomQuestionViewSpy).toHaveBeenCalled()
-    })
-
     it('should update best score and show the game over screen', function () {
       presenter.onViewReady()
 
