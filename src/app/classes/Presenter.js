@@ -23,10 +23,7 @@ export default class Presenter {
   }
 
   selectAnswer (answer) {
-    // TODO: submitAnswer should return the score for the given answer so we wouldn't have to use game.currentQuestion.isCorrect(answer)
-    this.game.submitAnswer(answer)
-
-    if (this.game.currentQuestion.isCorrect(answer)) {
+    if (this.game.submitAnswer(answer)) {
       this.setRandomTaunt('nice')
       this.riseLifeBar()
     } else {

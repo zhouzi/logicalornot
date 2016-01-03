@@ -102,4 +102,8 @@ describe('Game', function () {
     expect(spy).toHaveBeenCalled()
     expect(gameOverCallback).toHaveBeenCalled()
   })
+
+  it('should return the score for given answer', function () {
+    expect(game.submitAnswer('')).toBe(0)
+  })
 })

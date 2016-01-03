@@ -63,8 +63,11 @@ export default class Game {
     if (this.status === 'game over') return
     if (this.status === 'ready') this.start()
 
-    this.score.push(Number(this.currentQuestion.isCorrect(answer)))
+    const score = Number(this.currentQuestion.isCorrect(answer))
+    this.score.push(score)
 
     if (this.questions.length === 0) this.stop()
+
+    return score
   }
 }
