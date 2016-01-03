@@ -15,7 +15,7 @@
     "gulp-webpack": "1.4.0",
     "jasmine-core": "2.4.1",
     "json-loader": "0.5.1",
-    "karma": "0.12.31",
+    "karma": "0.13.16",
     "karma-jasmine": "0.3.6",
     "karma-phantomjs-launcher": "0.2.1",
     "karma-webpack": "1.7.0",
