@@ -1,7 +1,9 @@
-import PubSub from './PubSub'
+import Presenter from './Presenter'
 
 export default class View {
   constructor () {
+    this.presenter = new Presenter(this)
+
     this.$modal = document.getElementById('modal')
     this.$lifebar = document.getElementById('life-bar')
 
@@ -31,6 +33,9 @@ export default class View {
     this.$hardcoreModeButton = document.getElementById('hardcore-mode')
 
     this.bind()
+
+    this.presenter.onViewReady()
+    setTimeout(() => { document.body.classList.add('active') }, 500)
   }
 
   bind () {
@@ -38,11 +43,11 @@ export default class View {
       if (this.isGameOverScreenVisible()) return
 
       const answer = element.getAttribute('data-event-data')
-      PubSub.publish('selectAnswer', answer)
+      this.presenter.selectAnswer(answer)
     }
 
     function replayButtonListener () {
-      if (this.isGameOverScreenVisible()) PubSub.publish('newGame')
+      if (this.isGameOverScreenVisible()) this.presenter.newGame()
     }
 
     this.$answerLeftButton.addEventListener('click', answerButtonListener.bind(this, this.$answerLeftButton), false)
@@ -88,7 +93,7 @@ export default class View {
       this.$normalModeButton.classList.add('active')
       this.$hardcoreModeButton.classList.remove('active')
 
-      PubSub.publish('newGame', 'normal')
+      this.presenter.newGame('normal')
     }, false)
 
     this.$hardcoreModeButton.addEventListener('click', () => {
@@ -97,7 +102,7 @@ export default class View {
       this.$hardcoreModeButton.classList.add('active')
       this.$normalModeButton.classList.remove('active')
 
-      PubSub.publish('newGame', 'hardcore')
+      this.presenter.newGame('hardcore')
     }, false)
   }
 
@@ -167,9 +172,5 @@ export default class View {
 
   setBestScore (score) {
     this.$bestScore.innerHTML = score
-  }
-
-  animateIntro () {
-    setTimeout(() => document.body.classList.add('active'), 500)
   }
 }

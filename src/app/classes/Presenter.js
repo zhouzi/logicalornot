@@ -1,4 +1,3 @@
-import PubSub from './PubSub'
 import Game from './Game'
 import BestScore from './BestScore'
 
@@ -13,23 +12,18 @@ export default class Presenter {
     this.view = view
     this.game = null
     this.bestScore = new BestScore()
+  }
 
-    PubSub
-      .subscribe('selectAnswer', this.selectAnswer.bind(this))
-      .subscribe('newGame', this.newGame.bind(this))
-      .subscribe('updateLifebar', this.updateLifeBar.bind(this))
-      .subscribe('gameOver', this.showGameOverScreen.bind(this))
-      .subscribe('newQuestion', this.view.setQuestion.bind(this.view))
-
+  onViewReady () {
     // the best score is updated every time a game ends
     // so we need to update it manually the first time
     this.updateBestScore()
 
     this.newGame()
-    this.view.animateIntro()
   }
 
   selectAnswer (answer) {
+    // TODO: submitAnswer should return the score for the given answer so we wouldn't have to use game.currentQuestion.isCorrect(answer)
     this.game.submitAnswer(answer)
 
     if (this.game.currentQuestion.isCorrect(answer)) {
@@ -40,8 +34,11 @@ export default class Presenter {
       this.dropLifeBar()
     }
 
-    if (this.game.status === 'game over') this.showGameOverScreen()
-    else this.game.setRandomQuestion()
+    // TODO: setRandomQuestion should be called from Game, meaning it should accept a setQuestion callback
+    if (this.game.status !== 'game over') {
+      this.game.setRandomQuestion()
+      this.view.setQuestion(this.game.currentQuestion)
+    }
   }
 
   riseLifeBar () {
@@ -76,12 +73,19 @@ export default class Presenter {
 
     if (this.game) this.game.stop()
 
-    this.game = new Game(gameplay[mode], questions.slice())
+    this.game = new Game(gameplay[mode], questions.slice(), {
+      updateLifebar: this.updateLifeBar.bind(this),
+      gameOver: this.showGameOverScreen.bind(this)
+    })
 
     this.updateLifeBar()
     this.setTaunt("So, what's the result of...")
+
+    // TODO: this will become useless when Game will accept a setQuestion callback
+    this.view.setQuestion(this.game.currentQuestion)
   }
 
+  // TODO: setTaunt might be useless and its usage could be replace by view.setTaunt
   setTaunt (index, type = 'nice') {
     const taunt =
       typeof index === 'string'
