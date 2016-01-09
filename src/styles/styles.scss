@@ -1,29 +1,26 @@
-@import "functions",
-        "variables",
-        "mixins";
-
-
-
-/*--------------------------------------------*\
-  Styles
-\*--------------------------------------------*/
+@import
+  "functions",
+  "variables",
+  "mixins"
+;
 
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html,
 body {
-  width: 100%;
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 html {
   height: 100%;
   font-size: $font-size-root-small;
+  box-sizing: border-box;
 
   @media #{$sm-up} {
     font-size: $font-size-root;
@@ -31,7 +28,7 @@ html {
 }
 
 body {
-  font-family: 'Abel', sans-serif;
+  font-family: $font-family-base;
   font-size: $font-size-normal;
   line-height: 1.2;
   text-align: center;
@@ -59,7 +56,7 @@ small {
 
 h1, .h1,
 h2, .h2 {
-  font-family: 'Bigshot One', cursive;
+  font-family: $font-family-heading;
   font-size: $font-size-large;
   line-height: 1;
   margin: 0;
@@ -136,7 +133,15 @@ h2, .h2 {
 }
 
 .button {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: transparent;
+  cursor: pointer;
+
   display: block;
+  width: 100%;
+  color: #fff;
   position: relative;
   padding: $gutter-small $gutter;
   border-radius: $border-radius;
@@ -153,7 +158,7 @@ h2, .h2 {
 
     [class*="icon-"],
     .muted {
-      display: inline;
+      display: inline-block;
     }
   }
 
@@ -255,6 +260,7 @@ h2, .h2 {
 
 footer a,
 .link {
+  cursor: pointer;
   display: inline-block;
   padding: .2em;
   border-bottom: 2px solid $reddish-light;

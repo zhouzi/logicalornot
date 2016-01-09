@@ -1,12 +1,8 @@
-/*--------------------------------------------*\
-  Mixins
-\*--------------------------------------------*/
-
 @mixin fade-slide-base {
   transform: translateY(10px);
   opacity: 0;
   transition: transform 600ms ease-out,
-  opacity 600ms ease-out;
+              opacity 600ms ease-out;
 }
 
 @mixin delay ($delay) {
@@ -24,7 +20,3 @@
   justify-content: center;
   flex-direction: column;
 }
-
-/*@media #{$xl-up} {
-  margin: 0 -230px;
-}*/

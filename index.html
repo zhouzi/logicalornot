@@ -4,13 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Logical (Or Not)</title>
-    <link href='http://fonts.googleapis.com/css?family=Bigshot+One' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link href="https://fontastic.s3.amazonaws.com/gt4axpaFgnXruB39Ch83x3/icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Bigshot+One|Abel">
+    <link rel="stylesheet" href="https://file.myfontastic.com/gt4axpaFgnXruB39Ch83x3/icons.css">
     <link rel="stylesheet" href="dist/styles.css">
   </head>
 
-  <body id="bind-body">
+  <body>
     <noscript>
       <div style="position: relative; z-index: 9;">
         <div class="h1">Oops!</div>
@@ -18,12 +17,12 @@
       </div>
     </noscript>
 
-    <div id="bind-modal" class="modal u-hide">
+    <div id="modal" class="modal u-hide">
       <div class="modal-box">
         <h2>Boom!</h2>
 
         <p>
-          "Just made a score of <span id="bind-wins" class="wins"></span><span id="bind-loses" class="loses"></span>,
+          "Just made a score of <span id="wins" class="wins"></span><span id="loses" class="loses"></span>,
           <br>
           come and beat me!"
         </p>
@@ -32,66 +31,85 @@
           <li>
             <span class="caret"></span>
 
-            <a href="#" id="bind-tweet-my-game-button" class="button button--secondary" target="_blank">
+            <a href="#" id="tweet-my-game-button" class="button button--secondary" target="_blank">
               <span class="icon-twitter"></span>
               Tweet
             </a>
           </li>
 
           <li>
-            <a href="#" class="button button--secondary" data-bind="spacebar" data-event="view:newRound">
+            <button type="button"
+                    id="replay-button"
+                    class="button button--secondary"
+                    data-bind="spacebar"
+                    data-event="view:newRound">
               <small class="muted">(space)</small>
               Replay
-            </a>
+            </button>
           </li>
         </ul>
       </div>
     </div>
 
-    <div id="bind-bloody" class="bloody"></div>
+    <div id="bloody" class="bloody"></div>
 
     <div class="wrapper">
-      <div class="life-bar-container"><div id="bind-life-bar" class="life-bar"></div></div>
+      <div class="life-bar-container"><div id="life-bar" class="life-bar"></div></div>
 
       <section class="box-container">
         <header class="header">
           <h1>Logical <span class="ornot"><span class="muted">(</span>Or Not<span class="muted">)</span></span></h1>
 
           <p class="taunt-container">
-            <span id="bind-taunt" class="taunt active"></span>
+            <span id="taunt" class="taunt active"></span>
           </p>
         </header>
 
-        <pre class="question-container"><code id="bind-question"></code></pre>
+        <pre class="question-container"><code id="question"></code></pre>
 
         <ul class="button-list">
           <li>
-            <a href="#" id="bind-answer-left-button" class="button" data-bind="left" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-left-button"
+                    class="button"
+                    data-bind="left"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-left"></span>
-              <span id="bind-answer-left-label"></span>
-            </a>
+              <span id="answer-left-label"></span>
+            </button>
           </li>
 
           <li>
-            <a href="#" id="bind-answer-up-button" class="button" data-bind="up" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-up-button"
+                    class="button"
+                    data-bind="up"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-up"></span>
-              <span id="bind-answer-up-label"></span>
-            </a>
+              <span id="answer-up-label"></span>
+            </button>
           </li>
 
           <li>
-            <a href="#" id="bind-answer-right-button" class="button" data-bind="right" data-event="view:selectAnswer" data-event-data="">
+            <button type="button"
+                    id="answer-right-button"
+                    class="button"
+                    data-bind="right"
+                    data-event="view:selectAnswer"
+                    data-event-data>
               <span class="icon-arrow-right"></span>
-              <span id="bind-answer-right-label"></span>
-            </a>
+              <span id="answer-right-label"></span>
+            </button>
           </li>
         </ul>
       </section>
 
       <footer class="footer">
         <div class="footer__left">
-          <span class="best-score">Best Score: <span id="bind-best-score" class="u-gold">/</span></span>
-          <span class="modes">Mode: <a href="#" id="bind-normal-mode" class="active">normal</a><a href="#" id="bind-hardcore-mode">hardcore</a></span>
+          <span class="best-score">Best Score: <span id="best-score" class="u-gold">/</span></span>
+          <span class="modes">Mode: <span id="normal-mode" class="link active">normal</span><span id="hardcore-mode" class="link">hardcore</span></span>
         </div>
 
         <div class="footer__right">
