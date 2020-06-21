@@ -1,8 +1,4 @@
-@import
-  "functions",
-  "variables",
-  "mixins"
-;
+@import "functions", "variables", "mixins";
 
 *,
 *:before,
@@ -54,8 +50,10 @@ small {
   vertical-align: middle;
 }
 
-h1, .h1,
-h2, .h2 {
+h1,
+.h1,
+h2,
+.h2 {
   font-family: $font-family-heading;
   font-size: $font-size-large;
   line-height: 1;
@@ -75,11 +73,13 @@ h2, .h2 {
   }
 }
 
-h1, .h1 {
+h1,
+.h1 {
   color: $gold;
 }
 
-h2, .h2 {
+h2,
+.h2 {
   color: $reddish;
   margin-bottom: $gutter;
 }
@@ -106,10 +106,7 @@ h2, .h2 {
 }
 
 [class*="icon-"] {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-  margin: 0 .2em 0 0;
+  margin: 0 0.2em 0 0;
 }
 
 .button-list {
@@ -123,6 +120,7 @@ h2, .h2 {
 
     @media #{$sm-up} {
       display: inline-block;
+      vertical-align: middle;
       margin: 0 $gutter-small 0 0;
 
       &:last-child {
@@ -139,7 +137,9 @@ h2, .h2 {
   background-color: transparent;
   cursor: pointer;
 
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   color: #fff;
   position: relative;
@@ -158,7 +158,7 @@ h2, .h2 {
 
     [class*="icon-"],
     .muted {
-      display: inline-block;
+      display: inline;
     }
   }
 
@@ -177,7 +177,7 @@ h2, .h2 {
 
   &:active,
   &.active {
-    opacity: .6;
+    opacity: 0.6;
   }
 
   &.button--secondary {
@@ -233,7 +233,7 @@ h2, .h2 {
 
   .footer__links {
     display: block;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
   }
 
   @media #{$md-up} {
@@ -261,17 +261,19 @@ h2, .h2 {
 footer a,
 .link {
   cursor: pointer;
-  display: inline-block;
-  padding: .2em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2em;
   border-bottom: 2px solid $reddish-light;
-  margin-left: .4rem;
+  margin-left: 0.4rem;
 
   &:focus,
   &:hover,
   &.active {
     color: $white;
     border-color: $gold;
-    background: linear-gradient(0deg, rgba($gold, .2) 0%, rgba($white, 0) 80%);
+    background: linear-gradient(0deg, rgba($gold, 0.2) 0%, rgba($white, 0) 80%);
 
     [class*="icon-"] {
       color: $gold;
@@ -287,16 +289,14 @@ footer a,
   margin-right: $gutter;
 }
 
-
-
 .life-bar {
   height: 8px;
   width: 100%;
   background-color: $green;
-  box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($green, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($green, .8), 10%);
+  box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($green, 0.8), 10%), 10%),
+    0 0 4px 2px lighten(rgba($green, 0.8), 10%);
   margin-bottom: $gutter;
-  transition: background-color 500ms ease-in,
-              box-shadow 500ms ease-in;
+  transition: background-color 500ms ease-in, box-shadow 500ms ease-in;
 
   @media #{$md-up} {
     border-radius: $border-radius;
@@ -304,16 +304,17 @@ footer a,
 
   &.life-bar--low {
     background-color: $yellow;
-    box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($yellow, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($yellow, .8), 10%);
+    box-shadow: inset 0 0 2px 2px
+        lighten(saturate(rgba($yellow, 0.8), 10%), 10%),
+      0 0 4px 2px lighten(rgba($yellow, 0.8), 10%);
   }
 
   &.life-bar--critical {
     background-color: $red;
-    box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($red, .8), 10%), 10%), 0 0 4px 2px lighten(rgba($red, .8), 10%);
+    box-shadow: inset 0 0 2px 2px lighten(saturate(rgba($red, 0.8), 10%), 10%),
+      0 0 4px 2px lighten(rgba($red, 0.8), 10%);
   }
 }
-
-
 
 .modal {
   position: fixed;
@@ -337,13 +338,13 @@ footer a,
   color: $black;
   background-color: $white;
   padding: $gutter-small $gutter-large;
-  box-shadow: 0 0 6px 4px rgba($black, .4);
+  box-shadow: 0 0 6px 4px rgba($black, 0.4);
   max-width: 100%;
   margin: $gutter;
-  transform: translateY(20px) rotateX(-30deg) scale(.8);
+  transform: translateY(20px) rotateX(-30deg) scale(0.8);
   opacity: 0;
-  transition: transform 300ms cubic-bezier(.87,.66,.38,1.35),
-              opacity 300ms cubic-bezier(.87,.66,.38,1.35);
+  transition: transform 300ms cubic-bezier(0.87, 0.66, 0.38, 1.35),
+    opacity 300ms cubic-bezier(0.87, 0.66, 0.38, 1.35);
 
   @media #{$md-up} {
     padding: $gutter-large $gutter-xlarge;
@@ -381,19 +382,19 @@ footer a,
 .loses {
   font-size: $font-size-normal;
   color: $white;
-  padding: .2rem .4rem;
+  padding: 0.2rem 0.4rem;
   vertical-align: middle;
 
   &:after {
     font-size: $font-size-small;
-    margin-left: .1rem;
+    margin-left: 0.1rem;
   }
 }
 
 .wins {
   background-color: $green;
   border-radius: $border-radius 0 0 $border-radius;
-  margin-right: .1rem;
+  margin-right: 0.1rem;
 
   &:after {
     content: "W";
@@ -411,9 +412,9 @@ footer a,
 
 .taunt {
   transform: scale(1.2);
-  opacity: .6;
-  transition: transform 150ms cubic-bezier(.87,.66,.38,1.35),
-              opacity 150ms cubic-bezier(.87,.66,.38,1.35);
+  opacity: 0.6;
+  transition: transform 150ms cubic-bezier(0.87, 0.66, 0.38, 1.35),
+    opacity 150ms cubic-bezier(0.87, 0.66, 0.38, 1.35);
 
   &.active {
     transform: scale(1);
@@ -442,30 +443,28 @@ footer a,
   z-index: 1;
 }
 
-
-
 /*--------------------------------------------*\
   Utils
 \*--------------------------------------------*/
 
-.u-gold { color: $gold; }
-.u-hide { display: none; }
-.u-no-transition { transition: none; }
-
-
+.u-gold {
+  color: $gold;
+}
+.u-hide {
+  display: none;
+}
+.u-no-transition {
+  transition: none;
+}
 
 /*--------------------------------------------*\
   Introduction animation
 \*--------------------------------------------*/
 
 $intro-delay: 150ms;
-$intro-elements:
-  unquote(".box-container"),
-  unquote(".header h1"),
-  unquote(".taunt-container"),
-  unquote(".question-container"),
-  unquote(".box-container .button-list"),
-  unquote(".footer"),
+$intro-elements: unquote(".box-container"), unquote(".header h1"),
+  unquote(".taunt-container"), unquote(".question-container"),
+  unquote(".box-container .button-list"), unquote(".footer"),
   unquote(".life-bar-container");
 
 #{$intro-elements} {

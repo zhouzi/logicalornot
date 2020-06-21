@@ -1,19 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Logical (Or Not)</title>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Bigshot+One|Abel">
-    <link rel="stylesheet" href="https://file.myfontastic.com/gt4axpaFgnXruB39Ch83x3/icons.css">
-    <link rel="stylesheet" href="dist/styles.css">
+    <link
+      rel="stylesheet"
+      href="http://fonts.googleapis.com/css?family=Bigshot+One|Abel"
+    />
+    <link rel="stylesheet" href="dist/styles.css" />
   </head>
 
   <body>
     <noscript>
       <div style="position: relative; z-index: 9;">
         <div class="h1">Oops!</div>
-        <p>This game requires JavaScript to be turned on. <a href="http://enable-javascript.com/" class="link">Learn more</a></p>
+        <p>
+          This game requires JavaScript to be turned on.
+          <a href="http://enable-javascript.com/" class="link">Learn more</a>
+        </p>
       </div>
     </noscript>
 
@@ -22,8 +27,9 @@
         <h2>Boom!</h2>
 
         <p>
-          "Just made a score of <span id="wins" class="wins"></span><span id="loses" class="loses"></span>,
-          <br>
+          "Just made a score of <span id="wins" class="wins"></span
+          ><span id="loses" class="loses"></span>,
+          <br />
           come and beat me!"
         </p>
 
@@ -31,18 +37,38 @@
           <li>
             <span class="caret"></span>
 
-            <a href="#" id="tweet-my-game-button" class="button button--secondary" target="_blank">
-              <span class="icon-twitter"></span>
+            <a
+              href="#"
+              id="tweet-my-game-button"
+              class="button button--secondary"
+              target="_blank"
+            >
+              <svg
+                class="icon-twitter"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"
+                ></path>
+              </svg>
               Tweet
             </a>
           </li>
 
           <li>
-            <button type="button"
-                    id="replay-button"
-                    class="button button--secondary"
-                    data-bind="spacebar"
-                    data-event="view:newRound">
+            <button
+              type="button"
+              id="replay-button"
+              class="button button--secondary"
+              data-bind="spacebar"
+              data-event="view:newRound"
+            >
               <small class="muted">(space)</small>
               Replay
             </button>
@@ -54,11 +80,20 @@
     <div id="bloody" class="bloody"></div>
 
     <div class="wrapper">
-      <div class="life-bar-container"><div id="life-bar" class="life-bar"></div></div>
+      <div class="life-bar-container">
+        <div id="life-bar" class="life-bar"></div>
+      </div>
 
       <section class="box-container">
         <header class="header">
-          <h1>Logical <span class="ornot"><span class="muted">(</span>Or Not<span class="muted">)</span></span></h1>
+          <h1>
+            Logical
+            <span class="ornot"
+              ><span class="muted">(</span>Or Not<span class="muted"
+                >)</span
+              ></span
+            >
+          </h1>
 
           <p class="taunt-container">
             <span id="taunt" class="taunt active"></span>
@@ -69,37 +104,82 @@
 
         <ul class="button-list">
           <li>
-            <button type="button"
-                    id="answer-left-button"
-                    class="button"
-                    data-bind="left"
-                    data-event="view:selectAnswer"
-                    data-event-data>
-              <span class="icon-arrow-left"></span>
+            <button
+              type="button"
+              id="answer-left-button"
+              class="button"
+              data-bind="left"
+              data-event="view:selectAnswer"
+              data-event-data
+            >
+              <svg
+                class="icon-arrow-left"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M464 256c0-114.875-93.125-208-208-208S48 141.125 48 256s93.125 208 208 208 208-93.125 208-208zm-272 0l96-96v192l-96-96z"
+                ></path>
+              </svg>
               <span id="answer-left-label"></span>
             </button>
           </li>
 
           <li>
-            <button type="button"
-                    id="answer-up-button"
-                    class="button"
-                    data-bind="up"
-                    data-event="view:selectAnswer"
-                    data-event-data>
-              <span class="icon-arrow-up"></span>
+            <button
+              type="button"
+              id="answer-up-button"
+              class="button"
+              data-bind="up"
+              data-event="view:selectAnswer"
+              data-event-data
+            >
+              <svg
+                class="icon-arrow-up"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M464 256c0-114.875-93.125-208-208-208S48 141.125 48 256s93.125 208 208 208 208-93.125 208-208zm-112 32H160l96-96 96 96z"
+                ></path>
+              </svg>
               <span id="answer-up-label"></span>
             </button>
           </li>
 
           <li>
-            <button type="button"
-                    id="answer-right-button"
-                    class="button"
-                    data-bind="right"
-                    data-event="view:selectAnswer"
-                    data-event-data>
-              <span class="icon-arrow-right"></span>
+            <button
+              type="button"
+              id="answer-right-button"
+              class="button"
+              data-bind="right"
+              data-event="view:selectAnswer"
+              data-event-data
+            >
+              <svg
+                class="icon-arrow-right"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256 464c114.875 0 208-93.125 208-208S370.875 48 256 48 48 141.125 48 256s93.125 208 208 208zm-32-112V160l96 96-96 96z"
+                ></path>
+              </svg>
               <span id="answer-right-label"></span>
             </button>
           </li>
@@ -108,28 +188,100 @@
 
       <footer class="footer">
         <div class="footer__left">
-          <span class="best-score">Best Score: <span id="best-score" class="u-gold">/</span></span>
-          <span class="modes">Mode: <span id="normal-mode" class="link active">normal</span><span id="hardcore-mode" class="link">hardcore</span></span>
+          <span class="best-score"
+            >Best Score: <span id="best-score" class="u-gold">/</span></span
+          >
+          <span class="modes"
+            >Mode: <span id="normal-mode" class="link active">normal</span
+            ><span id="hardcore-mode" class="link">hardcore</span></span
+          >
         </div>
 
         <div class="footer__right">
           <span class="footer__links">
-            <a href="https://github.com/Zhouzi/logicalornot"><span class="icon-star"></span>Star</a>
-            <a href="https://github.com/Zhouzi/logicalornot"><span class="icon-github"></span>Contribute</a>
-            <a href="https://twitter.com/home?status=Logical%20(Or%20Not)%20-%20A%20Game%20About%20JavaScript%20Logical%20Operators%20%23logicalornot%20http%3A%2F%2Fgabinaureche.com%2Flogicalornot%2F%20via%20%40zh0uzi" target="_blank"><span class="icon-twitter"></span>Tweet</a>
+            <a href="https://github.com/Zhouzi/logicalornot">
+              <svg
+                class="icon-star"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 512 512"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256 38.013c-22.458 0-66.472 110.3-84.64 123.502-18.17 13.2-136.674 20.975-143.614 42.334-6.94 21.358 84.362 97.303 91.302 118.662 6.94 21.36-22.286 136.465-4.116 149.665 18.17 13.2 118.61-50.164 141.068-50.164 22.458 0 122.9 63.365 141.068 50.164 18.17-13.2-11.056-128.306-4.116-149.665 6.94-21.36 98.242-97.304 91.302-118.663-6.94-21.36-125.444-29.134-143.613-42.335-18.168-13.2-62.182-123.502-84.64-123.502z"
+                ></path>
+              </svg>
+              Star
+            </a>
+            <a href="https://github.com/Zhouzi/logicalornot">
+              <svg
+                class="icon-github"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M11.9989871,1 C5.92550416,1 1,5.92482888 1,12.0003376 C1,16.8603395 4.15153934,20.9829338 8.52263728,22.4374904 C9.0729918,22.5387827 9.27355045,22.199116 9.27355045,21.9073943 C9.27355045,21.6467356 9.2640965,20.954572 9.25869425,20.0368642 C6.19899322,20.7013414 5.55342398,18.5620492 5.55342398,18.5620492 C5.0530403,17.2911692 4.33183953,16.9528531 4.33183953,16.9528531 C3.33309801,16.2708186 4.40747107,16.2843243 4.40747107,16.2843243 C5.51155652,16.3619816 6.09229872,17.4181221 6.09229872,17.4181221 C7.07348292,19.0988981 8.66714755,18.6133706 9.2938089,18.3317781 C9.39375058,17.6213819 9.67804414,17.1365297 9.99205009,16.86169 C7.54955646,16.5841493 4.98146045,15.6401056 4.98146045,11.4249977 C4.98146045,10.224347 5.41026428,9.24181221 6.11390773,8.47334172 C6.00046042,8.19512569 5.62297799,7.07618404 6.22195279,5.56220265 C6.22195279,5.56220265 7.14506277,5.26642929 9.24653918,6.68992296 C10.12373,6.44547101 11.0650726,6.32392032 12.0003376,6.31919335 C12.9349274,6.32392032 13.8755947,6.44547101 14.7541361,6.68992296 C16.8542619,5.26642929 17.7760214,5.56220265 17.7760214,5.56220265 C18.3763467,7.07618404 17.9988643,8.19512569 17.8860923,8.47334172 C18.5910863,9.24181221 19.0165137,10.224347 19.0165137,11.4249977 C19.0165137,15.6509101 16.444366,16.5807729 13.9944443,16.8529114 C14.3888087,17.192578 14.7406305,17.863808 14.7406305,18.890236 C14.7406305,20.3603241 14.7271248,21.5467939 14.7271248,21.9073943 C14.7271248,22.2018171 14.9256576,22.5441849 15.4834403,22.4368151 C19.8511618,20.9788821 23,16.8589889 23,12.0003376 C23,5.92482888 18.0744958,1 11.9989871,1"
+                ></path>
+              </svg>
+              Contribute
+            </a>
+            <a
+              href="https://twitter.com/home?status=Logical%20(Or%20Not)%20-%20A%20Game%20About%20JavaScript%20Logical%20Operators%20%23logicalornot%20http%3A%2F%2Fgabinaureche.com%2Flogicalornot%2F%20via%20%40zh0uzi"
+              target="_blank"
+            >
+              <svg
+                class="icon-twitter"
+                stroke="currentColor"
+                fill="currentColor"
+                stroke-width="0"
+                viewBox="0 0 1024 1024"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"
+                ></path>
+              </svg>
+              Tweet
+            </a>
           </span>
         </div>
       </footer>
     </div>
 
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      (function (i, s, o, g, r, a, m) {
+        i["GoogleAnalyticsObject"] = r;
+        (i[r] =
+          i[r] ||
+          function () {
+            (i[r].q = i[r].q || []).push(arguments);
+          }),
+          (i[r].l = 1 * new Date());
+        (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+      })(
+        window,
+        document,
+        "script",
+        "//www.google-analytics.com/analytics.js",
+        "ga"
+      );
 
-      ga('create', 'UA-43673873-6', 'auto');
-      ga('send', 'pageview');
+      ga("create", "UA-43673873-6", "auto");
+      ga("send", "pageview");
     </script>
     <script src="dist/app.min.js"></script>
   </body>
